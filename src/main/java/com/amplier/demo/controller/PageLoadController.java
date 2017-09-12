@@ -1,4 +1,4 @@
-package com.amplier.controller;
+package com.amplier.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
