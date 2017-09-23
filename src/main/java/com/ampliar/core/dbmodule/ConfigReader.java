@@ -14,12 +14,13 @@ public class ConfigReader {
 		try {
 
 			//input = new FileInputStream("./config.properties");
-			input = getClass().getClassLoader().getResourceAsStream("/com/ampliar/services/dbmodule/config.properties");
+			input = getClass().getClassLoader().getResourceAsStream("/com/ampliar/core/dbmodule/config.properties"); 
 
 			// load a properties file
 			prop.load(input);
 
 			// get the property value and print it out
+			System.out.println(prop.getProperty("dbms"));
 			System.out.println(prop.getProperty("database"));
 			System.out.println(prop.getProperty("dbuser"));
 			System.out.println(prop.getProperty("dbpassword"));
