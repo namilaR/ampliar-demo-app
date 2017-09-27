@@ -2,6 +2,7 @@ package com.ampliar.core.models;
 
 public class SubCategory {
 	
+
 	private int id;
 	private int categoryId;
 	private String subCategoryName;
@@ -14,7 +15,10 @@ public class SubCategory {
 		this.status = status;
 	}
 	
-	
+	public SubCategory(String subCategoryName) {
+		super();
+		this.subCategoryName = subCategoryName;
+	}
 	
 	public SubCategory(int id, int categoryId, String subCategoryName, int status) {
 		super();

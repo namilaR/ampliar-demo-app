@@ -22,6 +22,16 @@ public class Car extends Advertisment {
 	private String fuelType;
 	private double engineCapacity;
 	private String description;
+	
+	
+	
+	
+	
+
+	public Car() {
+		super();
+		System.out.println("Car created");
+	}
 
 	public Car(int userId, String title, ArrayList<AdvertismentImage> advertismentImage, Category advertismentCategoty,
 			SubCategory advertismentSubCategoty, District advertismentDistrict, DistrictLocalArea districtLoacalArea,
@@ -46,8 +56,14 @@ public class Car extends Advertisment {
 	public String toString() {
 		return "Car [brand=" + brand + ", model=" + model + ", modelYear=" + modelYear + ", condition=" + condition
 				+ ", mileage=" + mileage + ", bodyType=" + bodyType + ", transmission=" + transmission + ", fuelType="
-				+ fuelType + ", engineCapacity=" + engineCapacity + ", description=" + description + ", price="
-				+ super.price + "]";
+				+ fuelType + ", engineCapacity=" + engineCapacity + ", description=" + description + ", advertismentId="
+				+ advertismentId + ", userId=" + userId + ", title=" + title + ", advertismentImage="
+				+ advertismentImage + ", advertismentCategoty=" + advertismentCategoty + ", advertismentSubCategoty="
+				+ advertismentSubCategoty + ", advertismentDistrict=" + advertismentDistrict + ", districtLoacalArea="
+				+ districtLoacalArea + ", price=" + price + ", status=" + status + ", createAt=" + createAt
+				+ ", updatedAt=" + updatedAt + "]";
 	}
 
+	
+	
 }

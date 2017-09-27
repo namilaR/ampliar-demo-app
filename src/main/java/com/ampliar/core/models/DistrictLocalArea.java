@@ -25,6 +25,13 @@ public class DistrictLocalArea {
 
 
 
+	public DistrictLocalArea(String localAreaName) {
+		super();
+		this.localAreaName = localAreaName;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

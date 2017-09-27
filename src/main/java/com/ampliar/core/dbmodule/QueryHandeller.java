@@ -2,6 +2,7 @@ package com.ampliar.core.dbmodule;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -21,8 +22,44 @@ public class QueryHandeller implements DataAccess {
 
 	}
 
-	public List<Advertisment> findAllAdvertisments() {
-		// TODO Auto-generated method stub
+	public ArrayList<Advertisment> findAllAdvertisments(String categoryType,String subCategoryType) {
+		
+		Class params[] = new Class[2];
+		params[0] = String.class;
+		params[1] = String.class;
+		
+		Class<?> clazz;
+		try {
+			
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method findAllAdvertisments = clazz.getDeclaredMethod("findAllAdvertisments", params);
+			Object obj = clazz.newInstance();
+			return (ArrayList<Advertisment>) findAllAdvertisments.invoke(obj,null,null );
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 
@@ -83,124 +120,6 @@ public class QueryHandeller implements DataAccess {
 
 	}
 
-	public List<District> findAllDistricts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<District> findDistrictById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<District> findDistrictByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertDistrict(District obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateDistrict(District obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteDistrict(District obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public List<DistrictLocalArea> findAllDistrictLocalAreas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<DistrictLocalArea> findDistrictLocalAreaById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<DistrictLocalArea> findDistrictLocalAreaByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertDistrictLocalArea(DistrictLocalArea obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateDistrictLocalArea(DistrictLocalArea obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteDistrictLocalArea(DistrictLocalArea obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public List<Category> findAllCategorys() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Category> findCategoryById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Category> findCategoryByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertCategory(Category obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateCategory(Category obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteCategory(Category obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public List<SubCategory> findAllSubCategorys() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<SubCategory> findSubCategoryById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<SubCategory> findSubCategoryByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertSubCategory(SubCategory obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateSubCategory(SubCategory obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteSubCategory(SubCategory obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }
