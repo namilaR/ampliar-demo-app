@@ -40,6 +40,13 @@ public class RestController {
 
 	}
 
+	@RequestMapping(value = "/api-get-add-title", method = RequestMethod.POST, produces = "application/json")
+	public String getAddByTitle(HttpServletRequest request) {
+		ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
+		tempAds = new QueryHandeller().findAdvertismentByTitle(request.getParameter("title"));
+		return gson.toJson(tempAds);
+
+	}
 	
 	@RequestMapping(value="/api-insert-mobile",method = RequestMethod.POST)
 	public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {

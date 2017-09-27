@@ -203,8 +203,30 @@ public class MySqlDataAccess implements DataAccess {
 		return null;
 	}
 
-	public Advertisment findAdvertismentByName(String title) {
-		// TODO Auto-generated method stub
+	public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
+		pst = null; rs = null;
+		String query = "SELECT\n" +
+				"	*\n" +
+				"FROM\n" +
+				"	advertisments\n" +
+				"INNER JOIN advertisment_images ON advertisment_images.ADVERTISMENT_ID = advertisments.ID \n" +
+				"WHERE advertisments.TITLE LIKE '%" + title + "%'";
+		
+		System.out.println(query);
+		
+		try {
+			pst = con.prepareStatement(query);
+			rs = pst.executeQuery();
+			
+			return new DynamicClassHandeller().createDynamicClassList(rs);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	
 		return null;
 	}
 

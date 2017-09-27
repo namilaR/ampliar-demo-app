@@ -105,9 +105,47 @@ public class QueryHandeller implements DataAccess {
 
 	}
 
-	public Advertisment findAdvertismentByName(String title) {
-		// TODO Auto-generated method stub
+	public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
+		Class params[] = new Class[2];
+		params[0] = String.class;
+		params[1] = String.class;
+		
+		Class<?> clazz;
+		try {
+			
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method findAdvertismentByTitle = clazz.getDeclaredMethod("findAdvertismentByTitle", String.class);
+			Object obj = clazz.newInstance();
+			return (ArrayList<Advertisment>) findAdvertismentByTitle.invoke(obj, title);
+			
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return null;
+
+		
 	}
 
 	public boolean insertAdvertisment(Advertisment add) {
