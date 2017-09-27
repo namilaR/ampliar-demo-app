@@ -99,17 +99,7 @@ public class MySqlDataAccess implements DataAccess {
 		return null;
 	}
 	
-	
 
-	public List<Advertisment> findAdvertismentById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Advertisment> findAdvertismentByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public boolean insertAdvertisment(Advertisment adv) {
 
@@ -185,6 +175,37 @@ public class MySqlDataAccess implements DataAccess {
 	private void getConnectionConfigurations() {
 		ConfigReader conf = new ConfigReader();
 		this.props = conf.getConfigurations();
+	}
+
+	public Advertisment findAdvertismentById(int id) {
+		pst = null; rs = null;
+		String query = "SELECT\n" +
+				"	*\n" +
+				"FROM\n" +
+				"	advertisments\n" +
+				"INNER JOIN advertisment_images ON advertisment_images.ADVERTISMENT_ID = advertisments.ID \n" +
+				"WHERE advertisments.ID = " + id;
+		
+		System.out.println(query);
+		
+		try {
+			pst = con.prepareStatement(query);
+			rs = pst.executeQuery();
+			
+			return new DynamicClassHandeller().createDynamicClass(rs);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
+	public Advertisment findAdvertismentByName(String title) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -12,8 +12,8 @@ import com.ampliar.core.models.SubCategory;
 public interface DataAccess {
 	
 	public ArrayList<Advertisment> findAllAdvertisments(String categoryType,String subCategoryType);
-	public List<Advertisment> findAdvertismentById();
-	public List<Advertisment> findAdvertismentByName();
+	public Advertisment findAdvertismentById(int id);
+	public Advertisment findAdvertismentByName(String title);
 	public boolean insertAdvertisment(Advertisment obj);
 	public boolean updateAdvertisment(Advertisment obj);
 	public boolean deleteAdvertisment(Advertisment obj);

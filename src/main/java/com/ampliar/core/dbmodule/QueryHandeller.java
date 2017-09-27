@@ -63,12 +63,49 @@ public class QueryHandeller implements DataAccess {
 		return null;
 	}
 
-	public List<Advertisment> findAdvertismentById() {
-		// TODO Auto-generated method stub
+	public Advertisment findAdvertismentById(int id) {
+		Class params[] = new Class[2];
+		params[0] = String.class;
+		params[1] = String.class;
+		
+		Class<?> clazz;
+		try {
+			
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method findAdvertismentById = clazz.getDeclaredMethod("findAdvertismentById", Integer.TYPE);
+			Object obj = clazz.newInstance();
+			return (Advertisment) findAdvertismentById.invoke(obj, id);
+			
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return null;
+
 	}
 
-	public List<Advertisment> findAdvertismentByName() {
+	public Advertisment findAdvertismentByName(String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}

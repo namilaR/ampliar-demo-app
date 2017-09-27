@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,13 +24,22 @@ import com.google.gson.Gson;
 public class RestController {
 	Gson gson = new Gson();
 
-	@RequestMapping(value = "/api-get-all-cars", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/api-get-all-ads", method = RequestMethod.GET, produces = "application/json")
 	public String getAllCarsApi() {
 		ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
 		tempAds = new QueryHandeller().findAllAdvertisments(null, null);
 		return gson.toJson(tempAds);
 
 	}
+	
+	@RequestMapping(value = "/api-get-add/{id}", method = RequestMethod.GET, produces = "application/json")
+	public String getAddById(@PathVariable String id) {
+		Advertisment tempAdd = null;
+		tempAdd = new QueryHandeller().findAdvertismentById(Integer.parseInt(id));
+		return gson.toJson(tempAdd);
+
+	}
+
 	
 	@RequestMapping(value="/api-insert-mobile",method = RequestMethod.POST)
 	public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
