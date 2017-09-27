@@ -11,6 +11,15 @@ public class District {
 		this.districtName = districtName;
 		this.status = status;
 	}
+	
+	
+
+	public District(String districtName) {
+		super();
+		this.districtName = districtName;
+	}
+
+
 
 	public int getId() {
 		return id;

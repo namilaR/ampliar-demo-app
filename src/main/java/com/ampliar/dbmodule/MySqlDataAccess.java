@@ -8,12 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
 import com.ampliar.core.dbmodule.ConfigReader;
 import com.ampliar.core.dbmodule.DataAccess;
+import com.ampliar.core.dbmodule.DynamicClassHandeller;
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.AdvertismentImage;
 import com.ampliar.core.models.Category;
@@ -54,10 +56,50 @@ public class MySqlDataAccess implements DataAccess {
 		}
 	}
 
-	public List<Advertisment> findAllAdvertisments() {
-		// TODO Auto-generated method stub
+	public ArrayList<Advertisment> findAllAdvertisments(String categoryType,String subCategoryType) {
+		pst = null; rs = null;
+		String query = "SELECT\n" +
+						"	*\n" +
+						"FROM\n" +
+						"	advertisments\n" +
+						"INNER JOIN advertisment_images ON advertisment_images.ADVERTISMENT_ID = advertisments.ID \n";
+		
+		if(categoryType != null) {
+			query = query.split("WHERE")[0];
+			query += "WHERE advertisments.CATEGORY = '" + categoryType + "' ";
+		}
+		
+		if(subCategoryType!= null) {
+			query = query.split("WHERE")[0];
+			query += "WHERE advertisments.SUB_CATEGORY = '" + subCategoryType + "' ";
+		}
+		
+		if(categoryType != null && subCategoryType!= null) {
+			query = query.split("WHERE")[0];
+			query += "WHERE advertisments.CATEGORY = " + categoryType + " AND advertisments.SUB_CATEGORY = '" + subCategoryType + "' ";
+		}
+		
+		System.out.println(query);
+		
+		try {
+			pst = con.prepareStatement(query);
+			rs = pst.executeQuery();
+			
+			
+			
+			return new DynamicClassHandeller().createDynamicClassList(rs);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
 		return null;
 	}
+	
+	
 
 	public List<Advertisment> findAdvertismentById() {
 		// TODO Auto-generated method stub
@@ -145,124 +187,6 @@ public class MySqlDataAccess implements DataAccess {
 		this.props = conf.getConfigurations();
 	}
 
-	public List<District> findAllDistricts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<District> findDistrictById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<District> findDistrictByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertDistrict(District obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateDistrict(District obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteDistrict(District obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public List<DistrictLocalArea> findAllDistrictLocalAreas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<DistrictLocalArea> findDistrictLocalAreaById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<DistrictLocalArea> findDistrictLocalAreaByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertDistrictLocalArea(DistrictLocalArea obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateDistrictLocalArea(DistrictLocalArea obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteDistrictLocalArea(DistrictLocalArea obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public List<Category> findAllCategorys() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Category> findCategoryById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Category> findCategoryByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertCategory(Category obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateCategory(Category obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteCategory(Category obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public List<SubCategory> findAllSubCategorys() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<SubCategory> findSubCategoryById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<SubCategory> findSubCategoryByName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertSubCategory(SubCategory obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean updateSubCategory(SubCategory obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteSubCategory(SubCategory obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }

@@ -5,6 +5,21 @@ public class Category {
 	private String categoryName;
 	private int status;
 	
+	
+	
+	public Category() {
+		super();
+	}
+	
+	
+
+	public Category(String categoryName) {
+		super();
+		this.categoryName = categoryName;
+	}
+
+
+
 	public Category(String categoryName, int status) {
 		super();
 		this.categoryName = categoryName;

@@ -20,9 +20,9 @@ public abstract class Advertisment {
 	protected Date updatedAt;
 
 	public Advertisment() {
-
+		System.out.println("Advertisment created");
 	}
-
+ 
 	public Advertisment(int userId, String title, ArrayList<AdvertismentImage> advertismentImage,
 			Category advertismentCategoty, SubCategory advertismentSubCategoty, District advertismentDistrict,
 			DistrictLocalArea districtLoacalArea, double price, int status) {
@@ -58,10 +58,15 @@ public abstract class Advertisment {
 	public ArrayList<AdvertismentImage> getAdvertismentImage() {
 		return advertismentImage;
 	}
+	
+	
 
 	public void setAdvertismentImage(ArrayList<AdvertismentImage> advertismentImage) {
+		this.advertismentImage = new ArrayList<AdvertismentImage>();
 		this.advertismentImage = advertismentImage;
 	}
+	
+
 
 	public Category getAdvertismentCategoty() {
 		return advertismentCategoty;
@@ -69,6 +74,11 @@ public abstract class Advertisment {
 
 	public void setAdvertismentCategoty(Category advertismentCategoty) {
 		this.advertismentCategoty = advertismentCategoty;
+	}
+	
+	public void setAdvertismentCategoty(String categoryName) {
+		this.advertismentCategoty = new Category();
+		this.advertismentCategoty.setCategoryName(categoryName);
 	}
 
 	public SubCategory getAdvertismentSubCategoty() {
@@ -78,6 +88,12 @@ public abstract class Advertisment {
 	public void setAdvertismentSubCategoty(SubCategory advertismentSubCategoty) {
 		this.advertismentSubCategoty = advertismentSubCategoty;
 	}
+	
+	public void setAdvertismentSubCategoty(String subCategoryName) {
+		
+		this.advertismentSubCategoty.setSubCategoryName(subCategoryName);
+	}
+
 
 	public District getAdvertismentDistrict() {
 		return advertismentDistrict;
@@ -86,6 +102,10 @@ public abstract class Advertisment {
 	public void setAdvertismentDistrict(District advertismentDistrict) {
 		this.advertismentDistrict = advertismentDistrict;
 	}
+	
+	public void setAdvertismentDistrict(String districtName) {
+		this.advertismentDistrict.setDistrictName(districtName);
+	}
 
 	public DistrictLocalArea getDistrictLoacalArea() {
 		return districtLoacalArea;
@@ -93,6 +113,10 @@ public abstract class Advertisment {
 
 	public void setDistrictLoacalArea(DistrictLocalArea districtLoacalArea) {
 		this.districtLoacalArea = districtLoacalArea;
+	}
+	
+	public void setDistrictLoacalArea(String localAreaName) {
+		this.districtLoacalArea.setLocalAreaName(localAreaName);
 	}
 
 	public double getPrice() {

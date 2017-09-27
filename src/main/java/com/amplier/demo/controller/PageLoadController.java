@@ -15,15 +15,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ampliar.core.dbmodule.QueryHandeller;
+import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.AdvertismentImage;
 import com.ampliar.core.models.Category;
 import com.ampliar.core.models.District;
 import com.ampliar.core.models.DistrictLocalArea;
 import com.ampliar.core.models.SubCategory;
 import com.ampliar.demo.models.Car;
+import com.google.gson.Gson;
 
 @Controller
 public class PageLoadController {
+	Gson gson = new Gson();
 	@RequestMapping("/")
 	public ModelAndView loadHomePage() {
 		return new ModelAndView("index");
@@ -56,4 +59,13 @@ public class PageLoadController {
 
 		return new ModelAndView("index");
 	}
+	
+	@RequestMapping(path = "/get-all-cars",  method = RequestMethod.GET)
+	public ModelAndView getAllCars() {
+		new QueryHandeller().findAllAdvertisments(null, null);
+		return new ModelAndView("index");
+		
+	}
+	
+	
 }
