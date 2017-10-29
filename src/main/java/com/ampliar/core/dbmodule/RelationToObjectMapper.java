@@ -5,11 +5,7 @@ import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+
 
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.AdvertismentImage;
@@ -21,7 +17,7 @@ import com.ampliar.demo.models.Car;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-public class DynamicClassHandeller {
+public class RelationToObjectMapper {
 
 	public ArrayList<Advertisment> createDynamicClassList(ResultSet rst) {
 		System.out.println("createDynamicClassList called");

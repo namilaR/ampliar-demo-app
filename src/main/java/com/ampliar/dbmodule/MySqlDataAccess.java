@@ -1,7 +1,6 @@
 package com.ampliar.dbmodule;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,21 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 import java.util.Properties;
 
 import com.ampliar.core.dbmodule.ConfigReader;
 import com.ampliar.core.dbmodule.DataAccess;
-import com.ampliar.core.dbmodule.DynamicClassHandeller;
+import com.ampliar.core.dbmodule.RelationToObjectMapper;
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.AdvertismentImage;
-import com.ampliar.core.models.Category;
-import com.ampliar.core.models.District;
-import com.ampliar.core.models.DistrictLocalArea;
 import com.ampliar.core.models.FileUploader;
-import com.ampliar.core.models.SubCategory;
-import com.mysql.jdbc.Util;
 
 public class MySqlDataAccess implements DataAccess {
 
@@ -87,7 +79,7 @@ public class MySqlDataAccess implements DataAccess {
 			
 			
 			
-			return new DynamicClassHandeller().createDynamicClassList(rs);
+			return new RelationToObjectMapper().createDynamicClassList(rs);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -192,7 +184,7 @@ public class MySqlDataAccess implements DataAccess {
 			pst = con.prepareStatement(query);
 			rs = pst.executeQuery();
 			
-			return new DynamicClassHandeller().createDynamicClass(rs);
+			return new RelationToObjectMapper().createDynamicClass(rs);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -218,7 +210,7 @@ public class MySqlDataAccess implements DataAccess {
 			pst = con.prepareStatement(query);
 			rs = pst.executeQuery();
 			
-			return new DynamicClassHandeller().createDynamicClassList(rs);
+			return new RelationToObjectMapper().createDynamicClassList(rs);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
