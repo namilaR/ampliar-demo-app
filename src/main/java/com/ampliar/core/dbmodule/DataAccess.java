@@ -1,13 +1,7 @@
 package com.ampliar.core.dbmodule;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import com.ampliar.core.models.Advertisment;
-import com.ampliar.core.models.Category;
-import com.ampliar.core.models.District;
-import com.ampliar.core.models.DistrictLocalArea;
-import com.ampliar.core.models.SubCategory;
 
 public interface DataAccess {
 	

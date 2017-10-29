@@ -150,6 +150,7 @@ public class QueryHandeller implements DataAccess {
 
 	public boolean insertAdvertisment(Advertisment add) {
 		try {
+			
 			Class<?> clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
 			Method mInsertAdd = clazz.getDeclaredMethod("insertAdvertisment", Advertisment.class);
 			Object obj = clazz.newInstance();
