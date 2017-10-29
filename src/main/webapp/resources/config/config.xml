@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<connectors>
+    <connector name="Linkedin">
+        <enable>true</enable>
+        <clientid>812j558k7kkegx</clientid>
+        <clientsecret>KsshjjVz47p6lzcX</clientsecret>
+        <authorization_endpoint>https://www.linkedin.com/uas/oauth2/authorization</authorization_endpoint>
+        <token_endpoint>https://www.linkedin.com/uas/oauth2/accessToken</token_endpoint>
+        <client_endpoint>http://localhost:8080/TestProject/Linkedincallback</client_endpoint>
+        <grant_type>authorization_code</grant_type>
+        <response_type>code</response_type>
+        <scope>r_basicprofile r_emailaddress</scope>
+        <state>123456</state>
+    </connector>
+    <connector name="Facebook">
+        <enable>true</enable>
+        <clientid>1741364576163534</clientid>
+        <clientsecret>d23e5754aa74dad41e8eebfe16f3b764</clientsecret>
+        <authorization_endpoint>https://www.facebook.com/dialog/oauth</authorization_endpoint>
+        <token_endpoint>https://graph.facebook.com/oauth/access_token</token_endpoint>
+        <client_endpoint>http://localhost:8080/TestProject/Facebookcallback</client_endpoint>
+        <grant_type>authorization_code</grant_type>
+        <response_type>code</response_type>
+        <scope>public_profile email</scope>
+    </connector>
+     <connector name="Google">
+         <enable>true</enable>
+        <clientid>642110263906-sotsrsaeinlsudtfig5dhuvq97247ohe.apps.googleusercontent.com</clientid>
+        <clientsecret>75fAn-mynWV6BAhRHCIHNPc5</clientsecret>
+        <authorization_endpoint>https://accounts.google.com/o/oauth2/auth</authorization_endpoint>
+        <token_endpoint>https://accounts.google.com/o/oauth2/token</token_endpoint>
+        <client_endpoint>http://localhost:8080/TestProject/Googlecallback</client_endpoint>
+        <grant_type>authorization_code</grant_type>
+        <response_type>code</response_type>
+        <scope>email</scope>
+        <approval_prompt>force</approval_prompt>
+    </connector>
+     <connector name="Twitter">
+        <enable>true</enable>
+        <clientid>O0BjQECnBfIfo0UtA1U8Wd4Kz</clientid>
+        <clientsecret>QCuOpyLkYced0UPsU5JHaZluTmoP6ZT3VQChjCSxnK5j3dvzUr</clientsecret>
+        <requesttoken_endpoint>https://api.twitter.com/oauth/request_token</requesttoken_endpoint>
+        <authorization_endpoint>https://api.twitter.com/oauth/authorize</authorization_endpoint>
+        <token_endpoint>https://api.twitter.com/oauth/access_token</token_endpoint>
+    </connector>
+</connectors>
