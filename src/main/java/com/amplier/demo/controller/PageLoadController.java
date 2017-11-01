@@ -62,7 +62,7 @@ public class PageLoadController {
 	
 	@RequestMapping(path = "/get-all-cars",  method = RequestMethod.GET)
 	public ModelAndView getAllCars() {
-		new QueryHandeller().findAllAdvertisments(null, null);
+		new QueryHandeller().findAllAdvertisments();
 		return new ModelAndView("index");
 		
 	}

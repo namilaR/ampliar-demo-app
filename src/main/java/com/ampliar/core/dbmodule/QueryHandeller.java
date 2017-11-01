@@ -22,21 +22,21 @@ public class QueryHandeller implements DataAccess {
 
 	}
 
-	public ArrayList<Advertisment> findAllAdvertisments(String categoryType,String subCategoryType) {
-		
+	public ArrayList<Advertisment> findAllAdvertisments() {
+
 		Class params[] = new Class[2];
 		params[0] = String.class;
 		params[1] = String.class;
-		
+
 		Class<?> clazz;
 		try {
-			
+
 			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
-			Method findAllAdvertisments = clazz.getDeclaredMethod("findAllAdvertisments", params);
+			Method findAllAdvertisments = clazz.getDeclaredMethod("findAllAdvertisments", null);
 			Object obj = clazz.newInstance();
-			return (ArrayList<Advertisment>) findAllAdvertisments.invoke(obj,null,null );
-			
-			
+			return (ArrayList<Advertisment>) findAllAdvertisments.invoke(obj);
+
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch blocka
 			e.printStackTrace();
@@ -60,8 +60,15 @@ public class QueryHandeller implements DataAccess {
 			e.printStackTrace();
 		}
 
+
 		return null;
 	}
+
+	public ArrayList<Advertisment> findAllAdvertismentsByCategory() {
+		return null;
+	}
+
+
 
 	public Advertisment findAdvertismentById(int id) {
 		Class params[] = new Class[2];

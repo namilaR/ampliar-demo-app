@@ -17,13 +17,9 @@ public class Mobile extends Advertisment {
 	private String bluetooth;
 	private String camera;
 	
-	
-	
 	public Mobile() {
 		super();
 	}
-
-
 
 	public Mobile(int userId, String title, ArrayList<AdvertismentImage> advertismentImage,
 			Category advertismentCategoty, SubCategory advertismentSubCategoty, District advertismentDistrict,
@@ -39,8 +35,6 @@ public class Mobile extends Advertisment {
 		this.camera = camera;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Mobile [condition=" + condition + ", brand=" + brand + ", model=" + model + ", Authenticity="
@@ -51,7 +45,6 @@ public class Mobile extends Advertisment {
 				+ districtLoacalArea + ", price=" + price + ", status=" + status + ", createAt=" + createAt
 				+ ", updatedAt=" + updatedAt + "]";
 	}
-	
 	
 
 }

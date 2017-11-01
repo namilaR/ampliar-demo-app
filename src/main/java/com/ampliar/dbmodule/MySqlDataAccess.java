@@ -48,59 +48,34 @@ public class MySqlDataAccess implements DataAccess {
 		}
 	}
 
-	public ArrayList<Advertisment> findAllAdvertisments(String categoryType,String subCategoryType) {
+	public ArrayList<Advertisment> findAllAdvertisments() {
 		pst = null; rs = null;
-		String query = "SELECT\n" +
-						"	*\n" +
-						"FROM\n" +
-						"	advertisments\n" +
-						"INNER JOIN advertisment_images ON advertisment_images.ADVERTISMENT_ID = advertisments.ID \n";
-		
-		if(categoryType != null) {
-			query = query.split("WHERE")[0];
-			query += "WHERE advertisments.CATEGORY = '" + categoryType + "' ";
-		}
-		
-		if(subCategoryType!= null) {
-			query = query.split("WHERE")[0];
-			query += "WHERE advertisments.SUB_CATEGORY = '" + subCategoryType + "' ";
-		}
-		
-		if(categoryType != null && subCategoryType!= null) {
-			query = query.split("WHERE")[0];
-			query += "WHERE advertisments.CATEGORY = " + categoryType + " AND advertisments.SUB_CATEGORY = '" + subCategoryType + "' ";
-		}
-		
+		String query = "SELECT* FROM advertisments";
 		System.out.println(query);
-		
+
 		try {
 			pst = con.prepareStatement(query);
 			rs = pst.executeQuery();
-			
-			
-			
-			return new RelationToObjectMapper().createDynamicClassList(rs);
-			
+			return new RelationToObjectMapper().crateMappedRowList(rs);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
-		
 		return null;
 	}
-	
+
+	public ArrayList<Advertisment> findAllAdvertismentsByCategory() {
+		return null;
+	}
+
 
 
 	public boolean insertAdvertisment(Advertisment adv) {
 
-		String queryAdvertisment = "INSERT INTO `ampliar_demo`.`advertisments` (\n" + "	`PUBLISHED_BY`,\n"
-				+ "	`TITLE`,\n" + "	`PRICE`,\n" + "	`CATEGORY`,\n" + "	`SUB_CATEGORY`,\n" + "	`DISTRICT`,\n"
-				+ "	`DISTRICT_LOCAL_AREA`,\n" + "	`ATTRIBUTES`,\n" + "	`STATUS`,\n" + "	`CREATED_AT`,\n"
-				+ "	`UPDATED_AT`\n" + ")\n" + "VALUES\n" + "	(\n" + "		?,\n" + "		?,\n" + "		?,\n"
-				+ "		?,\n" + "		?,\n" + "		?,\n" + "		?,\n" + "		?,\n" + "		?,\n"
-				+ "		?,\n" + "		?\n" + "	);";
+		String queryAdvertisment = "INSERT INTO `ampliar_demo`.`advertisments` (  `PUBLISHED_BY`, `TITLE`, `PRICE`, `CATEGORY`, `SUB_CATEGORY`, `DISTRICT`, `DISTRICT_LOCAL_AREA`, `IMAGES`, `ATTRIBUTES`, `STATUS`, `CREATED_AT`, `UPDATED_AT` )\n" +
+				"VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );";
 
 		try {
 			pst = con.prepareStatement(queryAdvertisment, Statement.RETURN_GENERATED_KEYS);
@@ -111,10 +86,12 @@ public class MySqlDataAccess implements DataAccess {
 			pst.setString(5, adv.getAdvertismentSubCategoty().getSubCategoryName());
 			pst.setString(6, adv.getAdvertismentDistrict().getDistrictName());
 			pst.setString(7, adv.getDistrictLoacalArea().getLocalAreaName());
-			pst.setString(8, adv.objToJson());
-			pst.setInt(9, 1);
-			pst.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
+			pst.setString(8, adv.advImageKistToJson());
+			pst.setString(9, adv.objToJson());
+			pst.setInt(10, 1);
 			pst.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
+			pst.setTimestamp(12, new Timestamp(System.currentTimeMillis()));
+
 
 			pst.executeUpdate();
 			rs = pst.getGeneratedKeys();
@@ -126,20 +103,6 @@ public class MySqlDataAccess implements DataAccess {
 
 			pst = null;
 			for (AdvertismentImage advImage : adv.getAdvertismentImage()) {
-				advImage.getImage();
-
-				String query = "INSERT INTO `ampliar_demo`.`advertisment_images` (\n" + "	`ADVERTISMENT_ID`,\n"
-						+ "	`IMAGE_URL`,\n" + "	`STATUS`,\n" + "	`CREATED_AT`,\n" + "	`UPDATED_AT`\n" + ")\n"
-						+ "VALUES\n" + "	(\n" + "		?,\n" + "		?,\n" + "		?,\n" + "		?,\n"
-						+ "		?\n" + "	);";
-
-				pst = con.prepareStatement(query);
-				pst.setInt(1, adv.getAdvertismentId());
-				pst.setString(2, advImage.getImage().getOriginalFilename());
-				pst.setInt(3, 1);
-				pst.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-				pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
-				pst.execute();
 				new FileUploader().uploadFile(advImage.getImage());
 			}
 
