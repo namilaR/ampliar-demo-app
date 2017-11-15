@@ -86,7 +86,7 @@ public class PostgreSqlDataAccess implements DataAccess {
 
     public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
         pst = null; rs = null;
-        String query = "SELECT* FROM advertisments WHERE title LIKE ?";
+        String query = "SELECT* FROM advertisments WHERE title ILIKE ?";
 
         System.out.println(query);
 
