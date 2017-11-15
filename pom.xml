@@ -92,7 +92,7 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
@@ -111,7 +111,7 @@
 			<artifactId>ehcache</artifactId>
 			<version>3.1.3</version>
 		</dependency>
-                
+
 <!--		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-fuseki-server</artifactId>
@@ -162,8 +162,26 @@
 
 
 
+		<!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.19</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<finalName>AmplierDemo</finalName>
-	</build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
