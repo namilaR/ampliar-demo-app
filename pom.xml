@@ -91,8 +91,26 @@
 			<version>4.1.4.RELEASE</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.19</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<finalName>AmplierDemo</finalName>
-	</build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
