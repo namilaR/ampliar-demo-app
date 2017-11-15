@@ -122,7 +122,7 @@ public class RestController {
 	}
 
 	@RequestMapping(value="/api-delete-advertisment",method = RequestMethod.POST)
-	public String apiDeleteAdvertisment(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+	public String apiDeleteAdvertisment(HttpServletRequest request) {
 
 
 		new QueryHandeller().deleteAdvertisment(tempAdd);
