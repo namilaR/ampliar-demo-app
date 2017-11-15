@@ -70,6 +70,48 @@ public class MySqlDataAccess implements DataAccess {
 		return null;
 	}
 
+	public Advertisment findAdvertismentById(int id) {
+		pst = null; rs = null;
+		String query = "SELECT* FROM advertisments WHERE ID = ?";
+		System.out.println(query);
+
+		try {
+			pst = con.prepareStatement(query);
+			pst.setInt(1,id);
+			rs = pst.executeQuery();
+			return new RelationToObjectMapper().createMappedRow(rs);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
+		pst = null; rs = null;
+		String query = "SELECT* FROM advertisments WHERE TITLE LIKE ?";
+
+		System.out.println(query);
+
+		try {
+			pst = con.prepareStatement(query);
+			pst.setString(1,"%"+title+"%");
+			rs = pst.executeQuery();
+
+			return new RelationToObjectMapper().createMappedRowList(rs);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+		return null;
+	}
+
 	public boolean insertAdvertisment(Advertisment adv) {
 		pst = null;
 		String queryAdvertisment = "INSERT INTO `ampliar_demo`.`advertisments` (  `PUBLISHED_BY`, `TITLE`, `PRICE`, `CATEGORY`, `SUB_CATEGORY`, `DISTRICT`, `DISTRICT_LOCAL_AREA`, `IMAGES`, `ATTRIBUTES`, `STATUS`, `CREATED_AT`, `UPDATED_AT` )\n" +
@@ -188,46 +230,5 @@ public class MySqlDataAccess implements DataAccess {
 		this.props = conf.getConfigurations();
 	}
 
-	public Advertisment findAdvertismentById(int id) {
-		pst = null; rs = null;
-		String query = "SELECT* FROM advertisments WHERE ID = ?";
-		System.out.println(query);
-
-		try {
-			pst = con.prepareStatement(query);
-			pst.setInt(1,id);
-			rs = pst.executeQuery();
-			return new RelationToObjectMapper().createMappedRow(rs);
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
-		pst = null; rs = null;
-		String query = "SELECT* FROM advertisments WHERE TITLE LIKE ?";
-		
-		System.out.println(query);
-		
-		try {
-			pst = con.prepareStatement(query);
-			pst.setString(1,"%"+title+"%");
-			rs = pst.executeQuery();
-			
-			return new RelationToObjectMapper().createMappedRowList(rs);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	
-		return null;
-	}
 
 }
