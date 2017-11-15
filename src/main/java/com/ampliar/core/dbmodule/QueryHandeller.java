@@ -65,10 +65,9 @@ public class QueryHandeller implements DataAccess {
 	}
 
 	public ArrayList<Advertisment> findAllAdvertismentsByCategory() {
+
 		return null;
 	}
-
-
 
 	public Advertisment findAdvertismentById(int id) {
 		Class params[] = new Class[2];
@@ -202,7 +201,5 @@ public class QueryHandeller implements DataAccess {
 	public void testMethod(Advertisment add) {
 
 	}
-
-	
 
 }

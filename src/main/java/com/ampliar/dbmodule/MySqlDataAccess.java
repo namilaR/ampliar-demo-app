@@ -56,7 +56,7 @@ public class MySqlDataAccess implements DataAccess {
 		try {
 			pst = con.prepareStatement(query);
 			rs = pst.executeQuery();
-			return new RelationToObjectMapper().crateMappedRowList(rs);
+			return new RelationToObjectMapper().createMappedRowList(rs);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -69,8 +69,6 @@ public class MySqlDataAccess implements DataAccess {
 	public ArrayList<Advertisment> findAllAdvertismentsByCategory() {
 		return null;
 	}
-
-
 
 	public boolean insertAdvertisment(Advertisment adv) {
 
@@ -134,46 +132,35 @@ public class MySqlDataAccess implements DataAccess {
 
 	public Advertisment findAdvertismentById(int id) {
 		pst = null; rs = null;
-		String query = "SELECT\n" +
-				"	*\n" +
-				"FROM\n" +
-				"	advertisments\n" +
-				"INNER JOIN advertisment_images ON advertisment_images.ADVERTISMENT_ID = advertisments.ID \n" +
-				"WHERE advertisments.ID = " + id;
-		
+		String query = "SELECT* FROM advertisments WHERE ID = ?";
 		System.out.println(query);
-		
+
 		try {
 			pst = con.prepareStatement(query);
+			pst.setInt(1,id);
 			rs = pst.executeQuery();
-			
-			return new RelationToObjectMapper().createDynamicClass(rs);
-			
+			return new RelationToObjectMapper().createMappedRow(rs);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		return null;
 	}
 
 	public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
 		pst = null; rs = null;
-		String query = "SELECT\n" +
-				"	*\n" +
-				"FROM\n" +
-				"	advertisments\n" +
-				"INNER JOIN advertisment_images ON advertisment_images.ADVERTISMENT_ID = advertisments.ID \n" +
-				"WHERE advertisments.TITLE LIKE '%" + title + "%'";
+		String query = "SELECT* FROM advertisments WHERE TITLE LIKE ?";
 		
 		System.out.println(query);
 		
 		try {
 			pst = con.prepareStatement(query);
+			pst.setString(1,"%"+title+"%");
 			rs = pst.executeQuery();
 			
-			return new RelationToObjectMapper().createDynamicClassList(rs);
+			return new RelationToObjectMapper().createMappedRowList(rs);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -184,7 +171,5 @@ public class MySqlDataAccess implements DataAccess {
 	
 		return null;
 	}
-
-	
 
 }

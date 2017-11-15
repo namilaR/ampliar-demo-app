@@ -30,226 +30,7 @@ import org.json.simple.parser.ParseException;
 
 public class RelationToObjectMapper {
 
-    public ArrayList<Advertisment> createDynamicClassList(ResultSet rst) {
-        System.out.println("createDynamicClassList called");
-        ArrayList<Advertisment> list = new ArrayList<Advertisment>();
-        Gson gson = new Gson();
-        ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
-
-        try {
-
-            Class noparams[] = {};
-            Class paramInt[] = {Integer.TYPE};
-            Class paramDouble[] = {Double.TYPE};
-            Class paramString[] = {String.class};
-            Class addCategoty[] = {Category.class};
-            Class addSubCategoty[] = {SubCategory.class};
-            Class addDistrict[] = {District.class};
-            Class addDistrictLocalArea[] = {DistrictLocalArea.class};
-
-            // int id = rst.getInt(1);
-            while (rst.next()) {
-//				int thisrowId; = rst.getInt(1);
-                int previousRowId = 0;
-
-                adimage.add(new AdvertismentImage(rst.getInt(13), rst.getInt(14), rst.getString(15), rst.getInt(16)));
-
-//				if (!rst.next() || rst.getInt(1) != thisrowId) {
-//					rst.previous();
-                if (rst.getInt(1) != previousRowId) {
-
-                    Class<?> clazz = Class.forName("com.ampliar.demo.models." + rst.getString(6));
-                    Object obj = clazz.newInstance();
-                    System.out.println();
-
-                    Method setAdvertismentId = clazz.getSuperclass().getDeclaredMethod("setAdvertismentId", paramInt);
-                    Method setUserId = clazz.getSuperclass().getDeclaredMethod("setUserId", paramInt);
-                    Method setAdvertismentImage = clazz.getSuperclass().getDeclaredMethod("setAdvertismentImage",
-                            ArrayList.class);
-                    Method setAdvertismentCategoty = clazz.getSuperclass().getDeclaredMethod("setAdvertismentCategoty",
-                            addCategoty);
-                    Method setAdvertismentSubCategoty = clazz.getSuperclass().getDeclaredMethod("setAdvertismentSubCategoty",
-                            addSubCategoty);
-                    Method setAdvertismentDistrict = clazz.getSuperclass().getDeclaredMethod("setAdvertismentDistrict",
-                            addDistrict);
-                    Method setDistrictLoacalArea = clazz.getSuperclass().getDeclaredMethod("setDistrictLoacalArea",
-                            addDistrictLocalArea);
-                    Method setPrice = clazz.getSuperclass().getDeclaredMethod("setPrice", paramDouble);
-                    Method setTitle = clazz.getSuperclass().getDeclaredMethod("setTitle", paramString);
-                    Method toString = clazz.getDeclaredMethod("toString", noparams);
-
-                    obj = gson.fromJson(rst.getString(9), clazz);
-                    setAdvertismentId.invoke(obj, rst.getInt(1));
-                    setUserId.invoke(obj, rst.getInt(2));
-                    setTitle.invoke(obj, rst.getString(3));
-                    setPrice.invoke(obj, rst.getDouble(4));
-                    setAdvertismentCategoty.invoke(obj, new Category(rst.getString(5)));
-                    setAdvertismentSubCategoty.invoke(obj, new SubCategory(rst.getString(6)));
-                    setAdvertismentDistrict.invoke(obj, new District(rst.getString(7)));
-                    setDistrictLoacalArea.invoke(obj, new DistrictLocalArea(rst.getString(8)));
-                    setAdvertismentImage.invoke(obj, adimage.clone());
-
-
-                    list.add((Advertisment) obj);
-                    obj = null;
-                    clazz = null;
-                    adimage.clear();
-
-                    previousRowId = rst.getInt(1);
-
-
-                }
-
-//				} else {
-//					rst.previous();
-//				}
-
-            }
-
-
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (JsonSyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        System.out.println(gson.toJson(list));
-        System.out.println(list.size());
-        // System.out.println(gson.toJson(list.get(1).getAdvertismentImage()));
-        // System.out.println(gson.toJson(list.get(3).getAdvertismentImage()));
-        return list;
-    }
-
-    public Advertisment createDynamicClass(ResultSet rst) {
-        System.out.println("createDynamicClassList called");
-        Advertisment advertisment = null;
-        Gson gson = new Gson();
-        ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
-
-        try {
-
-            Class noparams[] = {};
-            Class paramInt[] = {Integer.TYPE};
-            Class paramDouble[] = {Double.TYPE};
-            Class paramString[] = {String.class};
-            Class addCategoty[] = {Category.class};
-            Class addSubCategoty[] = {SubCategory.class};
-            Class addDistrict[] = {District.class};
-            Class addDistrictLocalArea[] = {DistrictLocalArea.class};
-
-            // int id = rst.getInt(1);
-            while (rst.next()) {
-                int thisrowId = rst.getInt(1);
-
-                adimage.add(new AdvertismentImage(rst.getInt(13), rst.getInt(14), rst.getString(15), rst.getInt(16)));
-
-                if (!rst.next() || rst.getInt(1) != thisrowId) {
-                    rst.previous();
-
-                    Class<?> clazz = Class.forName("com.ampliar.demo.models." + rst.getString(6));
-                    Object obj = clazz.newInstance();
-                    System.out.println();
-
-                    Method setAdvertismentId = clazz.getSuperclass().getDeclaredMethod("setAdvertismentId", paramInt);
-                    Method setUserId = clazz.getSuperclass().getDeclaredMethod("setUserId", paramInt);
-                    Method setAdvertismentImage = clazz.getSuperclass().getDeclaredMethod("setAdvertismentImage",
-                            ArrayList.class);
-                    Method setAdvertismentCategoty = clazz.getSuperclass().getDeclaredMethod("setAdvertismentCategoty",
-                            addCategoty);
-                    Method setAdvertismentSubCategoty = clazz.getSuperclass().getDeclaredMethod("setAdvertismentSubCategoty",
-                            addSubCategoty);
-                    Method setAdvertismentDistrict = clazz.getSuperclass().getDeclaredMethod("setAdvertismentDistrict",
-                            addDistrict);
-                    Method setDistrictLoacalArea = clazz.getSuperclass().getDeclaredMethod("setDistrictLoacalArea",
-                            addDistrictLocalArea);
-                    Method setPrice = clazz.getSuperclass().getDeclaredMethod("setPrice", paramDouble);
-                    Method setTitle = clazz.getSuperclass().getDeclaredMethod("setTitle", paramString);
-                    Method toString = clazz.getDeclaredMethod("toString", noparams);
-
-                    obj = gson.fromJson(rst.getString(9), clazz);
-                    setAdvertismentId.invoke(obj, rst.getInt(1));
-                    setUserId.invoke(obj, rst.getInt(2));
-                    setTitle.invoke(obj, rst.getString(3));
-                    setPrice.invoke(obj, rst.getDouble(4));
-                    setAdvertismentCategoty.invoke(obj, new Category(rst.getString(5)));
-                    setAdvertismentSubCategoty.invoke(obj, new SubCategory(rst.getString(6)));
-                    setAdvertismentDistrict.invoke(obj, new District(rst.getString(7)));
-                    setDistrictLoacalArea.invoke(obj, new DistrictLocalArea(rst.getString(8)));
-                    setAdvertismentImage.invoke(obj, adimage.clone());
-
-
-                    advertisment = (Advertisment) obj;
-                    obj = null;
-                    clazz = null;
-                    adimage.clear();
-
-                } else {
-                    rst.previous();
-                }
-
-            }
-
-
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (JsonSyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-
-        // System.out.println(gson.toJson(list.get(1).getAdvertismentImage()));
-        // System.out.println(gson.toJson(list.get(3).getAdvertismentImage()));
-        return advertisment;
-    }
-
-
-    public ArrayList<Advertisment> crateMappedRowList(ResultSet rst) {
+    public ArrayList<Advertisment> createMappedRowList(ResultSet rst) {
         ArrayList<Advertisment> list = new ArrayList<Advertisment>();
         Gson gson = new Gson();
         ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
@@ -354,5 +135,113 @@ public class RelationToObjectMapper {
         System.out.println("Add Image Size : " + adimage.size());
 
         return list;
+    }
+
+    public Advertisment createMappedRow(ResultSet rst){
+        Advertisment add = null;
+        Gson gson = new Gson();
+        ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
+
+        try {
+
+            Class noparams[] = {};
+            Class paramInt[] = {Integer.TYPE};
+            Class paramDouble[] = {Double.TYPE};
+            Class paramString[] = {String.class};
+            Class addCategoty[] = {Category.class};
+            Class addSubCategoty[] = {SubCategory.class};
+            Class addDistrict[] = {District.class};
+            Class addDistrictLocalArea[] = {DistrictLocalArea.class};
+
+
+            while (rst.next()) {
+
+
+                Class<?> clazz = Class.forName("com.ampliar.demo.models." + rst.getString(6));
+                Object obj = clazz.newInstance();
+                System.out.println();
+
+                Method setAdvertismentId = clazz.getSuperclass().getDeclaredMethod("setAdvertismentId", paramInt);
+                Method setUserId = clazz.getSuperclass().getDeclaredMethod("setUserId", paramInt);
+                Method setAdvertismentImage = clazz.getSuperclass().getDeclaredMethod("setAdvertismentImage",
+                        ArrayList.class);
+                Method setAdvertismentCategoty = clazz.getSuperclass().getDeclaredMethod("setAdvertismentCategoty",
+                        addCategoty);
+                Method setAdvertismentSubCategoty = clazz.getSuperclass().getDeclaredMethod("setAdvertismentSubCategoty",
+                        addSubCategoty);
+                Method setAdvertismentDistrict = clazz.getSuperclass().getDeclaredMethod("setAdvertismentDistrict",
+                        addDistrict);
+                Method setDistrictLoacalArea = clazz.getSuperclass().getDeclaredMethod("setDistrictLoacalArea",
+                        addDistrictLocalArea);
+                Method setPrice = clazz.getSuperclass().getDeclaredMethod("setPrice", paramDouble);
+                Method setTitle = clazz.getSuperclass().getDeclaredMethod("setTitle", paramString);
+                Method toString = clazz.getDeclaredMethod("toString", noparams);
+
+                obj = gson.fromJson(rst.getString(10), clazz);
+                setAdvertismentId.invoke(obj, rst.getInt(1));
+                setUserId.invoke(obj, rst.getInt(2));
+                setTitle.invoke(obj, rst.getString(3));
+                setPrice.invoke(obj, rst.getDouble(4));
+                setAdvertismentCategoty.invoke(obj, new Category(rst.getString(5)));
+                setAdvertismentSubCategoty.invoke(obj, new SubCategory(rst.getString(6)));
+                setAdvertismentDistrict.invoke(obj, new District(rst.getString(7)));
+                setDistrictLoacalArea.invoke(obj, new DistrictLocalArea(rst.getString(8)));
+
+
+                JSONParser parser = new JSONParser();
+                JSONArray array = (JSONArray) parser.parse(rst.getString(9));
+                for (int i = 0; i < array.size(); i++) {
+                    System.out.println("JSON ID " + ((JSONObject) array.get(i)).get("imageUrl"));
+                    String URL = (String) ((JSONObject) array.get(i)).get("imageUrl");
+                    adimage.add(new AdvertismentImage(URL));
+                    setAdvertismentImage.invoke(obj, adimage.clone());
+                }
+
+
+                //list.add((Advertisment) obj);
+                add = (Advertisment) obj;
+                obj = null;
+                clazz = null;
+                adimage.clear();
+
+
+            }
+
+
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (JsonSyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("Add Image Size : " + adimage.size());
+
+        return add;
     }
 }
