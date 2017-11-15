@@ -45,6 +45,52 @@ public class Mobile extends Advertisment {
 				+ districtLoacalArea + ", price=" + price + ", status=" + status + ", createAt=" + createAt
 				+ ", updatedAt=" + updatedAt + "]";
 	}
-	
 
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getAuthenticity() {
+		return Authenticity;
+	}
+
+	public void setAuthenticity(String authenticity) {
+		Authenticity = authenticity;
+	}
+
+	public String getBluetooth() {
+		return bluetooth;
+	}
+
+	public void setBluetooth(String bluetooth) {
+		this.bluetooth = bluetooth;
+	}
+
+	public String getCamera() {
+		return camera;
+	}
+
+	public void setCamera(String camera) {
+		this.camera = camera;
+	}
 }

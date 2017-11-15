@@ -189,8 +189,37 @@ public class QueryHandeller implements DataAccess {
 	}
 
 	public boolean updateAdvertisment(Advertisment adv) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+
+			Class<?> clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method mInsertAdd = clazz.getDeclaredMethod("updateAdvertisment", Advertisment.class);
+			Object obj = clazz.newInstance();
+			mInsertAdd.invoke(obj, adv);
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return true;
 	}
 
 	public boolean deleteAdvertisment(Advertisment adv) {

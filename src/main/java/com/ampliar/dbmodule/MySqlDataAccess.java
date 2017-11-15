@@ -116,8 +116,49 @@ public class MySqlDataAccess implements DataAccess {
 	}
 
 	public boolean updateAdvertisment(Advertisment adv) {
-		// TODO Auto-generated method stub
+		String queryAdvertisment = "UPDATE `ampliar_demo`.`advertisments`\n" +
+				" SET `TITLE` = ?,\n" +
+				" `PRICE` = ?,\n" +
+				" `CATEGORY` = ?,\n" +
+				" `SUB_CATEGORY` = ?,\n" +
+				" `DISTRICT` = ?,\n" +
+				" `DISTRICT_LOCAL_AREA` = ?,\n" +
+				" `IMAGES` = ?,\n" +
+				" `ATTRIBUTES` = ?,\n" +
+				" `STATUS` = ?,\n" +
+				" `UPDATED_AT` = ?\n" +
+				" WHERE\n" +
+				"	(`ID` = ?);";
+
+		try {
+			pst = con.prepareStatement(queryAdvertisment);
+			pst.setString(1, adv.getTitle());
+			pst.setDouble(2, adv.getPrice());
+			pst.setString(3, adv.getAdvertismentCategoty().getCategoryName());
+			pst.setString(4, adv.getAdvertismentSubCategoty().getSubCategoryName());
+			pst.setString(5, adv.getAdvertismentDistrict().getDistrictName());
+			pst.setString(6, adv.getDistrictLoacalArea().getLocalAreaName());
+			pst.setString(7, adv.advImageKistToJson());
+			pst.setString(8, adv.objToJson());
+			pst.setInt(9, 1);
+			pst.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
+			pst.setInt(11, adv.getAdvertismentId());
+			pst.executeUpdate();
+			pst = null;
+			for (AdvertismentImage advImage : adv.getAdvertismentImage()) {
+				new FileUploader().uploadFile(advImage.getImage());
+			}
+
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+
 		return false;
+
 	}
 
 	public boolean deleteAdvertisment(Advertisment adv) {

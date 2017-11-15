@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
 	Gson gson = new Gson();
+	Advertisment tempAdd = null;
 
 	@RequestMapping(value = "/api-get-all-ads", method = RequestMethod.GET, produces = "application/json")
 	public String getAllCarsApi() {
@@ -32,9 +33,9 @@ public class RestController {
 
 	}
 	
-	@RequestMapping(value = "/api-get-add/{id}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/api-get-add-by-id/{id}", method = RequestMethod.GET, produces = "application/json")
 	public String getAddById(@PathVariable String id) {
-		Advertisment tempAdd = null;
+
 		tempAdd = new QueryHandeller().findAdvertismentById(Integer.parseInt(id));
 		System.out.println("ID " + id );
 		return gson.toJson(tempAdd);
@@ -81,6 +82,43 @@ public class RestController {
 		
 		return null;
 		
+	}
+
+	@RequestMapping(value="/api-update-mobile",method = RequestMethod.POST)
+	public String apiUpdateMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+		ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
+
+		for (MultipartFile multipartFile : files) {
+			adimage.add(new AdvertismentImage(multipartFile));
+
+		}
+
+		Category cat = new Category(1, request.getParameter("Category"), 1);
+		SubCategory subcat = new SubCategory(1, 1, request.getParameter("SubCategory"), 1);
+		District dis = new District(1, request.getParameter("District"), 1);
+		DistrictLocalArea disLocal = new DistrictLocalArea(1, 1, request.getParameter("DistrictLocalArea"), 1);
+
+		Mobile mobile = (Mobile) tempAdd;
+		mobile.setTitle(request.getParameter("title"));
+		mobile.setAdvertismentImage(adimage);
+		mobile.setAdvertismentCategoty(cat);
+		mobile.setAdvertismentSubCategoty(subcat);
+		mobile.setAdvertismentDistrict(dis);
+		mobile.setDistrictLoacalArea(disLocal);
+		mobile.setPrice(Double.parseDouble(request.getParameter("price")));
+
+		mobile.setCondition(request.getParameter("condition"));
+		mobile.setBrand( request.getParameter("brand"));
+		mobile.setModel(request.getParameter("model"));
+		mobile.setAuthenticity(request.getParameter("authenticity"));
+		mobile.setBluetooth(request.getParameter("bluetooth"));
+		mobile.setCamera(request.getParameter("camera"));
+
+		new QueryHandeller().updateAdvertisment(mobile);
+		//tempAdd = null;
+
+		return null;
+
 	}
 
 }
