@@ -115,7 +115,18 @@ public class RestController {
 		mobile.setCamera(request.getParameter("camera"));
 
 		new QueryHandeller().updateAdvertisment(mobile);
-		//tempAdd = null;
+		tempAdd = null;
+
+		return null;
+
+	}
+
+	@RequestMapping(value="/api-delete-advertisment",method = RequestMethod.POST)
+	public String apiDeleteAdvertisment(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+
+
+		new QueryHandeller().deleteAdvertisment(tempAdd);
+		tempAdd = null;
 
 		return null;
 

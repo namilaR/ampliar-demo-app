@@ -71,7 +71,7 @@ public class MySqlDataAccess implements DataAccess {
 	}
 
 	public boolean insertAdvertisment(Advertisment adv) {
-
+		pst = null;
 		String queryAdvertisment = "INSERT INTO `ampliar_demo`.`advertisments` (  `PUBLISHED_BY`, `TITLE`, `PRICE`, `CATEGORY`, `SUB_CATEGORY`, `DISTRICT`, `DISTRICT_LOCAL_AREA`, `IMAGES`, `ATTRIBUTES`, `STATUS`, `CREATED_AT`, `UPDATED_AT` )\n" +
 				"VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );";
 
@@ -116,6 +116,7 @@ public class MySqlDataAccess implements DataAccess {
 	}
 
 	public boolean updateAdvertisment(Advertisment adv) {
+		pst = null; rs = null;
 		String queryAdvertisment = "UPDATE `ampliar_demo`.`advertisments`\n" +
 				" SET `TITLE` = ?,\n" +
 				" `PRICE` = ?,\n" +
@@ -162,7 +163,23 @@ public class MySqlDataAccess implements DataAccess {
 	}
 
 	public boolean deleteAdvertisment(Advertisment adv) {
-		// TODO Auto-generated method stub
+		pst = null; rs = null;
+		String query = "DELETE FROM advertisments WHERE ID = ?";
+		System.out.println(query);
+
+		try {
+			pst = con.prepareStatement(query);
+			pst.setInt(1,adv.getAdvertismentId());
+			pst.executeUpdate();
+			return true;
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 		return false;
 	}
 
