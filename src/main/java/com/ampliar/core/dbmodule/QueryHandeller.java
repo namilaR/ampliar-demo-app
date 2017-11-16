@@ -266,8 +266,8 @@ public class QueryHandeller implements DataAccess {
 			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
 			Method AddUser = clazz.getDeclaredMethod("AddUser", User.class);
 			Object obj = clazz.newInstance();
-			AddUser.invoke(obj, user);
-			return 0;
+			return (Integer) AddUser.invoke(obj, user);
+
 
 
 
@@ -293,7 +293,7 @@ public class QueryHandeller implements DataAccess {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 1;
+		return 0;
 	}
 
 	public boolean CheckFederatedUserExists(String email, String authenticator) {
