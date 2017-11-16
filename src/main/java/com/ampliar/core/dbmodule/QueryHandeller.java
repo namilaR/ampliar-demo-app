@@ -2,10 +2,13 @@ package com.ampliar.core.dbmodule;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.ampliar.authenticationmodule.data.LoginInfo;
+import com.ampliar.authenticationmodule.data.User;
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.Category;
 import com.ampliar.core.models.District;
@@ -254,6 +257,107 @@ public class QueryHandeller implements DataAccess {
         }
 
         return true;
+	}
+
+	public int AddUser(User user) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method AddUser = clazz.getDeclaredMethod("AddUser", User.class);
+			Object obj = clazz.newInstance();
+			AddUser.invoke(obj, user);
+			return 0;
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 1;
+	}
+
+	public boolean CheckFederatedUserExists(String email, String authenticator) {
+		return false;
+	}
+
+	public int AddLoginInfo(LoginInfo info) {
+		return 0;
+	}
+
+	public boolean Login(String email, String password) {
+		return false;
+	}
+
+	public boolean CheckEmailExists(String email) {
+		return false;
+	}
+
+	public ResultSet GetSecurityQuestion(String email) {
+		return null;
+	}
+
+	public boolean CheckSecurityAnswer(String email, String answer) {
+		return false;
+	}
+
+	public ResultSet GetIPaddressRecords(String email) {
+		return null;
+	}
+
+	public ResultSet GetLastIPaddress(String email) {
+		return null;
+	}
+
+	public ResultSet GetBrowserRecords(String email) {
+		return null;
+	}
+
+	public ResultSet GetLastBrowser(String email) {
+		return null;
+	}
+
+	public ResultSet GetDeviceRecords(String email) {
+		return null;
+	}
+
+	public ResultSet GetLastDevice(String email) {
+		return null;
+	}
+
+	public ResultSet GetTimeRecords(String email) {
+		return null;
+	}
+
+	public ResultSet GetLastTime(String email) {
+		return null;
+	}
+
+	public ResultSet GetLocationRecords(String email) {
+		return null;
+	}
+
+	public ResultSet GetLastLocation(String email) {
+		return null;
 	}
 
 	public void testMethod(Advertisment add) {
