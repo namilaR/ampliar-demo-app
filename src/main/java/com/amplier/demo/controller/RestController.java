@@ -160,4 +160,29 @@ public class RestController {
 
 	}
 
+	@RequestMapping(value="/api-update-car",method = RequestMethod.POST)
+	public String apiUpdateCar(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+		ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
+
+		for (MultipartFile multipartFile : files) {
+			adimage.add(new AdvertismentImage(multipartFile));
+
+		}
+
+		Category cat = new Category(1, request.getParameter("Category"), 1);
+		SubCategory subcat = new SubCategory(1, 1, request.getParameter("SubCategory"), 1);
+		District dis = new District(1, request.getParameter("District"), 1);
+		DistrictLocalArea disLocal = new DistrictLocalArea(1, 1, request.getParameter("DistrictLocalArea"), 1);
+
+		Car car = new Car(1, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
+				Double.parseDouble(request.getParameter("price")), 1,
+				request.getParameter("brand"),request.getParameter("model"),Integer.parseInt(request.getParameter("modelYear")),request.getParameter("condition"),Double.parseDouble(request.getParameter("mileage")),
+				request.getParameter("bodyType"),request.getParameter("transmission"),request.getParameter("fuelType"),Double.parseDouble(request.getParameter("engineCapacity")),request.getParameter("description"));
+
+		new QueryHandeller().updateAdvertisment(car);
+
+		return null;
+
+	}
+
 }
