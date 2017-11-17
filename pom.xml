@@ -13,12 +13,19 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.3.6.RELEASE</version>
+		 <exclusions>
+		  <exclusion>
+		   <groupId>org.springframework</groupId>
+		   <artifactId>spring-web</artifactId>
+		  </exclusion>
+		 </exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.6.2</version>
+			<version>2.8.0</version>
+		 <type>jar</type>
 		</dependency>
 		<!-- Below declared dependencies are included for the servers who may complain 
 			about servlet/jstl missing dependency -->
@@ -153,9 +160,17 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.0</version>
 		</dependency>
-
-
-
+	 <dependency>
+	  <groupId>org.springframework</groupId>
+	  <artifactId>spring-web</artifactId>
+	  <version>4.3.6.RELEASE</version>
+	  <type>jar</type>
+	 </dependency>
+	 <dependency>
+	  <groupId>com.fasterxml.jackson.core</groupId>
+	  <artifactId>jackson-core</artifactId>
+	  <version>2.9.2</version>
+	 </dependency>
 	</dependencies>
 	<build>
 		<finalName>AmplierDemo</finalName>

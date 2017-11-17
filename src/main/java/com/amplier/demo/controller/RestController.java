@@ -48,29 +48,29 @@ public class RestController {
 
 	}
 	
-	@RequestMapping(value="/api-insert-mobile",method = RequestMethod.POST)
-	public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
-		ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
-
-		for (MultipartFile multipartFile : files) {
-			adimage.add(new AdvertismentImage(multipartFile));
-
-		}
-
-		Category cat = new Category(1, request.getParameter("Category"), 1);
-		SubCategory subcat = new SubCategory(1, 1, request.getParameter("SubCategory"), 1);		
-		District dis = new District(1, request.getParameter("District"), 1);
-		DistrictLocalArea disLocal = new DistrictLocalArea(1, 1, request.getParameter("DistrictLocalArea"), 1);
-		
-		Mobile mobile = new Mobile(1, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
-				Double.parseDouble(request.getParameter("price")), 1, request.getParameter("condition"), request.getParameter("brand"),
-				request.getParameter("model"), request.getParameter("authenticity"), request.getParameter("bluetooth"),
-				request.getParameter("camera"));
-		
-		new QueryHandeller().insertAdvertisment(mobile);
-		
-		return null;
-		
-	}
+//	@RequestMapping(value="/api-insert-mobile",method = RequestMethod.POST)
+//	public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+//		ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
+//
+//		for (MultipartFile multipartFile : files) {
+//			adimage.add(new AdvertismentImage(multipartFile));
+//
+//		}
+//
+//		Category cat = new Category(1, request.getParameter("Category"), 1);
+//		SubCategory subcat = new SubCategory(1, 1, request.getParameter("SubCategory"), 1);		
+//		District dis = new District(1, request.getParameter("District"), 1);
+//		DistrictLocalArea disLocal = new DistrictLocalArea(1, 1, request.getParameter("DistrictLocalArea"), 1);
+//		
+//		Mobile mobile = new Mobile(1, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
+//				Double.parseDouble(request.getParameter("price")), 1, request.getParameter("condition"), request.getParameter("brand"),
+//				request.getParameter("model"), request.getParameter("authenticity"), request.getParameter("bluetooth"),
+//				request.getParameter("camera"));
+//		
+//		new QueryHandeller().insertAdvertisment(mobile);
+//		
+//		return null;
+//		
+//	}
 
 }
