@@ -16,6 +16,7 @@ import com.ampliar.core.models.Category;
 import com.ampliar.core.models.District;
 import com.ampliar.core.models.DistrictLocalArea;
 import com.ampliar.core.models.SubCategory;
+import com.ampliar.dbmodule.MySqlDataAccess;
 import com.ampliar.demo.models.Car;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -23,12 +24,14 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class RelationToObjectMapper {
+    private static final Logger logger = Logger.getLogger(RelationToObjectMapper.class);
 
     public ArrayList<Advertisment> createMappedRowList(ResultSet rst) {
         ArrayList<Advertisment> list = new ArrayList<Advertisment>();
@@ -52,7 +55,7 @@ public class RelationToObjectMapper {
 
                 Class<?> clazz = Class.forName("com.ampliar.demo.models." + rst.getString(6));
                 Object obj = clazz.newInstance();
-                System.out.println();
+
 
                 Method setAdvertismentId = clazz.getSuperclass().getDeclaredMethod("setAdvertismentId", paramInt);
                 Method setUserId = clazz.getSuperclass().getDeclaredMethod("setUserId", paramInt);
@@ -84,7 +87,7 @@ public class RelationToObjectMapper {
                 JSONParser parser = new JSONParser();
                 JSONArray array = (JSONArray) parser.parse(rst.getString(9));
                 for (int i = 0; i < array.size(); i++) {
-                    System.out.println("JSON ID " + ((JSONObject) array.get(i)).get("imageUrl"));
+                    debug("JSON ID " + ((JSONObject) array.get(i)).get("imageUrl"));
                     String URL = (String) ((JSONObject) array.get(i)).get("imageUrl");
                     adimage.add(new AdvertismentImage(URL));
                     setAdvertismentImage.invoke(obj, adimage.clone());
@@ -102,37 +105,37 @@ public class RelationToObjectMapper {
 
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("ClassNotFoundException",e);
         } catch (InstantiationException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("InstantiationException",e);
         } catch (IllegalAccessException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("IllegalAccessException",e);
         } catch (JsonSyntaxException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("JsonSyntaxException",e);
         } catch (SecurityException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SecurityExeception",e);
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("IllegalArgumentException",e);
         } catch (NoSuchMethodException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("NoSuchMethodException",e);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         } catch (InvocationTargetException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("InvocationTargetException",e);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error("ParseException",e);
         }
 
 
-        System.out.println("Add Image Size : " + adimage.size());
+        debug("Add Image Size : " + adimage.size());
 
         return list;
     }
@@ -159,7 +162,7 @@ public class RelationToObjectMapper {
 
                 Class<?> clazz = Class.forName("com.ampliar.demo.models." + rst.getString(6));
                 Object obj = clazz.newInstance();
-                System.out.println();
+
 
                 Method setAdvertismentId = clazz.getSuperclass().getDeclaredMethod("setAdvertismentId", paramInt);
                 Method setUserId = clazz.getSuperclass().getDeclaredMethod("setUserId", paramInt);
@@ -191,7 +194,7 @@ public class RelationToObjectMapper {
                 JSONParser parser = new JSONParser();
                 JSONArray array = (JSONArray) parser.parse(rst.getString(9));
                 for (int i = 0; i < array.size(); i++) {
-                    System.out.println("JSON ID " + ((JSONObject) array.get(i)).get("imageUrl"));
+                    debug("JSON ID " + ((JSONObject) array.get(i)).get("imageUrl"));
                     String URL = (String) ((JSONObject) array.get(i)).get("imageUrl");
                     adimage.add(new AdvertismentImage(URL));
                     setAdvertismentImage.invoke(obj, adimage.clone());
@@ -210,38 +213,44 @@ public class RelationToObjectMapper {
 
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("ClassNotFoundException",e);
         } catch (InstantiationException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("InstantiationException",e);
         } catch (IllegalAccessException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("IllegalAccessException",e);
         } catch (JsonSyntaxException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("JsonSyntaxException",e);
         } catch (SecurityException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SecurityExeception",e);
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("IllegalArgumentException",e);
         } catch (NoSuchMethodException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("NoSuchMethodException",e);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         } catch (InvocationTargetException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("InvocationTargetException",e);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error("ParseException",e);
         }
 
 
-        System.out.println("Add Image Size : " + adimage.size());
+        debug("Add Image Size : " + adimage.size());
 
         return add;
+    }
+
+    private void debug(String msg) {
+        if (logger.isDebugEnabled()) {
+            logger.debug(msg);
+        }
     }
 }

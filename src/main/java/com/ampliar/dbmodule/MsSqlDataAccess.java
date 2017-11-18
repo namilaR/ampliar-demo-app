@@ -6,6 +6,7 @@ import com.ampliar.core.dbmodule.RelationToObjectMapper;
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.AdvertismentImage;
 import com.ampliar.core.models.FileUploader;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,9 +18,10 @@ public class MsSqlDataAccess implements DataAccess {
     private Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    private static final Logger logger = Logger.getLogger(MsSqlDataAccess.class);
 
     public MsSqlDataAccess() {
-        System.out.println("msssql constructor exectuted");
+        debug("msssql constructor exectuted");
         if (this.con == null) {
             getConnectionConfigurations();
             try {
@@ -29,15 +31,12 @@ public class MsSqlDataAccess implements DataAccess {
                 System.out.println(connString);
                 con = DriverManager.getConnection(connString);
 
-
-                System.out.println("db connection established to mymsssql server");
+                debug("db connection established to mymsssql server");
 
             } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("ClassNotFoundException",e);
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("SQLException",e);
             }
         }
     }
@@ -45,7 +44,7 @@ public class MsSqlDataAccess implements DataAccess {
     public ArrayList<Advertisment> findAllAdvertisments() {
         pst = null; rs = null;
         String query = "SELECT* FROM advertisments";
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -53,8 +52,7 @@ public class MsSqlDataAccess implements DataAccess {
             return new RelationToObjectMapper().createMappedRowList(rs);
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
 
         return null;
@@ -67,7 +65,7 @@ public class MsSqlDataAccess implements DataAccess {
     public Advertisment findAdvertismentById(int id) {
         pst = null; rs = null;
         String query = "SELECT* FROM advertisments WHERE ID = ?";
-        System.out.println(query);
+       debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -77,7 +75,7 @@ public class MsSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+          logger.error("SQLException",e);
         }
 
         return null;
@@ -87,7 +85,7 @@ public class MsSqlDataAccess implements DataAccess {
         pst = null; rs = null;
         String query = "SELECT* FROM advertisments WHERE TITLE LIKE ?";
 
-        System.out.println(query);
+       debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -98,7 +96,7 @@ public class MsSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+          logger.error("SQLException",e);
         }
 
 
@@ -144,7 +142,7 @@ public class MsSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+          logger.error("SQLException",e);
 
         }
 
@@ -190,7 +188,7 @@ public class MsSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+          logger.error("SQLException",e);
 
         }
 
@@ -201,7 +199,7 @@ public class MsSqlDataAccess implements DataAccess {
     public boolean deleteAdvertisment(Advertisment adv) {
         pst = null; rs = null;
         String query = "DELETE FROM advertisments WHERE ID = ?";
-        System.out.println(query);
+       debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -212,7 +210,7 @@ public class MsSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+          logger.error("SQLException",e);
         }
 
 
@@ -222,6 +220,12 @@ public class MsSqlDataAccess implements DataAccess {
     private void getConnectionConfigurations() {
         ConfigReader conf = new ConfigReader();
         this.props = conf.getConfigurations();
+    }
+
+    private void debug(String msg) {
+        if (logger.isDebugEnabled()) {
+            logger.debug(msg);
+        }
     }
 
 }

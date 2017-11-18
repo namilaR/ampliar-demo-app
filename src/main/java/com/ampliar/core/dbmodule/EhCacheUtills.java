@@ -18,12 +18,14 @@ public class EhCacheUtills {
     Cache<String, Advertisment> cachePool;
 
 
+
     private  EhCacheUtills(){
         URL myUrl = getClass().getResource("/ehcache.xml");
         Configuration xmlConfig = new XmlConfiguration(myUrl);
         this.cacheManager = CacheManagerBuilder.newCacheManager(xmlConfig);
         cacheManager.init();
         cachePool = cacheManager.getCache("cachePool",String.class,Advertisment.class);
+
     }
 
     public static EhCacheUtills getEhcacheUtils(){
@@ -34,7 +36,8 @@ public class EhCacheUtills {
     }
 
     public void putNewElement(String key, Advertisment value){
-        System.out.println("EhCahe :Put cache");
+        //System.out.println("EhCahe :Put cache");
+
         cachePool.put(key,value);
     }
 

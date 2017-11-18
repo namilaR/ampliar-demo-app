@@ -11,27 +11,21 @@ import com.ampliar.core.models.Category;
 import com.ampliar.core.models.District;
 import com.ampliar.core.models.DistrictLocalArea;
 import com.ampliar.core.models.SubCategory;
+import org.apache.log4j.Logger;
 
 public class QueryHandeller implements DataAccess {
 	private Properties props = null;
 	EhCacheUtills ehCacheUtills = null;
+	private static final Logger logger = Logger.getLogger(QueryHandeller.class);
 
 	Class[] adv = new Class[1];
 
 	public QueryHandeller() {
 		this.props = new ConfigReader().getConfigurations();
 		ehCacheUtills = EhCacheUtills.getEhcacheUtils();
-
-		System.out.println(ehCacheUtills!=null);
-
 	}
 
 	public ArrayList<Advertisment> findAllAdvertisments() {
-
-		Class params[] = new Class[2];
-		params[0] = String.class;
-		params[1] = String.class;
-
 		Class<?> clazz;
 		try {
 
@@ -43,25 +37,25 @@ public class QueryHandeller implements DataAccess {
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch blocka
-			e.printStackTrace();
+			logger.error("ClassNotFoundException",e);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("NoSuchMethodException",e);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("SecurityException",e);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InstantiationException",e);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalAccessException",e);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalArgumentException",e);
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InvocationTargetException",e);
 		}
 
 
@@ -92,25 +86,25 @@ public class QueryHandeller implements DataAccess {
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch blocka
-			e.printStackTrace();
+			logger.error("ClassNotFoundException",e);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("NoSuchMethodException",e);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("SecurityException",e);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InstantiationException",e);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalAccessException",e);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalArgumentException",e);
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InvocationTargetException",e);
 		}
 
 		return null;
@@ -118,11 +112,7 @@ public class QueryHandeller implements DataAccess {
 	}
 
 	public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
-		Class params[] = new Class[2];
-		params[0] = String.class;
-		params[1] = String.class;
-		
-		Class<?> clazz;
+ 		Class<?> clazz;
 		try {
 			
 			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
@@ -134,25 +124,25 @@ public class QueryHandeller implements DataAccess {
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch blocka
-			e.printStackTrace();
+			logger.error("ClassNotFoundException",e);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("NoSuchMethodException",e);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("SecurityException",e);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InstantiationException",e);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalAccessException",e);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalArgumentException",e);
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InvocationTargetException",e);
 		}
 
 		return null;
@@ -170,25 +160,25 @@ public class QueryHandeller implements DataAccess {
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("ClassNotFoundException",e);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InstantiationException",e);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalAccessException",e);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("NoSuchMethodException",e);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("SecurityException",e);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalArgumentException",e);
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InvocationTargetException",e);
 		}
 
 		return true;
@@ -204,25 +194,25 @@ public class QueryHandeller implements DataAccess {
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("ClassNotFoundException",e);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InstantiationException",e);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalAccessException",e);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("NoSuchMethodException",e);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("SecurityException",e);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IllegalArgumentException",e);
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("InvocationTargetException",e);
 		}
 
 		return true;
@@ -238,25 +228,25 @@ public class QueryHandeller implements DataAccess {
 
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("ClassNotFoundException",e);
         } catch (InstantiationException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("InstantiationException",e);
         } catch (IllegalAccessException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("IllegalAccessException",e);
         } catch (NoSuchMethodException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("NoSuchMethodException",e);
         } catch (SecurityException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SecurityException",e);
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("IllegalArgumentException",e);
         } catch (InvocationTargetException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("InvocationTargetException",e);
         }
 
         return true;

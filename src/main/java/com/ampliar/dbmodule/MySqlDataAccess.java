@@ -16,219 +16,224 @@ import com.ampliar.core.dbmodule.RelationToObjectMapper;
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.AdvertismentImage;
 import com.ampliar.core.models.FileUploader;
+import org.apache.log4j.Logger;
 
 public class MySqlDataAccess implements DataAccess {
 
-	private Properties props;
-	private Connection con = null;
-	PreparedStatement pst = null;
-	ResultSet rs = null;
+    private Properties props;
+    private Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    private static final Logger logger = Logger.getLogger(MySqlDataAccess.class);
 
-	public MySqlDataAccess() {
-		System.out.println("mysql constructor exectuted");
-		if (this.con == null) {
-			getConnectionConfigurations();
-			try {
-				// using mysql driver and configs create and return db connection
-				Class.forName("com.mysql.jdbc.Driver");
-				con = DriverManager.getConnection(
-						"jdbc:mysql://" + props.getProperty("host") + ":" + props.getProperty("port") + "/"
-								+ props.getProperty("database"),
-						props.getProperty("dbuser"), props.getProperty("dbpassword"));
+    public MySqlDataAccess() {
+        debug("mysql constructor exectuted");
+        if (this.con == null) {
+            getConnectionConfigurations();
+            try {
+                // using mysql driver and configs create and return db connection
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection(
+                        "jdbc:mysql://" + props.getProperty("host") + ":" + props.getProperty("port") + "/"
+                                + props.getProperty("database"),
+                        props.getProperty("dbuser"), props.getProperty("dbpassword"));
 
-				System.out.println("db connection established to mysql server");
+                debug("db connection established to mysql server");
 
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
+            } catch (ClassNotFoundException e) {
+                logger.error("ClassNotFoundException", e);
 
-	public ArrayList<Advertisment> findAllAdvertisments() {
-		pst = null; rs = null;
-		String query = "SELECT* FROM advertisments";
-		System.out.println(query);
+            } catch (SQLException e) {
+                logger.error("SQLException", e);
+            }
+        }
+    }
 
-		try {
-			pst = con.prepareStatement(query);
-			rs = pst.executeQuery();
-			return new RelationToObjectMapper().createMappedRowList(rs);
+    public ArrayList<Advertisment> findAllAdvertisments() {
+        pst = null;
+        rs = null;
+        String query = "SELECT* FROM advertisments";
+        debug(query);
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            pst = con.prepareStatement(query);
+            rs = pst.executeQuery();
+            return new RelationToObjectMapper().createMappedRowList(rs);
 
-		return null;
-	}
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        }
 
-	public ArrayList<Advertisment> findAllAdvertismentsByCategory() {
-		return null;
-	}
+        return null;
+    }
 
-	public Advertisment findAdvertismentById(int id) {
-		pst = null; rs = null;
-		String query = "SELECT* FROM advertisments WHERE ID = ?";
-		System.out.println(query);
+    public ArrayList<Advertisment> findAllAdvertismentsByCategory() {
+        return null;
+    }
 
-		try {
-			pst = con.prepareStatement(query);
-			pst.setInt(1,id);
-			rs = pst.executeQuery();
-			return new RelationToObjectMapper().createMappedRow(rs);
+    public Advertisment findAdvertismentById(int id) {
+        pst = null;
+        rs = null;
+        String query = "SELECT* FROM advertisments WHERE ID = ?";
+        debug(query);
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            pst = con.prepareStatement(query);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+            return new RelationToObjectMapper().createMappedRow(rs);
 
-		return null;
-	}
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        }
 
-	public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
-		pst = null; rs = null;
-		String query = "SELECT* FROM advertisments WHERE TITLE LIKE ?";
+        return null;
+    }
 
-		System.out.println(query);
+    public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
+        pst = null;
+        rs = null;
+        String query = "SELECT* FROM advertisments WHERE TITLE LIKE ?";
 
-		try {
-			pst = con.prepareStatement(query);
-			pst.setString(1,"%"+title+"%");
-			rs = pst.executeQuery();
+        debug(query);
 
-			return new RelationToObjectMapper().createMappedRowList(rs);
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, "%" + title + "%");
+            rs = pst.executeQuery();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            return new RelationToObjectMapper().createMappedRowList(rs);
 
-
-
-		return null;
-	}
-
-	public boolean insertAdvertisment(Advertisment adv) {
-		pst = null;
-		String queryAdvertisment = "INSERT INTO `ampliar_demo`.`advertisments` (  `PUBLISHED_BY`, `TITLE`, `PRICE`, `CATEGORY`, `SUB_CATEGORY`, `DISTRICT`, `DISTRICT_LOCAL_AREA`, `IMAGES`, `ATTRIBUTES`, `STATUS`, `CREATED_AT`, `UPDATED_AT` )\n" +
-				"VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );";
-
-		try {
-			pst = con.prepareStatement(queryAdvertisment, Statement.RETURN_GENERATED_KEYS);
-			pst.setInt(1, adv.getUserId());
-			pst.setString(2, adv.getTitle());
-			pst.setDouble(3, adv.getPrice());
-			pst.setString(4, adv.getAdvertismentCategoty().getCategoryName());
-			pst.setString(5, adv.getAdvertismentSubCategoty().getSubCategoryName());
-			pst.setString(6, adv.getAdvertismentDistrict().getDistrictName());
-			pst.setString(7, adv.getDistrictLoacalArea().getLocalAreaName());
-			pst.setString(8, adv.advImageKistToJson());
-			pst.setString(9, adv.objToJson());
-			pst.setInt(10, 1);
-			pst.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
-			pst.setTimestamp(12, new Timestamp(System.currentTimeMillis()));
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        }
 
 
-			pst.executeUpdate();
-			rs = pst.getGeneratedKeys();
-			if (rs.next()) {
+        return null;
+    }
 
-				adv.setAdvertismentId(rs.getInt(1));
+    public boolean insertAdvertisment(Advertisment adv) {
+        pst = null;
+        String queryAdvertisment = "INSERT INTO `ampliar_demo`.`advertisments` (  `PUBLISHED_BY`, `TITLE`, `PRICE`, `CATEGORY`, `SUB_CATEGORY`, `DISTRICT`, `DISTRICT_LOCAL_AREA`, `IMAGES`, `ATTRIBUTES`, `STATUS`, `CREATED_AT`, `UPDATED_AT` )\n" +
+                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );";
 
-			}
-
-			pst = null;
-			for (AdvertismentImage advImage : adv.getAdvertismentImage()) {
-				new FileUploader().uploadFile(advImage.getImage());
-			}
-
-			return true;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-		}
-
-		return false;
-	}
-
-	public boolean updateAdvertisment(Advertisment adv) {
-		pst = null; rs = null;
-		String queryAdvertisment = "UPDATE `ampliar_demo`.`advertisments`\n" +
-				" SET `TITLE` = ?,\n" +
-				" `PRICE` = ?,\n" +
-				" `CATEGORY` = ?,\n" +
-				" `SUB_CATEGORY` = ?,\n" +
-				" `DISTRICT` = ?,\n" +
-				" `DISTRICT_LOCAL_AREA` = ?,\n" +
-				" `IMAGES` = ?,\n" +
-				" `ATTRIBUTES` = ?,\n" +
-				" `STATUS` = ?,\n" +
-				" `UPDATED_AT` = ?\n" +
-				" WHERE\n" +
-				"	(`ID` = ?);";
-
-		try {
-			pst = con.prepareStatement(queryAdvertisment);
-			pst.setString(1, adv.getTitle());
-			pst.setDouble(2, adv.getPrice());
-			pst.setString(3, adv.getAdvertismentCategoty().getCategoryName());
-			pst.setString(4, adv.getAdvertismentSubCategoty().getSubCategoryName());
-			pst.setString(5, adv.getAdvertismentDistrict().getDistrictName());
-			pst.setString(6, adv.getDistrictLoacalArea().getLocalAreaName());
-			pst.setString(7, adv.advImageKistToJson());
-			pst.setString(8, adv.objToJson());
-			pst.setInt(9, 1);
-			pst.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
-			pst.setInt(11, adv.getAdvertismentId());
-			pst.executeUpdate();
-			pst = null;
-			for (AdvertismentImage advImage : adv.getAdvertismentImage()) {
-				new FileUploader().uploadFile(advImage.getImage());
-			}
-
-			return true;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-		}
-
-		return false;
-
-	}
-
-	public boolean deleteAdvertisment(Advertisment adv) {
-		pst = null; rs = null;
-		String query = "DELETE FROM advertisments WHERE ID = ?";
-		System.out.println(query);
-
-		try {
-			pst = con.prepareStatement(query);
-			pst.setInt(1,adv.getAdvertismentId());
-			pst.executeUpdate();
-			return true;
+        try {
+            pst = con.prepareStatement(queryAdvertisment, Statement.RETURN_GENERATED_KEYS);
+            pst.setInt(1, adv.getUserId());
+            pst.setString(2, adv.getTitle());
+            pst.setDouble(3, adv.getPrice());
+            pst.setString(4, adv.getAdvertismentCategoty().getCategoryName());
+            pst.setString(5, adv.getAdvertismentSubCategoty().getSubCategoryName());
+            pst.setString(6, adv.getAdvertismentDistrict().getDistrictName());
+            pst.setString(7, adv.getDistrictLoacalArea().getLocalAreaName());
+            pst.setString(8, adv.advImageKistToJson());
+            pst.setString(9, adv.objToJson());
+            pst.setInt(10, 1);
+            pst.setTimestamp(11, new Timestamp(System.currentTimeMillis()));
+            pst.setTimestamp(12, new Timestamp(System.currentTimeMillis()));
 
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+
+                adv.setAdvertismentId(rs.getInt(1));
+
+            }
+
+            pst = null;
+            for (AdvertismentImage advImage : adv.getAdvertismentImage()) {
+                new FileUploader().uploadFile(advImage.getImage());
+            }
+
+            return true;
+
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+
+        }
+
+        return false;
+    }
+
+    public boolean updateAdvertisment(Advertisment adv) {
+        pst = null;
+        rs = null;
+        String queryAdvertisment = "UPDATE `ampliar_demo`.`advertisments`\n" +
+                " SET `TITLE` = ?,\n" +
+                " `PRICE` = ?,\n" +
+                " `CATEGORY` = ?,\n" +
+                " `SUB_CATEGORY` = ?,\n" +
+                " `DISTRICT` = ?,\n" +
+                " `DISTRICT_LOCAL_AREA` = ?,\n" +
+                " `IMAGES` = ?,\n" +
+                " `ATTRIBUTES` = ?,\n" +
+                " `STATUS` = ?,\n" +
+                " `UPDATED_AT` = ?\n" +
+                " WHERE\n" +
+                "	(`ID` = ?);";
+
+        try {
+            pst = con.prepareStatement(queryAdvertisment);
+            pst.setString(1, adv.getTitle());
+            pst.setDouble(2, adv.getPrice());
+            pst.setString(3, adv.getAdvertismentCategoty().getCategoryName());
+            pst.setString(4, adv.getAdvertismentSubCategoty().getSubCategoryName());
+            pst.setString(5, adv.getAdvertismentDistrict().getDistrictName());
+            pst.setString(6, adv.getDistrictLoacalArea().getLocalAreaName());
+            pst.setString(7, adv.advImageKistToJson());
+            pst.setString(8, adv.objToJson());
+            pst.setInt(9, 1);
+            pst.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
+            pst.setInt(11, adv.getAdvertismentId());
+            pst.executeUpdate();
+            pst = null;
+            for (AdvertismentImage advImage : adv.getAdvertismentImage()) {
+                new FileUploader().uploadFile(advImage.getImage());
+            }
+
+            return true;
+
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+
+        }
+
+        return false;
+
+    }
+
+    public boolean deleteAdvertisment(Advertisment adv) {
+        pst = null;
+        rs = null;
+        String query = "DELETE FROM advertisments WHERE ID = ?";
+        debug(query);
+
+        try {
+            pst = con.prepareStatement(query);
+            pst.setInt(1, adv.getAdvertismentId());
+            pst.executeUpdate();
+            return true;
 
 
-		return false;
-	}
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        }
 
-	private void getConnectionConfigurations() {
-		ConfigReader conf = new ConfigReader();
-		this.props = conf.getConfigurations();
-	}
+
+        return false;
+    }
+
+    private void getConnectionConfigurations() {
+        ConfigReader conf = new ConfigReader();
+        this.props = conf.getConfigurations();
+    }
+
+    private void debug(String msg) {
+        if (logger.isDebugEnabled()) {
+            logger.debug(msg);
+        }
+    }
 
 
 }

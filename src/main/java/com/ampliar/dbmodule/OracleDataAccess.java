@@ -6,6 +6,7 @@ import com.ampliar.core.dbmodule.RelationToObjectMapper;
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.AdvertismentImage;
 import com.ampliar.core.models.FileUploader;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,9 +18,10 @@ public class OracleDataAccess implements DataAccess {
     private Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    private static final Logger logger = Logger.getLogger(OracleDataAccess.class);
 
     public OracleDataAccess() {
-        System.out.println("Oracle constructor exectuted");
+        debug("Oracle constructor exectuted");
         if (this.con == null) {
             getConnectionConfigurations();
             try {
@@ -28,14 +30,14 @@ public class OracleDataAccess implements DataAccess {
                 ///String connString = "jdbc:oracle:thin:@" + props.getProperty("host") + ":" + props.getProperty("port") + ";databaseName=" + props.getProperty("database") + ";user=" + props.getProperty("dbuser") + ";password="+props.getProperty("dbpassword");
                 con = DriverManager.getConnection("jdbc:oracle:thin:@" + props.getProperty("host") + ":" + props.getProperty("port") + ":" + props.getProperty("database"), props.getProperty("dbuser"), props.getProperty("dbpassword"));
 
-                System.out.println("db connection established to Oracle server");
+                debug("db connection established to Oracle server");
 
             } catch (ClassNotFoundException e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("ClassNotFoundException",e);
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("SQLException",e);
             }
         }
     }
@@ -44,7 +46,7 @@ public class OracleDataAccess implements DataAccess {
         pst = null;
         rs = null;
         String query = "SELECT* FROM \"ADVERTISEMENTS\" ";
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -53,7 +55,7 @@ public class OracleDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
 
         return null;
@@ -68,7 +70,7 @@ public class OracleDataAccess implements DataAccess {
         pst = null;
         rs = null;
         String query = "SELECT* FROM \"ADVERTISEMENTS\"  WHERE ID = ?";
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -78,7 +80,7 @@ public class OracleDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
 
         return null;
@@ -90,7 +92,7 @@ public class OracleDataAccess implements DataAccess {
         rs = null;
         String query = "SELECT* FROM \"ADVERTISEMENTS\"  WHERE TITLE LIKE ?";
 
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -101,7 +103,7 @@ public class OracleDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
         return null;
     }
@@ -138,7 +140,7 @@ public class OracleDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
 
         }
 
@@ -186,7 +188,7 @@ public class OracleDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
 
         }
 
@@ -198,7 +200,7 @@ public class OracleDataAccess implements DataAccess {
         pst = null;
         rs = null;
         String query = "DELETE FROM \"ADVERTISEMENTS\" WHERE ID = ?";
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -209,7 +211,7 @@ public class OracleDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
 
 
@@ -219,5 +221,11 @@ public class OracleDataAccess implements DataAccess {
     private void getConnectionConfigurations() {
         ConfigReader conf = new ConfigReader();
         this.props = conf.getConfigurations();
+    }
+
+    private void debug(String msg) {
+        if (logger.isDebugEnabled()) {
+            logger.debug(msg);
+        }
     }
 }
