@@ -14,11 +14,15 @@ import com.ampliar.core.models.SubCategory;
 
 public class QueryHandeller implements DataAccess {
 	private Properties props = null;
+	EhCacheUtills ehCacheUtills = null;
 
 	Class[] adv = new Class[1];
 
 	public QueryHandeller() {
 		this.props = new ConfigReader().getConfigurations();
+		ehCacheUtills = EhCacheUtills.getEhcacheUtils();
+
+		System.out.println(ehCacheUtills!=null);
 
 	}
 
@@ -70,9 +74,9 @@ public class QueryHandeller implements DataAccess {
 	}
 
 	public Advertisment findAdvertismentById(int id) {
-		Class params[] = new Class[2];
-		params[0] = String.class;
-		params[1] = String.class;
+		if(ehCacheUtills.isAvailableInCache(Integer.toString(id))) {
+			return (Advertisment) ehCacheUtills.getElement(Integer.toString(id));
+		}
 		
 		Class<?> clazz;
 		try {
@@ -80,7 +84,9 @@ public class QueryHandeller implements DataAccess {
 			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
 			Method findAdvertismentById = clazz.getDeclaredMethod("findAdvertismentById", Integer.TYPE);
 			Object obj = clazz.newInstance();
-			return (Advertisment) findAdvertismentById.invoke(obj, id);
+			Advertisment adv =  (Advertisment)  findAdvertismentById.invoke(obj, id);
+			ehCacheUtills.putNewElement(Integer.toString(adv.getAdvertismentId()),adv);
+			return adv;
 			
 			
 			
