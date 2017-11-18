@@ -14,6 +14,7 @@ public class FileUploader {
 	private static String UPLOADED_FOLDER = "/uploads/";
 
 	public boolean uploadFile(MultipartFile file) {
+		System.out.println("Inside file uploader!");
 		if (file.isEmpty()) {
 			System.err.println("Please select a file to upload");
 			return false;

@@ -58,15 +58,11 @@ public abstract class Advertisment {
 	public ArrayList<AdvertismentImage> getAdvertismentImage() {
 		return advertismentImage;
 	}
-	
-	
 
 	public void setAdvertismentImage(ArrayList<AdvertismentImage> advertismentImage) {
 		this.advertismentImage = new ArrayList<AdvertismentImage>();
 		this.advertismentImage = advertismentImage;
 	}
-	
-
 
 	public Category getAdvertismentCategoty() {
 		return advertismentCategoty;
@@ -93,7 +89,6 @@ public abstract class Advertisment {
 		
 		this.advertismentSubCategoty.setSubCategoryName(subCategoryName);
 	}
-
 
 	public District getAdvertismentDistrict() {
 		return advertismentDistrict;
@@ -141,4 +136,12 @@ public abstract class Advertisment {
 		json = json.split(",\"advertismentId\":")[0] + "}";
 		return json;
 	}
+
+	public String advImageKistToJson() {
+		Gson gson = new Gson();
+		String json = gson.toJson(this.advertismentImage);
+		//json = json.split(",\"advertismentId\":")[0] + "}";
+		return json;
+	}
+
 }

@@ -1,0 +1,8 @@
+<dbconfig>
+    <dbms>MySql</dbms>
+    <host>localhost</host>
+    <port>3306</port>
+    <dbuser>root</dbuser>
+    <dbpassword>1234</dbpassword>
+    <database>ampliar_demo</database>
+</dbconfig>

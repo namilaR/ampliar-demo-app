@@ -4,6 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
+ 
 
 public class ConfigReader {
 
@@ -14,7 +18,8 @@ public class ConfigReader {
 		try {
 
 			//input = new FileInputStream("./config.properties");
-			input = getClass().getClassLoader().getResourceAsStream("/com/ampliar/core/dbmodule/config.properties"); 
+			//input = getClass().getClassLoader().getResourceAsStream("classpath:com/ampliar/core/dbmodule/config.properties");
+			input = getClass().getClassLoader().getResourceAsStream("config.properties");
 
 			// load a properties file
 			prop.load(input);
