@@ -13,7 +13,7 @@ and open the template in the editor.
         <clientsecret>KsshjjVz47p6lzcX</clientsecret>
         <authorization_endpoint>https://www.linkedin.com/uas/oauth2/authorization</authorization_endpoint>
         <token_endpoint>https://www.linkedin.com/uas/oauth2/accessToken</token_endpoint>
-        <client_endpoint>http://localhost:8080/TestProject/Linkedincallback</client_endpoint>
+        <client_endpoint>http://localhost:8080/ampliar-demo-app/Linkedincallback</client_endpoint>
         <grant_type>authorization_code</grant_type>
         <response_type>code</response_type>
         <scope>r_basicprofile r_emailaddress</scope>
@@ -25,7 +25,7 @@ and open the template in the editor.
         <clientsecret>d23e5754aa74dad41e8eebfe16f3b764</clientsecret>
         <authorization_endpoint>https://www.facebook.com/dialog/oauth</authorization_endpoint>
         <token_endpoint>https://graph.facebook.com/oauth/access_token</token_endpoint>
-        <client_endpoint>http://localhost:8080/TestProject/Facebookcallback</client_endpoint>
+        <client_endpoint>http://localhost:8080/ampliar-demo-app/Facebookcallback</client_endpoint>
         <grant_type>authorization_code</grant_type>
         <response_type>code</response_type>
         <scope>public_profile email</scope>
@@ -36,7 +36,7 @@ and open the template in the editor.
         <clientsecret>75fAn-mynWV6BAhRHCIHNPc5</clientsecret>
         <authorization_endpoint>https://accounts.google.com/o/oauth2/auth</authorization_endpoint>
         <token_endpoint>https://accounts.google.com/o/oauth2/token</token_endpoint>
-        <client_endpoint>http://localhost:8080/TestProject/Googlecallback</client_endpoint>
+        <client_endpoint>http://localhost:8080/ampliar-demo-app/Googlecallback</client_endpoint>
         <grant_type>authorization_code</grant_type>
         <response_type>code</response_type>
         <scope>email</scope>

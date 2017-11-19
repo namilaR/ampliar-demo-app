@@ -297,66 +297,594 @@ public class QueryHandeller implements DataAccess {
 	}
 
 	public boolean CheckFederatedUserExists(String email, String authenticator) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method CheckFederatedUserExists = clazz.getDeclaredMethod("CheckFederatedUserExists", String.class,String.class);
+			Object obj = clazz.newInstance();
+			return (Boolean) CheckFederatedUserExists.invoke(obj, email,authenticator);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public int AddLoginInfo(LoginInfo info) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method AddLoginInfo = clazz.getDeclaredMethod("AddLoginInfo", LoginInfo.class);
+			Object obj = clazz.newInstance();
+			return (Integer) AddLoginInfo.invoke(obj, info);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	public boolean Login(String email, String password) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method Login = clazz.getDeclaredMethod("Login", String.class,String.class);
+			Object obj = clazz.newInstance();
+			return (Boolean) Login.invoke(obj, email,password);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public boolean CheckEmailExists(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method CheckEmailExists = clazz.getDeclaredMethod("CheckEmailExists", String.class);
+			Object obj = clazz.newInstance();
+			return (Boolean) CheckEmailExists.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public ResultSet GetSecurityQuestion(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetSecurityQuestion = clazz.getDeclaredMethod("GetSecurityQuestion", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetSecurityQuestion.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public boolean CheckSecurityAnswer(String email, String answer) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method CheckSecurityAnswer = clazz.getDeclaredMethod("CheckSecurityAnswer", String.class,String.class);
+			Object obj = clazz.newInstance();
+			return (Boolean) CheckSecurityAnswer.invoke(obj, email,answer);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public ResultSet GetIPaddressRecords(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetIPaddressRecords = clazz.getDeclaredMethod("GetIPaddressRecords", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetIPaddressRecords.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetLastIPaddress(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetLastIPaddress = clazz.getDeclaredMethod("GetLastIPaddress", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetLastIPaddress.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetBrowserRecords(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetBrowserRecords = clazz.getDeclaredMethod("GetBrowserRecords", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetBrowserRecords.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetLastBrowser(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetLastBrowser = clazz.getDeclaredMethod("GetLastBrowser", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetLastBrowser.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetDeviceRecords(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetDeviceRecords = clazz.getDeclaredMethod("GetDeviceRecords", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetDeviceRecords.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetLastDevice(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetLastDevice = clazz.getDeclaredMethod("GetLastDevice", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetLastDevice.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetTimeRecords(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetTimeRecords = clazz.getDeclaredMethod("GetTimeRecords", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetTimeRecords.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetLastTime(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetLastTime = clazz.getDeclaredMethod("GetLastTime", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetLastTime.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetLocationRecords(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetLocationRecords = clazz.getDeclaredMethod("GetLocationRecords", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetLocationRecords.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public ResultSet GetLastLocation(String email) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method GetLastLocation = clazz.getDeclaredMethod("GetLastLocation", String.class);
+			Object obj = clazz.newInstance();
+			return (ResultSet) GetLastLocation.invoke(obj, email);
+
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 

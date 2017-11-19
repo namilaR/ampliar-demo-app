@@ -8,6 +8,7 @@ package com.ampliar.authenticationmodule.impl;
 import com.ampliar.authenticationmodule.data.FacebookPojo;
 import com.ampliar.authenticationmodule.data.User;
 import com.ampliar.core.authenticationmodule.Authentication;
+import com.ampliar.core.dbmodule.QueryHandeller;
 import com.ampliar.temp.DataAccess;
 import com.google.gson.Gson;
 
@@ -70,7 +71,7 @@ public class Facebook extends Authentication{
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder=factory.newDocumentBuilder();
 
-            Document doc=builder.parse("http://localhost:8080/TestProject/config/config.xml");
+            Document doc=builder.parse("http://localhost:8080/ampliar-demo-app/resources/config/config.xml");
 
             NodeList connectorslist = doc.getElementsByTagName("connectors");
             for (int i = 0; i < connectorslist.getLength(); ++i)
@@ -189,6 +190,7 @@ public class Facebook extends Authentication{
                 String email=data.getEmail();
                 request.getSession().setAttribute("email", email);
                 request.setAttribute("auth", data);
+                createuser(request, "Facebook");
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(Facebook.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -199,12 +201,12 @@ public class Facebook extends Authentication{
     @Override
     public void createuser(HttpServletRequest request, String authenticator) {
         String email=(String) request.getSession().getAttribute("email");
-        if(!DataAccess.CheckFederatedUserExists(email, authenticator))
+        if(!new QueryHandeller().CheckFederatedUserExists(email, authenticator))
         {
             User user=new User();
             user.setEmail(email);
             user.setAuthenticator(authenticator);
-            int id=DataAccess.AddUser(user);
+            int id=new QueryHandeller().AddUser(user);
         }
     }
 }
