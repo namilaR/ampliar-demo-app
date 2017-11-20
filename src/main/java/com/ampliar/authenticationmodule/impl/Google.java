@@ -53,7 +53,7 @@ public class Google extends Authentication{
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder=factory.newDocumentBuilder();
 
-            Document doc=builder.parse("http://localhost:8080/TestProject/config/config.xml");
+            Document doc=builder.parse("http://localhost:8080/ampliar-demo-app/resources/config/config.xml");
 
             NodeList connectorslist = doc.getElementsByTagName("connectors");
             for (int i = 0; i < connectorslist.getLength(); ++i)
@@ -153,6 +153,7 @@ public class Google extends Authentication{
                 
                 reader.close();
                 request.setAttribute("auth", data);
+                createuser(request, "Google");
         }
         catch(Exception ex)
         {
