@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.ampliar.authenticationmodule.data.LoginInfo;
+import com.ampliar.authenticationmodule.data.User;
 import com.ampliar.core.dbmodule.ConfigReader;
 import com.ampliar.core.dbmodule.DataAccess;
 import com.ampliar.core.dbmodule.RelationToObjectMapper;
@@ -222,6 +224,74 @@ public class MySqlDataAccess implements DataAccess {
 
 
         return false;
+    }
+
+    public int AddUser(User user) {
+        return 0;
+    }
+
+    public boolean CheckFederatedUserExists(String email, String authenticator) {
+        return false;
+    }
+
+    public int AddLoginInfo(LoginInfo info) {
+        return 0;
+    }
+
+    public boolean Login(String email, String password) {
+        return false;
+    }
+
+    public boolean CheckEmailExists(String email) {
+        return false;
+    }
+
+    public ResultSet GetSecurityQuestion(String email) {
+        return null;
+    }
+
+    public boolean CheckSecurityAnswer(String email, String answer) {
+        return false;
+    }
+
+    public ResultSet GetIPaddressRecords(String email) {
+        return null;
+    }
+
+    public ResultSet GetLastIPaddress(String email) {
+        return null;
+    }
+
+    public ResultSet GetBrowserRecords(String email) {
+        return null;
+    }
+
+    public ResultSet GetLastBrowser(String email) {
+        return null;
+    }
+
+    public ResultSet GetDeviceRecords(String email) {
+        return null;
+    }
+
+    public ResultSet GetLastDevice(String email) {
+        return null;
+    }
+
+    public ResultSet GetTimeRecords(String email) {
+        return null;
+    }
+
+    public ResultSet GetLastTime(String email) {
+        return null;
+    }
+
+    public ResultSet GetLocationRecords(String email) {
+        return null;
+    }
+
+    public ResultSet GetLastLocation(String email) {
+        return null;
     }
 
     private void getConnectionConfigurations() {
