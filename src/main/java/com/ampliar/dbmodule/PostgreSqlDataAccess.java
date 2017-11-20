@@ -8,6 +8,7 @@ import com.ampliar.core.dbmodule.RelationToObjectMapper;
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.AdvertismentImage;
 import com.ampliar.core.models.FileUploader;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,10 +20,11 @@ public class PostgreSqlDataAccess implements DataAccess {
     private Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    private static final Logger logger = Logger.getLogger(PostgreSqlDataAccess.class);
 
 
     public PostgreSqlDataAccess(){
-        System.out.println("postgreSql constructor exectuted");
+        debug("postgreSql constructor exectuted");
         if (this.con == null) {
             getConnectionConfigurations();
             try {
@@ -33,14 +35,14 @@ public class PostgreSqlDataAccess implements DataAccess {
                                 + props.getProperty("database"),
                         props.getProperty("dbuser"), props.getProperty("dbpassword"));
 
-                System.out.println("db connection established to postgreSql server");
+                debug("db connection established to postgreSql server");
 
             } catch (ClassNotFoundException e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("ClassNotFoundException",e);
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("SQLException",e);
             }
         }
     }
@@ -48,7 +50,7 @@ public class PostgreSqlDataAccess implements DataAccess {
     public ArrayList<Advertisment> findAllAdvertisments() {
         pst = null; rs = null;
         String query = "SELECT* FROM advertisments";
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -57,7 +59,7 @@ public class PostgreSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
 
         return null;
@@ -70,7 +72,7 @@ public class PostgreSqlDataAccess implements DataAccess {
     public Advertisment findAdvertismentById(int id) {
         pst = null; rs = null;
         String query = "SELECT* FROM advertisments WHERE ID = ?";
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -80,7 +82,7 @@ public class PostgreSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
 
         return null;
@@ -90,7 +92,7 @@ public class PostgreSqlDataAccess implements DataAccess {
         pst = null; rs = null;
         String query = "SELECT* FROM advertisments WHERE title ILIKE ?";
 
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -101,7 +103,7 @@ public class PostgreSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
 
 
@@ -114,7 +116,7 @@ public class PostgreSqlDataAccess implements DataAccess {
 
         String queryAdvertisment = "INSERT INTO \"public\".\"advertisments\" (  \"published_by\", \"title\", \"price\", \"category\", \"sub_category\", \"district\", \"district_local_area\", \"images\", \"attributes\", \"status\", \"created_at\", \"updated_at\" )\n" +
                 "VALUES ( ?, ?, ?, ?, ?, ?, ?, to_json(?::json), to_json(?::json), ?, ?, ? );";
-        System.out.println(queryAdvertisment);
+        debug(queryAdvertisment);
 
         try {
             pst = con.prepareStatement(queryAdvertisment, Statement.RETURN_GENERATED_KEYS);
@@ -149,7 +151,7 @@ public class PostgreSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
 
         }
 
@@ -195,7 +197,7 @@ public class PostgreSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
 
         }
 
@@ -206,7 +208,7 @@ public class PostgreSqlDataAccess implements DataAccess {
     public boolean deleteAdvertisment(Advertisment adv) {
         pst = null; rs = null;
         String query = "DELETE FROM advertisments WHERE ID = ?";
-        System.out.println(query);
+        debug(query);
 
         try {
             pst = con.prepareStatement(query);
@@ -217,7 +219,7 @@ public class PostgreSqlDataAccess implements DataAccess {
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQLException",e);
         }
 
 
@@ -295,6 +297,12 @@ public class PostgreSqlDataAccess implements DataAccess {
     private void getConnectionConfigurations() {
         ConfigReader conf = new ConfigReader();
         this.props = conf.getConfigurations();
+    }
+
+    private void debug(String msg) {
+        if (logger.isDebugEnabled()) {
+            logger.debug(msg);
+        }
     }
 
 }

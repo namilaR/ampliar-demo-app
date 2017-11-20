@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ampliar.demo.models.Car;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,8 +38,10 @@ public class RestController {
 	public String getAddById(@PathVariable String id) {
 
 		tempAdd = new QueryHandeller().findAdvertismentById(Integer.parseInt(id));
-		System.out.println("ID " + id );
+		System.out.println(tempAdd.getAdvertismentSubCategoty().getSubCategoryName() );
+
 		return gson.toJson(tempAdd);
+
 
 	}
 
@@ -127,6 +130,56 @@ public class RestController {
 
 		new QueryHandeller().deleteAdvertisment(tempAdd);
 		tempAdd = null;
+
+		return null;
+
+	}
+
+	@RequestMapping(value="/api-insert-car",method = RequestMethod.POST)
+	public String apiInsertCar(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+		ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
+
+		for (MultipartFile multipartFile : files) {
+			adimage.add(new AdvertismentImage(multipartFile));
+
+		}
+
+		Category cat = new Category(1, request.getParameter("Category"), 1);
+		SubCategory subcat = new SubCategory(1, 1, request.getParameter("SubCategory"), 1);
+		District dis = new District(1, request.getParameter("District"), 1);
+		DistrictLocalArea disLocal = new DistrictLocalArea(1, 1, request.getParameter("DistrictLocalArea"), 1);
+
+		Car car = new Car(1, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
+				Double.parseDouble(request.getParameter("price")), 1,
+				request.getParameter("brand"),request.getParameter("model"),Integer.parseInt(request.getParameter("modelYear")),request.getParameter("condition"),Double.parseDouble(request.getParameter("mileage")),
+				request.getParameter("bodyType"),request.getParameter("transmission"),request.getParameter("fuelType"),Double.parseDouble(request.getParameter("engineCapacity")),request.getParameter("description"));
+
+		new QueryHandeller().insertAdvertisment(car);
+
+		return null;
+
+	}
+
+	@RequestMapping(value="/api-update-car",method = RequestMethod.POST)
+	public String apiUpdateCar(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+		ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
+
+		for (MultipartFile multipartFile : files) {
+			adimage.add(new AdvertismentImage(multipartFile));
+
+		}
+
+		Category cat = new Category(1, request.getParameter("Category"), 1);
+		SubCategory subcat = new SubCategory(1, 1, request.getParameter("SubCategory"), 1);
+		District dis = new District(1, request.getParameter("District"), 1);
+		DistrictLocalArea disLocal = new DistrictLocalArea(1, 1, request.getParameter("DistrictLocalArea"), 1);
+
+		Car car = new Car(1, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
+				Double.parseDouble(request.getParameter("price")), 1,
+				request.getParameter("brand"),request.getParameter("model"),Integer.parseInt(request.getParameter("modelYear")),request.getParameter("condition"),Double.parseDouble(request.getParameter("mileage")),
+				request.getParameter("bodyType"),request.getParameter("transmission"),request.getParameter("fuelType"),Double.parseDouble(request.getParameter("engineCapacity")),request.getParameter("description"));
+
+		new QueryHandeller().updateAdvertisment(car);
 
 		return null;
 
