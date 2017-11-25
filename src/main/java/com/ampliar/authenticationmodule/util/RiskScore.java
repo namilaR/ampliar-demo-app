@@ -247,6 +247,7 @@ public class RiskScore {
                     cal.add(Calendar.HOUR_OF_DAY, (int) RiskScore.time_range);
                     Date aftertime=cal.getTime();
                     
+                    cal.setTime(today);
                     cal.add(Calendar.HOUR_OF_DAY, (int) RiskScore.time_range*(-1));
                     Date beforetime=cal.getTime();
                     

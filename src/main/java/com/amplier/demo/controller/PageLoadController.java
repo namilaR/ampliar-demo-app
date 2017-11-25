@@ -360,7 +360,7 @@ public class PageLoadController {
                 InputStream input = null;
 
                 try {
-                        input = getClass().getClassLoader().getResourceAsStream("adaptiveconfig.properties");
+                        input = new FileInputStream("G:\\Research-Final\\ampliar-demo-app\\src\\main\\resources\\adaptiveconfig.properties");;
 
                         // load a properties file
                         prop.load(input);
@@ -398,7 +398,7 @@ public class PageLoadController {
 
                 Properties prop = new Properties();
                 OutputStream output = null;
-                output = new FileOutputStream("G:\\Research Final\\ampliar-demo-app\\src\\main\\resources\\adaptiveconfig.properties");
+                output = new FileOutputStream("G:\\Research-Final\\ampliar-demo-app\\src\\main\\resources\\adaptiveconfig.properties");
 
                 // set the properties value
                 prop.setProperty("ip_weight", Double.toString(ip_weight));
@@ -435,6 +435,33 @@ public class PageLoadController {
             return new ModelAndView("verification");
 	}
         
+        @RequestMapping(path = "/verification", method = RequestMethod.POST)
+	public ModelAndView VerifyUser(HttpServletRequest request) throws SQLException {
+            String answer=request.getParameter("answer");
+            LoginInfo info=(LoginInfo)request.getSession().getAttribute("info");
+            
+            if(new QueryHandeller().CheckSecurityAnswer(info.getEmail(), answer))
+            {
+                info.setStatus("success");
+                int info_id=new QueryHandeller().AddLoginInfo(info);
+                if(info_id>0)
+                {
+                    request.getSession().setAttribute("email", info.getEmail());
+                    return loadHomePage();
+                }
+            }
+            else
+            {
+                info.setStatus("failure");
+                int info_id=new QueryHandeller().AddLoginInfo(info);
+                if(info_id>0)
+                {
+                    return loadHomePage();
+                }
+            }
+            return null;
+	}
+        
         @RequestMapping(path = "/OTPVerification", method = RequestMethod.GET)
 	public ModelAndView loadOTPVerificationPage(HttpServletRequest request) throws SQLException {
             LoginInfo info=(LoginInfo)request.getSession().getAttribute("info");
@@ -460,6 +487,27 @@ public class PageLoadController {
             
 	}
 	
+        @RequestMapping(path = "/OTPVerification", method = RequestMethod.POST)
+	public ModelAndView VerifyOTP(HttpServletRequest request) throws SQLException {
+            LoginInfo info=(LoginInfo)request.getSession().getAttribute("info");
+            
+            String code=request.getParameter("code");
+            String otp=(String)request.getSession().getAttribute("otp");
+            
+            if(otp.equals(code))
+            {
+                info.setStatus("success");
+                int info_id=new QueryHandeller().AddLoginInfo(info);
+                if(info_id>0)
+                {
+                    request.getSession().setAttribute("email", info.getEmail());
+                    return loadHomePage();
+                }
+            }
+            return null;
+            
+	}
+        
         @RequestMapping(path = "/insert-car", method = RequestMethod.POST)
 	public ModelAndView insertCar(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
 

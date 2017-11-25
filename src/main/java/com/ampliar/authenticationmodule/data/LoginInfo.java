@@ -9,12 +9,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 
 /**
  *
  * @author Ishani
  */
-public class LoginInfo {
+public class LoginInfo implements Serializable{
     private String email;
     private String userip;
     private String device;

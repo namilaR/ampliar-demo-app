@@ -6,7 +6,7 @@
     <div id="page-wrapper" class="sign-in-wrapper">
         <div class="graphs">
             <div class="sign-in-form">
-                <form method="POST" action="verification">
+                <form method="POST" action="OTPVerification">
                     <div class="sign-in-form-top">
                         <h1 style="text-align: center">Verify It's you!</h1>
                     </div>
