@@ -313,7 +313,7 @@ public class RiskScore {
                         dif_latitude=Math.abs(pre_latitude-latitude);
                         dif_longitude=Math.abs(pre_longitude-longitude);
                         
-                        if(dif_latitude<=3 && dif_longitude<=1)
+                        if(dif_latitude<=RiskScore.latitude_range && dif_longitude<=RiskScore.longitude_range)
                         {
                             matching_count++;
                         }

@@ -498,11 +498,24 @@ public class PageLoadController {
             {
                 info.setStatus("success");
                 int info_id=new QueryHandeller().AddLoginInfo(info);
+                String email=info.getEmail();
                 if(info_id>0)
                 {
-                    request.getSession().setAttribute("email", info.getEmail());
+                    request.getSession().invalidate();
+                    request.getSession().setAttribute("email",email );
                     return loadHomePage();
                 }
+            }
+            else
+            {
+                info.setStatus("failure");
+                int info_id=new QueryHandeller().AddLoginInfo(info);
+                if(info_id>0)
+                {
+                    request.getSession().invalidate();
+                    return new ModelAndView("verificationfailure");
+                }
+                
             }
             return null;
             

@@ -122,7 +122,8 @@
                 </div>
         </div>
                               
-</div><script type="text/javascript">
+</div>
+    <script type="text/javascript">
         function checkweightedSum()
         {
           var ip_weight = document.getElementById("ip_weight").value;

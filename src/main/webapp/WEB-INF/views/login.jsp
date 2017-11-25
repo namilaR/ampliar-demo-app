@@ -170,9 +170,9 @@
                             </div>
                             <div class="log-input" style="text-align: center">
                                     <input type="image" src="resources/images/facebook.png" id="facebookButton" width="60%" height="60%">
-                                    <input type="image" src="resources/images/twitter.png" id="twitterButton" width="60%" height="60%">
                                     <input type="image" src="resources/images/linkedin.png" id="linkedInButton" width="60%" height="60%">
                                     <input type="image" src="resources/images/google.png" id="googleButton" width="60%" height="60%">
+                                    <input type="image" src="resources/images/twitter.png" id="twitterButton" width="60%" height="60%">
                             </div>
                         </div>
                         <div class="new_people">
