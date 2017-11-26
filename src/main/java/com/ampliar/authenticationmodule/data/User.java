@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package com.ampliar.authenticationmodule.data;
-
+import java.io.Serializable;
 /**
  *
  * @author Ishani
  */
-public class User {
+public class User implements Serializable{
     private String email;
     private String name;
     private String password;
