@@ -17,13 +17,15 @@ import com.ampliar.core.models.Category;
 import com.ampliar.core.models.District;
 import com.ampliar.core.models.DistrictLocalArea;
 import com.ampliar.core.models.SubCategory;
+import com.ampliar.core.webanalytics.Listener;
 import com.ampliar.demo.models.Mobile;
 import com.google.gson.Gson;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
 	Gson gson = new Gson();
-
+        
+        @Listener("/api-get-all-ads")
 	@RequestMapping(value = "/api-get-all-ads", method = RequestMethod.GET, produces = "application/json")
 	public String getAllCarsApi() {
 		ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
@@ -31,7 +33,8 @@ public class RestController {
 		return gson.toJson(tempAds);
 
 	}
-	
+        
+        @Listener("/api-get-add")
 	@RequestMapping(value = "/api-get-add/{id}", method = RequestMethod.GET, produces = "application/json")
 	public String getAddById(@PathVariable String id) {
 		Advertisment tempAdd = null;
@@ -40,6 +43,7 @@ public class RestController {
 
 	}
 
+        
 	@RequestMapping(value = "/api-get-add-title", method = RequestMethod.POST, produces = "application/json")
 	public String getAddByTitle(HttpServletRequest request) {
 		ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
@@ -48,6 +52,7 @@ public class RestController {
 
 	}
 	
+        @Listener("/api-insert-mobile")
 	@RequestMapping(value="/api-insert-mobile",method = RequestMethod.POST)
 	public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
 		ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();

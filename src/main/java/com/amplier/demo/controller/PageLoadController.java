@@ -23,6 +23,7 @@ import com.ampliar.core.models.DistrictLocalArea;
 import com.ampliar.core.models.SubCategory;
 import com.ampliar.demo.models.Car;
 import com.google.gson.Gson;
+import java.sql.ResultSet;
 
 @Controller
 public class PageLoadController {
@@ -64,6 +65,20 @@ public class PageLoadController {
 	public ModelAndView getAllCars() {
 		new QueryHandeller().findAllAdvertisments(null, null);
 		return new ModelAndView("index");
+		
+	}
+        
+        @RequestMapping(path = "/webanalytics",  method = RequestMethod.GET)
+	public ModelAndView loadWebAnalyticsHome(HttpServletRequest request) {
+		ResultSet rs1=new QueryHandeller().getVisitorCount();
+                request.setAttribute("visitor_count", rs1);
+                ResultSet rs2=new QueryHandeller().getHomePageViewCount();
+                request.setAttribute("homepage_count", rs2);
+                ResultSet rs3=new QueryHandeller().getVisitorCountWithDate();
+                request.setAttribute("visitorwithdate_count", rs3);
+                ResultSet rs4=new QueryHandeller().getSessionsWithDate();
+                request.setAttribute("sessionswithdate_count", rs4);
+		return new ModelAndView("webanalytics_home");
 		
 	}
 	

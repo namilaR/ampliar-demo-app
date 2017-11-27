@@ -14,7 +14,7 @@ public class ConfigReader {
 		try {
 
 			//input = new FileInputStream("./config.properties");
-			input = getClass().getClassLoader().getResourceAsStream("/com/ampliar/core/dbmodule/config.properties"); 
+			input = getClass().getClassLoader().getResourceAsStream("config.properties"); 
 
 			// load a properties file
 			prop.load(input);

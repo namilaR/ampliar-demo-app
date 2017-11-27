@@ -229,7 +229,149 @@ public class MySqlDataAccess implements DataAccess {
 	
 		return null;
 	}
+        public int AddGetItemEventRecord(int ad_id,String ipaddress,String date,String time,String category) {
+		pst = null;
+		String queryUser = "INSERT INTO `ampliar_demo`.`getitem_listener` (  `ad_id`, `ipaddress`, `date`, `time`, `category`)\n" +
+				"VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
 
-	
+		try {
+			pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, ad_id);
+                        pst.setString(2, ipaddress);
+                        pst.setString(3, date);
+                        pst.setString(4, time);
+                        pst.setString(5, category);
+                        
+			int i=pst.executeUpdate();
+                        int id=0;
+                        if(i==1)
+                        {
+                            rs=pst.getGeneratedKeys();
+                
+                            while (rs.next()) {
+                                id=rs.getInt(1);
+
+                            }
+                        }
+			
+			return id;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+                        return 0;
+
+		}
+	}
+
+	public int AddPostItemEventRecord(String ad_name,String ipaddress,String date,String time,String category) {
+		pst = null;
+		String queryUser = "INSERT INTO `ampliar_demo`.`postitem_listener` (  `ad_name` ,`ipaddress`, `date`, `time`, `category`)\n" +
+				"VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?);";
+
+		try {
+			pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
+                        pst.setString(1, ad_name);
+                        pst.setString(2, ipaddress);
+                        pst.setString(3, date);
+                        pst.setString(4, time);
+                        pst.setString(5, category);
+                        
+			int i=pst.executeUpdate();
+                        int id=0;
+                        if(i==1)
+                        {
+                            rs=pst.getGeneratedKeys();
+                
+                            while (rs.next()) {
+                                id=rs.getInt(1);
+
+                            }
+                        }
+			
+			return id;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+                        return 0;
+
+		}
+	}
+
+    @Override
+    public ResultSet getVisitorCount() {
+        pst = null;
+                String querygetVisitorCount="select COUNT(*) AS total,COUNT(DISTINCT ip) AS visitors from page_views";
+                
+		try
+                {
+                    pst=con.prepareStatement(querygetVisitorCount);
+                   
+
+                    rs=pst.executeQuery();
+                    return rs;
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                    return null;
+                }
+    }
+
+    @Override
+    public ResultSet getHomePageViewCount() {
+        pst = null;
+                String querygetHomePageViewCount="select COUNT(*) AS total from page_views where page='Home'";
+                
+		try
+                {
+                    pst=con.prepareStatement(querygetHomePageViewCount);
+                    
+
+                    rs=pst.executeQuery();
+                    return rs;
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                    return null;
+                }
+    }
+
+    @Override
+    public ResultSet getVisitorCountWithDate() {
+        pst = null;
+                String querygetVisitorCountWithDate="SELECT date,COUNT(DISTINCT ip) AS visitors FROM `page_views` group by date";
+                
+		try
+                {
+                    pst=con.prepareStatement(querygetVisitorCountWithDate);
+
+                    rs=pst.executeQuery();
+                    return rs;
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                    return null;
+                }
+    }
+
+    @Override
+    public ResultSet getSessionsWithDate() {
+        pst = null;
+                String querygetSessionsWithDate="select date,COUNT(*) AS sessions from page_views group by date";
+                
+		try
+                {
+                    pst=con.prepareStatement(querygetSessionsWithDate);
+                   
+
+                    rs=pst.executeQuery();
+                    return rs;
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                    return null;
+                }
+    }
 
 }

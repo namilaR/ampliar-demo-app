@@ -2,7 +2,7 @@ package com.ampliar.core.dbmodule;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.sql.ResultSet;
 import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.Category;
 import com.ampliar.core.models.District;
@@ -17,6 +17,12 @@ public interface DataAccess {
 	public boolean insertAdvertisment(Advertisment obj);
 	public boolean updateAdvertisment(Advertisment obj);
 	public boolean deleteAdvertisment(Advertisment obj);
+        public int AddGetItemEventRecord(int ad_id,String ipaddress,String date,String time,String category);
+        public int AddPostItemEventRecord(String ad_name,String ip,String date,String time,String category);
+        public ResultSet getVisitorCount();
+        public ResultSet getHomePageViewCount();
+        public ResultSet getVisitorCountWithDate();
+        public ResultSet getSessionsWithDate();
 
 
 
