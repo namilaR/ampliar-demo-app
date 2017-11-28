@@ -99,7 +99,7 @@
           ['Date', 'No of Logins'],
           <%
             while (rs4.next()) {
-                String date=rs4.getString("date");
+                String date=rs4.getString("time");
                 int logins=rs4.getInt("logins");
             
            %>

@@ -5,8 +5,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <%
 
-        ResultSet rs1=(ResultSet)request.getAttribute("browser_count");
-        ResultSet rs2 = (ResultSet)request.getAttribute("device_count");
+        ResultSet rs1=(ResultSet)request.getAttribute("Category_count");
+        ResultSet rs2 = (ResultSet)request.getAttribute("Vehicle_count");
         
                         
             
@@ -43,7 +43,7 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Date', 'Vehicles'],
+          ['Date', 'Vehicle'],
           <%
             while (rs2.next()) {
                 String date=rs2.getString("date");
@@ -58,7 +58,7 @@
         ]);
 
         var options = {
-          title: 'Vehicles',
+          title: 'Vehicle',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
