@@ -6,15 +6,8 @@
 package com.ampliar.core.webanalytics;
 
 import com.ampliar.core.dbmodule.QueryHandeller;
-import com.ampliar.core.models.Advertisment;
 import com.ampliar.core.models.Category;
-import com.ampliar.demo.models.Mobile;
-import com.google.gson.Gson;
 import java.io.FileWriter;
-import java.lang.reflect.Type;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
