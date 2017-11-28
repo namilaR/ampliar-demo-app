@@ -69,6 +69,14 @@ public class RestController {
 		return gson.toJson(tempAds);
 
 	}
+
+	@RequestMapping(value = "/api-get-add-by-sub-category/{subCategory}", method = RequestMethod.GET, produces = "application/json")
+	public String getAddBySubCategory(@PathVariable String subCategory) {
+		ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
+		tempAds = new QueryHandeller().findAdvertismentBySubCategory(subCategory);
+		return gson.toJson(tempAds);
+
+	}
 	
 	@RequestMapping(value="/api-insert-mobile",method = RequestMethod.POST)
 	public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
