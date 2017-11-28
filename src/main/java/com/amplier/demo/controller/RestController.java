@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ampliar.core.dbmodule.QueryHandeller;
 import com.ampliar.core.models.Advertisment;
@@ -79,7 +80,7 @@ public class RestController {
 	}
 	
 	@RequestMapping(value="/api-insert-mobile",method = RequestMethod.POST)
-	public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+	public ModelAndView apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
 		ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
 
 		for (MultipartFile multipartFile : files) {
@@ -99,7 +100,7 @@ public class RestController {
 		
 		new QueryHandeller().insertAdvertisment(mobile);
 		
-		return null;
+		return new ModelAndView("classified_all");
 		
 	}
 
