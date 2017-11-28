@@ -55,6 +55,8 @@ import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URL;
+import java.io.File;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -361,8 +363,8 @@ public class PageLoadController {
         InputStream input = null;
 
         try {
-            input = new FileInputStream("G:\\Research-Final\\ampliar-demo-app\\src\\main\\resources\\adaptiveconfig.properties");
-            ;
+            input = new FileInputStream("G:\\Completed\\ampliar-demo-app\\src\\main\\resources\\adaptiveConfig.properties");
+            
 
             // load a properties file
             prop.load(input);
@@ -399,7 +401,7 @@ public class PageLoadController {
 
             Properties prop = new Properties();
             OutputStream output = null;
-            output = new FileOutputStream("G:\\Research-Final\\ampliar-demo-app\\src\\main\\resources\\adaptiveconfig.properties");
+            output = new FileOutputStream("G:\\Completed\\ampliar-demo-app\\src\\main\\resources\\adaptiveConfig.properties");
 
             // set the properties value
             prop.setProperty("ip_weight", Double.toString(ip_weight));

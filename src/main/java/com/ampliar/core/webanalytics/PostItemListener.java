@@ -27,11 +27,11 @@ public class PostItemListener implements ListenerService {
            
             boolean errorfound = false;
 
-            String ad_name = request.getParameter("ad_name");
-            String ad_price = request.getParameter("ad_price");
-            String category = request.getParameter("category-select");
-            String description = request.getParameter("description");
-            String sub_category = request.getParameter("sub_category-select");
+            String ad_name = request.getParameter("title");
+            String ad_price = request.getParameter("price");
+            String category = request.getParameter("Category");
+            
+            String sub_category = request.getParameter("SubCategory");
 
             if(ad_name.equals(""))
             {  
@@ -41,7 +41,11 @@ public class PostItemListener implements ListenerService {
             {
                 errorfound = true;
             }
-            if(description.equals(""))
+            if(category.equals(""))
+            {
+                errorfound = true;
+            }
+            if(sub_category.equals(""))
             {
                 errorfound = true;
             }
@@ -86,7 +90,7 @@ public class PostItemListener implements ListenerService {
         String NEW_LINE_SEPERATOR = "\n";
         //String FILE_HEADER ="ad_name,ipaddress,date,time,category";
         try{
-            FileWriter fw = new FileWriter("G:\\Completed\\PostItemListener.csv",true);
+            FileWriter fw = new FileWriter("G:\\Completed\\ampliar-demo-app\\src\\main\\resources\\PostItemListener.csv",true);
             //fw.append(FILE_HEADER);
             fw.append(NEW_LINE_SEPERATOR);
             fw.append(ad_name);
