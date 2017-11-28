@@ -92,6 +92,86 @@ public class MySqlDataAccess implements DataAccess {
         return null;
     }
 
+    public ArrayList<Advertisment> findAdvertismentByCategory(String Category) {
+        pst = null;
+        rs = null;
+        String query = "SELECT* FROM advertisments WHERE CATEGORY = ?";
+
+        debug(query);
+
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, Category);
+            rs = pst.executeQuery();
+
+            return new RelationToObjectMapper().createMappedRowList(rs);
+
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        }
+        return null;
+    }
+
+    public ArrayList<Advertisment> findAdvertismentBySubCategory(String subCategory) {
+                pst = null;
+        rs = null;
+        String query = "SELECT* FROM advertisments WHERE SUB_CATEGORY = ?";
+
+        debug(query);
+
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, subCategory);
+            rs = pst.executeQuery();
+
+            return new RelationToObjectMapper().createMappedRowList(rs);
+
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        }
+        return null;
+    }
+
+    public ArrayList<Advertisment> findAdvertismentByDistrict(String district) {
+                pst = null;
+        rs = null;
+        String query = "SELECT* FROM advertisments WHERE DISTRICT = ?";
+
+        debug(query);
+
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, district);
+            rs = pst.executeQuery();
+
+            return new RelationToObjectMapper().createMappedRowList(rs);
+
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        }
+        return null;
+    }
+
+    public ArrayList<Advertisment> findAdvertismentByDistrictLocalArea(String districtLocalArea) {
+                pst = null;
+        rs = null;
+        String query = "SELECT* FROM advertisments WHERE DISTRICT_LOCAL_AREA = ?";
+
+        debug(query);
+
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, districtLocalArea);
+            rs = pst.executeQuery();
+
+            return new RelationToObjectMapper().createMappedRowList(rs);
+
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        }
+        return null;
+    }
+
     public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
         pst = null;
         rs = null;

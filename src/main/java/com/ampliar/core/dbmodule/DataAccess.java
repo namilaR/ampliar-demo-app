@@ -12,6 +12,10 @@ public interface DataAccess {
 	public ArrayList<Advertisment> findAllAdvertisments();
 	public ArrayList<Advertisment> findAllAdvertismentsByCategory();
 	public Advertisment findAdvertismentById(int id);
+	public ArrayList<Advertisment> findAdvertismentByCategory(String Category);
+	public ArrayList<Advertisment> findAdvertismentBySubCategory(String subCategory);
+	public ArrayList<Advertisment> findAdvertismentByDistrict(String district);
+	public ArrayList<Advertisment> findAdvertismentByDistrictLocalArea(String districtLocalArea);
 	public ArrayList<Advertisment> findAdvertismentByTitle(String title);
 	public boolean insertAdvertisment(Advertisment obj);
 	public boolean updateAdvertisment(Advertisment obj);
