@@ -287,6 +287,36 @@ public class MsSqlDataAccess implements DataAccess {
         return null;
     }
 
+    @Override
+    public int AddGetItemEventRecord(int ad_id, String ipaddress, String date, String time, String category) {
+        return 0;
+    }
+
+    @Override
+    public int AddPostItemEventRecord(String ad_name, String ip, String date, String time, String category) {
+        return 0;
+    }
+
+    @Override
+    public ResultSet getVisitorCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getHomePageViewCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getVisitorCountWithDate() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getSessionsWithDate() {
+        return null;
+    }
+
     private void getConnectionConfigurations() {
         ConfigReader conf = new ConfigReader();
         this.props = conf.getConfigurations();

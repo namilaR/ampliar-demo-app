@@ -227,492 +227,451 @@ public class MySqlDataAccess implements DataAccess {
     }
 
 
-	public int AddUser(User user) {
-		pst = null;
-		String queryUser = "INSERT INTO `ampliar_demo`.`users` (  `name`, `email`, `password`, `user_type`, `status`, `SecurityQuestion`, `SecurityAnswer`, `authenticator`)\n" +
-				"VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
+    public int AddUser(User user) {
+        pst = null;
+        String queryUser = "INSERT INTO `ampliar_demo`.`users` (  `name`, `email`, `password`, `user_type`, `status`, `SecurityQuestion`, `SecurityAnswer`, `authenticator`)\n" +
+                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
 
-		try {
-			pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, user.getName());
-                        pst.setString(2, user.getEmail());
-                        pst.setString(3, user.getPassword());
-                        pst.setString(4, user.getUser_type());
-                        pst.setString(5, user.getStatus());
-			pst.setString(6, user.getSec_question());
-			pst.setString(7, user.getSec_answer());
-                        pst.setString(8, user.getAuthenticator());
+        try {
+            pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
+            pst.setString(1, user.getName());
+            pst.setString(2, user.getEmail());
+            pst.setString(3, user.getPassword());
+            pst.setString(4, user.getUser_type());
+            pst.setString(5, user.getStatus());
+            pst.setString(6, user.getSec_question());
+            pst.setString(7, user.getSec_answer());
+            pst.setString(8, user.getAuthenticator());
 
 
+            int i = pst.executeUpdate();
+            int id = 0;
+            if (i == 1) {
+                rs = pst.getGeneratedKeys();
 
-			int i=pst.executeUpdate();
-                        int id=0;
-                        if(i==1)
-                        {
-                            rs=pst.getGeneratedKeys();
+                while (rs.next()) {
+                    id = rs.getInt(1);
 
-                            while (rs.next()) {
-                                id=rs.getInt(1);
-
-                            }
-                        }
-
-			return id;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-                        return 0;
-
-		}
-	}
-
-	public boolean CheckFederatedUserExists(String email, String authenticator) {
-		return false;
-	}
-
-	public int AddLoginInfo(LoginInfo info) {
-		pst = null;
-		String queryUserInfo = "INSERT INTO `ampliar_demo`.`login_info` (  `email`, `userip`, `browser`, `device`, `latitude`, `longitude`, `status`)\n" +
-				"VALUES ( ?, ?, ?, ?, ?, ?, ?);";
-
-		try {
-			pst = con.prepareStatement(queryUserInfo, Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, info.getEmail());
-                        pst.setString(2, info.getUserip());
-                        pst.setString(3, info.getBrowser());
-                        pst.setString(4, info.getDevice());
-                        pst.setDouble(5, info.getLatitude());
-			pst.setDouble(6, info.getLongitude());
-			pst.setString(7, info.getStatus());
-
-			int i=pst.executeUpdate();
-                        int id=0;
-                        if(i==1)
-                        {
-                            rs=pst.getGeneratedKeys();
-
-                            while (rs.next()) {
-                                id=rs.getInt(1);
-
-                            }
-                        }
-
-			return id;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-                        return 0;
-
-		}
-	}
-
-	public boolean Login(String email, String password) {
-                pst = null;
-                String queryLogin="select * from users where email=? and password=? and authenticator=?";
-
-		try
-                {
-                    pst=con.prepareStatement(queryLogin);
-                    pst.setString(1,email);
-                    pst.setString(2,password);
-                    pst.setString(3,"Local");
-
-                    rs=pst.executeQuery();
-                    return rs.next();
                 }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return false;
+            }
+
+            return id;
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return 0;
+
+        }
+    }
+
+    public boolean CheckFederatedUserExists(String email, String authenticator) {
+        return false;
+    }
+
+    public int AddLoginInfo(LoginInfo info) {
+        pst = null;
+        String queryUserInfo = "INSERT INTO `ampliar_demo`.`login_info` (  `email`, `userip`, `browser`, `device`, `latitude`, `longitude`, `status`)\n" +
+                "VALUES ( ?, ?, ?, ?, ?, ?, ?);";
+
+        try {
+            pst = con.prepareStatement(queryUserInfo, Statement.RETURN_GENERATED_KEYS);
+            pst.setString(1, info.getEmail());
+            pst.setString(2, info.getUserip());
+            pst.setString(3, info.getBrowser());
+            pst.setString(4, info.getDevice());
+            pst.setDouble(5, info.getLatitude());
+            pst.setDouble(6, info.getLongitude());
+            pst.setString(7, info.getStatus());
+
+            int i = pst.executeUpdate();
+            int id = 0;
+            if (i == 1) {
+                rs = pst.getGeneratedKeys();
+
+                while (rs.next()) {
+                    id = rs.getInt(1);
+
                 }
-	}
+            }
 
-	public boolean CheckEmailExists(String email) {
-		pst = null;
-                String queryCheckEmailExists="select * from users where email=? and authenticator=?";
+            return id;
 
-		try
-                {
-                    pst=con.prepareStatement(queryCheckEmailExists);
-                    pst.setString(1,email);
-                    pst.setString(2,"Local");
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return 0;
 
-                    rs=pst.executeQuery();
-                    return rs.next();
+        }
+    }
+
+    public boolean Login(String email, String password) {
+        pst = null;
+        String queryLogin = "select * from users where email=? and password=? and authenticator=?";
+
+        try {
+            pst = con.prepareStatement(queryLogin);
+            pst.setString(1, email);
+            pst.setString(2, password);
+            pst.setString(3, "Local");
+
+            rs = pst.executeQuery();
+            return rs.next();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean CheckEmailExists(String email) {
+        pst = null;
+        String queryCheckEmailExists = "select * from users where email=? and authenticator=?";
+
+        try {
+            pst = con.prepareStatement(queryCheckEmailExists);
+            pst.setString(1, email);
+            pst.setString(2, "Local");
+
+            rs = pst.executeQuery();
+            return rs.next();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public ResultSet GetSecurityQuestion(String email) {
+        pst = null;
+        String queryGetSecurityQuestion = "select SecurityQuestion from users where email=? and authenticator=?";
+
+        try {
+            pst = con.prepareStatement(queryGetSecurityQuestion);
+            pst.setString(1, email);
+            pst.setString(2, "Local");
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public boolean CheckSecurityAnswer(String email, String answer) {
+        return false;
+    }
+
+    public int AddGetItemEventRecord(int ad_id, String ipaddress, String date, String time, String category) {
+        pst = null;
+        String queryUser = "INSERT INTO `ampliar_demo`.`getitem_listener` (  `ad_id`, `ipaddress`, `date`, `time`, `category`)\n" +
+                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
+
+        try {
+            pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
+            pst.setInt(1, ad_id);
+            pst.setString(2, ipaddress);
+            pst.setString(3, date);
+            pst.setString(4, time);
+            pst.setString(5, category);
+
+            int i = pst.executeUpdate();
+            int id = 0;
+            if (i == 1) {
+                rs = pst.getGeneratedKeys();
+
+                while (rs.next()) {
+                    id = rs.getInt(1);
+
                 }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return false;
+            }
+
+            return id;
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return 0;
+
+        }
+    }
+
+    public int AddPostItemEventRecord(String ad_name, String ipaddress, String date, String time, String category) {
+        pst = null;
+        String queryUser = "INSERT INTO `ampliar_demo`.`postitem_listener` (  `ad_name` ,`ipaddress`, `date`, `time`, `category`)\n" +
+                "VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?);";
+
+        try {
+            pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
+            pst.setString(1, ad_name);
+            pst.setString(2, ipaddress);
+            pst.setString(3, date);
+            pst.setString(4, time);
+            pst.setString(5, category);
+
+            int i = pst.executeUpdate();
+            int id = 0;
+            if (i == 1) {
+                rs = pst.getGeneratedKeys();
+
+                while (rs.next()) {
+                    id = rs.getInt(1);
+
                 }
-	}
+            }
 
-	public ResultSet GetSecurityQuestion(String email) {
-		pst = null;
-                String queryGetSecurityQuestion="select SecurityQuestion from users where email=? and authenticator=?";
+            return id;
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetSecurityQuestion);
-                    pst.setString(1,email);
-                    pst.setString(2,"Local");
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return 0;
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
-        public int AddGetItemEventRecord(int ad_id,String ipaddress,String date,String time,String category) {
-		pst = null;
-		String queryUser = "INSERT INTO `ampliar_demo`.`getitem_listener` (  `ad_id`, `ipaddress`, `date`, `time`, `category`)\n" +
-				"VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
+        }
+    }
 
-		try {
-			pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
-			pst.setInt(1, ad_id);
-                        pst.setString(2, ipaddress);
-                        pst.setString(3, date);
-                        pst.setString(4, time);
-                        pst.setString(5, category);
 
-			int i=pst.executeUpdate();
-                        int id=0;
-                        if(i==1)
-                        {
-                            rs=pst.getGeneratedKeys();
-
-                            while (rs.next()) {
-                                id=rs.getInt(1);
-
-                            }
-                        }
-
-			return id;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-                        return 0;
-
-		}
-	}
-
-	public int AddPostItemEventRecord(String ad_name,String ipaddress,String date,String time,String category) {
-		pst = null;
-		String queryUser = "INSERT INTO `ampliar_demo`.`postitem_listener` (  `ad_name` ,`ipaddress`, `date`, `time`, `category`)\n" +
-				"VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?);";
-
-		try {
-			pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
-                        pst.setString(1, ad_name);
-                        pst.setString(2, ipaddress);
-                        pst.setString(3, date);
-                        pst.setString(4, time);
-                        pst.setString(5, category);
-
-			int i=pst.executeUpdate();
-                        int id=0;
-                        if(i==1)
-                        {
-                            rs=pst.getGeneratedKeys();
-
-                            while (rs.next()) {
-                                id=rs.getInt(1);
-
-                            }
-                        }
-
-			return id;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-                        return 0;
-
-		}
-	}
-
-    @Override
     public ResultSet getVisitorCount() {
         pst = null;
-                String querygetVisitorCount="select COUNT(*) AS total,COUNT(DISTINCT ip) AS visitors from page_views";
+        String querygetVisitorCount = "select COUNT(*) AS total,COUNT(DISTINCT ip) AS visitors from page_views";
 
-		try
-                {
-                    pst=con.prepareStatement(querygetVisitorCount);
+        try {
+            pst = con.prepareStatement(querygetVisitorCount);
 
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
-    @Override
+
     public ResultSet getHomePageViewCount() {
         pst = null;
-                String querygetHomePageViewCount="select COUNT(*) AS total from page_views where page='Home'";
+        String querygetHomePageViewCount = "select COUNT(*) AS total from page_views where page='Home'";
 
-		try
-                {
-                    pst=con.prepareStatement(querygetHomePageViewCount);
+        try {
+            pst = con.prepareStatement(querygetHomePageViewCount);
 
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
-    @Override
+
     public ResultSet getVisitorCountWithDate() {
         pst = null;
-                String querygetVisitorCountWithDate="SELECT date,COUNT(DISTINCT ip) AS visitors FROM `page_views` group by date";
+        String querygetVisitorCountWithDate = "SELECT date,COUNT(DISTINCT ip) AS visitors FROM `page_views` group by date";
 
-		try
-                {
-                    pst=con.prepareStatement(querygetVisitorCountWithDate);
+        try {
+            pst = con.prepareStatement(querygetVisitorCountWithDate);
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
-    @Override
+
     public ResultSet getSessionsWithDate() {
         pst = null;
-                String querygetSessionsWithDate="select date,COUNT(*) AS sessions from page_views group by date";
+        String querygetSessionsWithDate = "select date,COUNT(*) AS sessions from page_views group by date";
 
-		try
-                {
-                    pst=con.prepareStatement(querygetSessionsWithDate);
+        try {
+            pst = con.prepareStatement(querygetSessionsWithDate);
 
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
-                    rs=pst.executeQuery();
-                    return rs.next();
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return false;
-                }
-	}
 
-	public ResultSet GetIPaddressRecords(String email) {
-		pst = null;
-                String queryGetIPaddressRecords="select userip from login_info where email=? and status=?";
+    public ResultSet GetIPaddressRecords(String email) {
+        pst = null;
+        String queryGetIPaddressRecords = "select userip from login_info where email=? and status=?";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetIPaddressRecords);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetIPaddressRecords);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetLastIPaddress(String email) {
-		pst = null;
-                String queryGetLastIPaddress="SELECT userip FROM login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
+    public ResultSet GetLastIPaddress(String email) {
+        pst = null;
+        String queryGetLastIPaddress = "SELECT userip FROM login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetLastIPaddress);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetLastIPaddress);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetBrowserRecords(String email) {
-		pst = null;
-                String queryGetBrowserRecords="select browser from login_info where email=? and status=?";
+    public ResultSet GetBrowserRecords(String email) {
+        pst = null;
+        String queryGetBrowserRecords = "select browser from login_info where email=? and status=?";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetBrowserRecords);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetBrowserRecords);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetLastBrowser(String email) {
-		pst = null;
-                String queryGetLastBrowser="SELECT browser FROM login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
+    public ResultSet GetLastBrowser(String email) {
+        pst = null;
+        String queryGetLastBrowser = "SELECT browser FROM login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetLastBrowser);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetLastBrowser);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetDeviceRecords(String email) {
-		pst = null;
-                String queryGetDeviceRecords="select device from login_info where email=? and status=?";
+    public ResultSet GetDeviceRecords(String email) {
+        pst = null;
+        String queryGetDeviceRecords = "select device from login_info where email=? and status=?";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetDeviceRecords);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetDeviceRecords);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetLastDevice(String email) {
-		pst = null;
-                String queryGetLastDevice="SELECT device FROM login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
+    public ResultSet GetLastDevice(String email) {
+        pst = null;
+        String queryGetLastDevice = "SELECT device FROM login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetLastDevice);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetLastDevice);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetTimeRecords(String email) {
-		pst = null;
-                String queryGetTimeRecords="select time from login_info where email=? and status=?";
+    public ResultSet GetTimeRecords(String email) {
+        pst = null;
+        String queryGetTimeRecords = "select time from login_info where email=? and status=?";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetTimeRecords);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetTimeRecords);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetLastTime(String email) {
-		pst = null;
-                String queryGetLastTime="select time from login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
+    public ResultSet GetLastTime(String email) {
+        pst = null;
+        String queryGetLastTime = "select time from login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetLastTime);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetLastTime);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetLocationRecords(String email) {
-		pst = null;
-                String queryGetLocationRecords="select latitude,longitude from login_info where email=? and status=?";
+    public ResultSet GetLocationRecords(String email) {
+        pst = null;
+        String queryGetLocationRecords = "select latitude,longitude from login_info where email=? and status=?";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetLocationRecords);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetLocationRecords);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	public ResultSet GetLastLocation(String email) {
-		pst = null;
-                String queryGetLastLocation="SELECT latitude,longitude FROM login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
+    public ResultSet GetLastLocation(String email) {
+        pst = null;
+        String queryGetLastLocation = "SELECT latitude,longitude FROM login_info where email=? and status=? ORDER BY time DESC LIMIT 1";
 
-		try
-                {
-                    pst=con.prepareStatement(queryGetLastLocation);
-                    pst.setString(1,email);
-                    pst.setString(2, "success");
+        try {
+            pst = con.prepareStatement(queryGetLastLocation);
+            pst.setString(1, email);
+            pst.setString(2, "success");
 
-                    rs=pst.executeQuery();
-                    return rs;
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                    return null;
-                }
-	}
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-	private void getConnectionConfigurations() {
-		ConfigReader conf = new ConfigReader();
-		this.props = conf.getConfigurations();
-	}
+    private void getConnectionConfigurations() {
+        ConfigReader conf = new ConfigReader();
+        this.props = conf.getConfigurations();
+    }
 
     private void debug(String msg) {
         if (logger.isDebugEnabled()) {
