@@ -21,14 +21,14 @@
 					<p> <i class="glyphicon glyphicon-map-marker"></i><a href="#"><%= request.getParameter("localAreaName") %></a>, <a href="#"><%= request.getParameter("advertismentDistrict") %></a></p>
 					<div class="flexslider">
 						<ul class="slides">
-							<li data-thumb="http://localhost:8080/ampliar-demo-app/resources/images/ss<%= request.getParameter("imageID") %>.jpg">
-								<img src="http://localhost:8080/ampliar-demo-app/resources/images/ss<%= request.getParameter("imageID") %>.jpg" />
+							<li data-thumb="http://localhost:8080/ampliar-demo-app/resources/images/ss1.jpg">
+								<img src="http://localhost:8080/ampliar-demo-app/resources/images/ss1.jpg" />
 							</li>
-							<li data-thumb="http://localhost:8080/ampliar-demo-app/resources/images/ss<%= request.getParameter("imageID") %>.jpg">
-								<img src="http://localhost:8080/ampliar-demo-app/resources/images/ss<%= request.getParameter("imageID") %>.jpg" />
+							<li data-thumb="http://localhost:8080/ampliar-demo-app/resources/images/ss2.jpg">
+								<img src="http://localhost:8080/ampliar-demo-app/resources/images/ss2.jpg" />
 							</li>
-							<li data-thumb="http://localhost:8080/ampliar-demo-app/resources/images/ss<%= request.getParameter("imageID") %>.jpg">
-								<img src="http://localhost:8080/ampliar-demo-app/resources/images/ss<%= request.getParameter("imageID") %>.jpg" />
+							<li data-thumb="http://localhost:8080/ampliar-demo-app/resources/images/ss3.jpg">
+								<img src="http://localhost:8080/ampliar-demo-app/resources/images/ss3.jpg" />
 							</li>
 						</ul>
 					</div>
