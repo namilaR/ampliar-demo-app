@@ -61,6 +61,14 @@ public class RestController {
 		return gson.toJson(tempAds);
 
 	}
+
+	@RequestMapping(value = "/api-get-add-by-category/{category}", method = RequestMethod.GET, produces = "application/json")
+	public String getAddByCategory(@PathVariable String category) {
+		ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
+		tempAds = new QueryHandeller().findAdvertismentByCategory(category);
+		return gson.toJson(tempAds);
+
+	}
 	
 	@RequestMapping(value="/api-insert-mobile",method = RequestMethod.POST)
 	public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
@@ -76,7 +84,7 @@ public class RestController {
 		District dis = new District(1, request.getParameter("District"), 1);
 		DistrictLocalArea disLocal = new DistrictLocalArea(1, 1, request.getParameter("DistrictLocalArea"), 1);
 		
-		Mobile mobile = new Mobile(1, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
+		Mobile mobile = new Mobile(2, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
 				Double.parseDouble(request.getParameter("price")), 1, request.getParameter("condition"), request.getParameter("brand"),
 				request.getParameter("model"), request.getParameter("authenticity"), request.getParameter("bluetooth"),
 				request.getParameter("camera"));
