@@ -23,7 +23,8 @@
             <h2 class="head">WEB ANALYSIS</h2>
             <div class="work-section-grids">
                 <div>
-                    <div>
+                <div class="row">
+                    <div style="margin-left: 50px;width: 600px;height: 200px;float: left">
                         <table>
                             <thead>
                                 <tr><h4>Current State of the Web Site</h4></tr>
@@ -41,8 +42,8 @@
                             try{
                                      
                                     ResultSet rs2=(ResultSet)request.getAttribute("homepage_count");
-                                    while(rs1.next()){
-                                        int sessions = rs1.getInt("total");
+                                    while(rs2.next()){
+                                        int sessions = rs2.getInt("total");
                                     
                             %>
                                     <td style="padding: 10px"><h4><%=sessions%></h4></td>
@@ -59,10 +60,88 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="row"> <a href="/ampliar/views/Postadchart.jsp"><h3> ADVERTISEMENT POSTING ANALYSIS</h3></a></div>
-                        <div class="row"> <a href="/ampliar/views/Chart.jsp"><h3> ADVERTISEMENT CATEGORY ANALYSIS</h3></a></div>
-                        <div class="row"> <a href="/ampliar/views/login_info_chart.jsp"><h3> AUTHENTICATION ANALYSIS</h3></a></div>
                     </div>
+                                <div style="float: left">
+                                    <div class="row" style="padding: 10px"> <a href="/ampliar/views/Postadchart.jsp"><h3> ADVERTISEMENT POSTING ANALYSIS</h3></a></div>
+                                    <div class="row" style="padding: 10px"> <a href="/ampliar/views/Chart.jsp"><h3> ADVERTISEMENT CATEGORY ANALYSIS</h3></a></div>
+                                    <div class="row" style="padding: 10px"> <a href="/ampliar/views/login_info_chart.jsp"><h3> AUTHENTICATION ANALYSIS</h3></a></div>
+                    </div>
+                </div>
+                                <div class="row">
+                     <div id="curve_chart" style="width: 500px; height: 300px;float:left"></div>
+                     <div id="curve_chart1" style="width: 500px; height: 300px;float:left"></div>
+                                </div>
+                
+<%
+            ResultSet rs3=(ResultSet)request.getAttribute("visitorwithdate_count");
+            
+       
+%>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Visitors'],
+          <%
+            while (rs3.next()) {
+                String date=rs3.getString("date");
+                int noofvisitors=rs3.getInt("visitors");
+            
+           %>
+           ['<%=date%>',     <%=noofvisitors%>],
+        <%  
+            }
+        
+        %>
+        ]);
+
+        var options = {
+          title: 'Visitors',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+<%
+        ResultSet rs4=(ResultSet)request.getAttribute("sessionswithdate_count");
+%>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Sessions'],
+          <%
+            while (rs4.next()) {
+                String date=rs4.getString("date");
+                int sessions=rs4.getInt("sessions");
+            
+           %>
+           ['<%=date%>',     <%=sessions%>],
+        <%  
+            }
+        
+        %>
+        ]);
+
+        var options = {
+          title: 'Sessions',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart1'));
+
+        chart.draw(data, options);
+      }
+    </script>
                 </div>
             </div>
         </div>

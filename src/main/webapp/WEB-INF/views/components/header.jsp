@@ -97,6 +97,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	src="<c:url value="/resources/js/jquery.uls.regionfilter.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.uls.core.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/loader.js" />"></script>
 <script>
 	$(document).ready(function() {
 		$('.uls-trigger').uls({

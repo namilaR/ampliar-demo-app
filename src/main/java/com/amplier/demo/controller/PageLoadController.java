@@ -542,6 +542,20 @@ public class PageLoadController {
         return new ModelAndView("webanalytics_home");
 
     }
+    
+    @RequestMapping(path = "/pagevisualization", method = RequestMethod.GET)
+    public ModelAndView loadPageViewChart(HttpServletRequest request) {
+        ResultSet rs1 = new QueryHandeller().getPageViewCountByPage();
+        request.setAttribute("pageview_count", rs1);
+        ResultSet rs2 = new QueryHandeller().getHomePageViewsWithDate();
+        request.setAttribute("homepage_views", rs2);
+        ResultSet rs3 = new QueryHandeller().getListPageViewsWithDate();
+        request.setAttribute("listpage_views", rs3);
+        ResultSet rs4 = new QueryHandeller().getSellPageViewsWithDate();
+        request.setAttribute("sellpage_views", rs4);
+        return new ModelAndView("PageViewsChart");
+
+    }
 
 
 }

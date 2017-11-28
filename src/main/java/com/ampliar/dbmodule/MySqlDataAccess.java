@@ -708,5 +708,73 @@ public class MySqlDataAccess implements DataAccess {
         }
     }
 
+    @Override
+    public ResultSet getPageViewCountByPage() {
+        pst = null;
+        String querygetPageViewCountByPage = "SELECT page,COUNT(*) as views FROM `page_views` group by page";
+
+        try {
+            pst = con.prepareStatement(querygetPageViewCountByPage);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getHomePageViewsWithDate() {
+        pst = null;
+        String querygetHomePageViewsWithDate = "SELECT date,COUNT(*) as views FROM `page_views` where page='Home' group by date";
+
+        try {
+            pst = con.prepareStatement(querygetHomePageViewsWithDate);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getListPageViewsWithDate() {
+        pst = null;
+        String querygetListPageViewsWithDate = "SELECT date,COUNT(*) as views FROM `page_views` where page='List' group by date";
+
+        try {
+            pst = con.prepareStatement(querygetListPageViewsWithDate);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getSellPageViewsWithDate() {
+        pst = null;
+        String querygetSellPageViewsWithDate = "SELECT date,COUNT(*) as views FROM `page_views` where page='Sell' group by date";
+
+        try {
+            pst = con.prepareStatement(querygetSellPageViewsWithDate);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
 
 }

@@ -34,13 +34,15 @@ public interface DataAccess {
 	public ResultSet GetLastTime(String email);
 	public ResultSet GetLocationRecords(String email);
 	public ResultSet GetLastLocation(String email);
-    public int AddGetItemEventRecord(int ad_id,String ipaddress,String date,String time,String category);
-    public int AddPostItemEventRecord(String ad_name,String ip,String date,String time,String category);
-    public ResultSet getVisitorCount();
-    public ResultSet getHomePageViewCount();
-    public ResultSet getVisitorCountWithDate();
-    public ResultSet getSessionsWithDate();
-
-
+        public int AddGetItemEventRecord(int ad_id,String ipaddress,String date,String time,String category);
+        public int AddPostItemEventRecord(String ad_name,String ip,String date,String time,String category);
+        public ResultSet getVisitorCount();
+        public ResultSet getHomePageViewCount();
+        public ResultSet getVisitorCountWithDate();
+        public ResultSet getSessionsWithDate();
+        public ResultSet getPageViewCountByPage();
+        public ResultSet getHomePageViewsWithDate();
+        public ResultSet getListPageViewsWithDate();
+        public ResultSet getSellPageViewsWithDate();
 
 }

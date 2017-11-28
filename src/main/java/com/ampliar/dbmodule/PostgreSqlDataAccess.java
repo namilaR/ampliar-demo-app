@@ -335,4 +335,24 @@ public class PostgreSqlDataAccess implements DataAccess {
         }
     }
 
+    @Override
+    public ResultSet getPageViewCountByPage() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getHomePageViewsWithDate() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getListPageViewsWithDate() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getSellPageViewsWithDate() {
+        return null;
+    }
+
 }
