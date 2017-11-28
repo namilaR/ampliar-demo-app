@@ -78,6 +78,11 @@ public class PageLoadController {
 		return new ModelAndView("post-ad");
 	}
         
+        @RequestMapping(path = "/single", method = RequestMethod.GET)
+	public ModelAndView loadSingleAd() {
+		return new ModelAndView("single");
+	}
+        
         @RequestMapping("/Facebookcallback")
 	public ModelAndView OAuthFacebookCallbackListener(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
             Facebook fb=new Facebook();

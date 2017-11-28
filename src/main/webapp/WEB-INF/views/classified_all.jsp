@@ -55,16 +55,14 @@
 			<div class="all-categories">
 				<h3> Select your category and find the perfect ad</h3>
 				<ul class="all-cat-list">
-					<li><a href="mobiles.html">Mobiles <span class="num-of-ads"></span></a></li>
-					<li><a href="electronics-appliances.html">Electronics & Appliances  <span class="num-of-ads"></span></a></li>
-					<li><a href="real-estate.html">Real Estate  <span class="num-of-ads"></span></a></li>
-					<li><a href="furnitures.html">Furniture    <span class="num-of-ads"></span></a></li>
-					<li><a href="pets.html">Pets   <span class="num-of-ads"></span></a></li>
-					<li><a href="books-sports-hobbies.html">Books, Sports & Hobbies    <span class="num-of-ads"></span></a></li>
-					<li><a href="fashion.html">Fashion   <span class="num-of-ads"></span></a></li>
-					<li><a href="kids.html">Kids   <span class="num-of-ads"></span></a></li>
-					<li><a href="services.html">Services   <span class="num-of-ads"></span></a></li>
-					<li><a href="cars.html">Cars   <span class="num-of-ads"></span></a></li>
+					<li><a href="/ampliar-demo-app/classified-all?type=mobile">Mobiles <span class="num-of-ads"></span></a></li>
+					<li><a href="/ampliar-demo-app/classified-all?type=electronics">Electronics & Appliances  <span class="num-of-ads"></span></a></li>
+					<li><a href="/ampliar-demo-app/classified-all?type=pets">Pets   <span class="num-of-ads"></span></a></li>
+					<li><a href="/ampliar-demo-app/classified-all?type=books">Books, Sports & Hobbies    <span class="num-of-ads"></span></a></li>
+					<li><a href="/ampliar-demo-app/classified-all?type=fashion">Fashion   <span class="num-of-ads"></span></a></li>
+					<li><a href="/ampliar-demo-app/classified-all?type=kids">Kids   <span class="num-of-ads"></span></a></li>
+					<li><a href="/ampliar-demo-app/classified-all?type=services">Services   <span class="num-of-ads"></span></a></li>
+					<li><a href="/ampliar-demo-app/classified-all?type=cars">Cars   <span class="num-of-ads"></span></a></li>
 				</ul>
 			</div>
 			<ol class="breadcrumb" style="margin-bottom: 5px;">
@@ -125,7 +123,9 @@
 						<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
 						   <div>
                                                         <div id="container">
-
+                                                            <div class="text-center" id="add-list-loader" style="width: 300px;height: 300px;display: none">
+                                                                <img src="http://localhost:8080/ampliar-demo-app/resources/images/giphy.gif"></img>
+                                                            </div>        
                                                             <ul class="list" id="add-list">
                                                                     
                                                             </ul>
@@ -152,22 +152,38 @@
      function getAllAds(){
 
           $("#add-list").html('');
+          $("#add-list-loader").show();
 
           $.ajax({url: "http://localhost:8080/ampliar-demo-app/api-get-all-ads", success: function(result){
                    
                    var ads_list_html = '';
                    var image_id = 1;
-                    jQuery.each(result, function() {                    
+                    jQuery.each(result, function() {
+                        console.log(this);
                         var brand = this.brand;
                         var condition = this.condition;
                         var model = this.model;
                         var price = this.price;
                         var status = this.status;
                         var title = this.title;
+                        var categoryName = this.advertismentCategoty.categoryName;
+                        var subCategoryName = this.advertismentSubCategoty.subCategoryName;
                         var localAreaName = this.districtLoacalArea.localAreaName;
                         var advertismentDistrict = this.advertismentDistrict.districtName;
                         
-                        ads_list_html += '<a href="single.html">'
+                        var single_url = '/ampliar-demo-app/single?brand='+brand+
+                                '&condition='+condition+
+                                '&model='+model+
+                                '&price='+price+
+                                '&status='+status+
+                                '&title='+title+
+                                '&localAreaName='+localAreaName+
+                                '&categoryName='+categoryName+
+                                '&subCategoryName='+subCategoryName+
+                                '&imageID='+image_id+
+                                '&advertismentDistrict='+advertismentDistrict;
+                        
+                        ads_list_html += '<a href="'+single_url+'">'
                                                 +'<li>'
                                                 +'<img src="http://localhost:8080/ampliar-demo-app/resources/images/m'+image_id+'.jpg" title="" alt="" />'
                                                 +'<section class="list-left">'
@@ -184,7 +200,7 @@
                                     image_id ++;
                                     console.log(ads_list_html);
                       });
-              
+                         $("#add-list-loader").hide();
                          $("#add-list").html(ads_list_html);
 
                 }});
