@@ -74,7 +74,22 @@ public class PageLoadController {
         return new ModelAndView("index");
     }
 
-    @RequestMapping("/Facebookcallback")
+    @RequestMapping(path = "/classified-all", method = RequestMethod.GET)
+	public ModelAndView loadClassifiedAll() {
+		return new ModelAndView("classified_all");
+	}
+
+        @RequestMapping(path = "/post-ad", method = RequestMethod.GET)
+	public ModelAndView loadPostAd() {
+		return new ModelAndView("post-ad");
+	}
+
+        @RequestMapping(path = "/single", method = RequestMethod.GET)
+	public ModelAndView loadSingleAd() {
+		return new ModelAndView("single");
+	}
+
+        @RequestMapping("/Facebookcallback")
     public ModelAndView OAuthFacebookCallbackListener(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
         Facebook fb = new Facebook();
         String authorizationCode = fb.getAuthorizationcode(request);
@@ -542,7 +557,7 @@ public class PageLoadController {
         return new ModelAndView("webanalytics_home");
 
     }
-    
+
     @RequestMapping(path = "/pagevisualization", method = RequestMethod.GET)
     public ModelAndView loadPageViewChart(HttpServletRequest request) {
         ResultSet rs1 = new QueryHandeller().getPageViewCountByPage();
@@ -583,7 +598,7 @@ public class PageLoadController {
         return new ModelAndView("Login_info_Chart");
 
     }
-    
+
     @RequestMapping(path = "/Category_Chart", method = RequestMethod.GET)
     public ModelAndView loadCategoryChart(HttpServletRequest request) {
         ResultSet rs1 = new QueryHandeller().getViewAdCategoryCount();

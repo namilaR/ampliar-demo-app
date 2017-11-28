@@ -13,24 +13,10 @@
 						normal letters, as opposed to using 'Content here.</p>
 				</div>
 				<div class="col-md-3 footer-grid">
-					<h4 class="footer-head">Help</h4>
-					<ul>
-						<li><a href="howitworks.html">How it Works</a></li>
-						<li><a href="sitemap.html">Sitemap</a></li>
-						<li><a href="faq.html">Faq</a></li>
-						<li><a href="feedback.html">Feedback</a></li>
-						<li><a href="contact.html">Contact</a></li>
-						<li><a href="typography.html">Shortcodes</a></li>
-					</ul>
+					
 				</div>
 				<div class="col-md-3 footer-grid">
-					<h4 class="footer-head">Information</h4>
-					<ul>
-						<li><a href="regions.html">Locations Map</a></li>
-						<li><a href="terms.html">Terms of Use</a></li>
-						<li><a href="popular-search.html">Popular searches</a></li>
-						<li><a href="privacy.html">Privacy Policy</a></li>
-					</ul>
+					
 				</div>
 				<div class="col-md-3 footer-grid">
 					<h4 class="footer-head">Contact Us</h4>
@@ -61,7 +47,7 @@
 	<div class="footer-bottom text-center">
 		<div class="container">
 			<div class="footer-logo">
-				<a href="index.html"><span>Re</span>sale</a>
+				<a href="/ampliar-demo-app"><span>Re</span>sale</a>
 			</div>
 			<div class="footer-social-icons">
 				<ul>
@@ -74,8 +60,7 @@
 			</div>
 			<div class="copyrights">
 				<p>
-					© 2016 Resale. All Rights Reserved | Design by <a
-						href="http://w3layouts.com/"> W3layouts</a>
+					© 2017 Resale. All Rights Reserved | Design by Ampliar 
 				</p>
 			</div>
 			<div class="clearfix"></div>

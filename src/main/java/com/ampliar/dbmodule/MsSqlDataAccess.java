@@ -83,6 +83,22 @@ public class MsSqlDataAccess implements DataAccess {
         return null;
     }
 
+    public ArrayList<Advertisment> findAdvertismentByCategory(String Category) {
+        return null;
+    }
+
+    public ArrayList<Advertisment> findAdvertismentBySubCategory(String subCategory) {
+        return null;
+    }
+
+    public ArrayList<Advertisment> findAdvertismentByDistrict(String district) {
+        return null;
+    }
+
+    public ArrayList<Advertisment> findAdvertismentByDistrictLocalArea(String districtLocalArea) {
+        return null;
+    }
+
     public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
         pst = null; rs = null;
         String query = "SELECT* FROM advertisments WHERE TITLE LIKE ?";

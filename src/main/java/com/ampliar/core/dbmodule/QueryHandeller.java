@@ -115,6 +115,155 @@ public class QueryHandeller implements DataAccess {
 
 	}
 
+	public ArrayList<Advertisment> findAdvertismentByCategory(String Category) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method findAdvertismentByCategory = clazz.getDeclaredMethod("findAdvertismentByCategory", String.class);
+			Object obj = clazz.newInstance();
+			return (ArrayList<Advertisment>) findAdvertismentByCategory.invoke(obj, Category);
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			logger.error("ClassNotFoundException",e);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			logger.error("NoSuchMethodException",e);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			logger.error("SecurityException",e);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			logger.error("InstantiationException",e);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			logger.error("IllegalAccessException",e);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			logger.error("IllegalArgumentException",e);
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			logger.error("InvocationTargetException",e);
+		}
+
+		return null;
+	}
+
+	public ArrayList<Advertisment> findAdvertismentBySubCategory(String subCategory) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method findAdvertismentBySubCategory = clazz.getDeclaredMethod("findAdvertismentBySubCategory", String.class);
+			Object obj = clazz.newInstance();
+			return (ArrayList<Advertisment>) findAdvertismentBySubCategory.invoke(obj, subCategory);
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			logger.error("ClassNotFoundException",e);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			logger.error("NoSuchMethodException",e);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			logger.error("SecurityException",e);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			logger.error("InstantiationException",e);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			logger.error("IllegalAccessException",e);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			logger.error("IllegalArgumentException",e);
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			logger.error("InvocationTargetException",e);
+		}
+
+		return null;
+
+	}
+
+	public ArrayList<Advertisment> findAdvertismentByDistrict(String district) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method findAdvertismentByDistrict = clazz.getDeclaredMethod("findAdvertismentByDistrict", String.class);
+			Object obj = clazz.newInstance();
+			return (ArrayList<Advertisment>) findAdvertismentByDistrict.invoke(obj, district);
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			logger.error("ClassNotFoundException",e);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			logger.error("NoSuchMethodException",e);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			logger.error("SecurityException",e);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			logger.error("InstantiationException",e);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			logger.error("IllegalAccessException",e);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			logger.error("IllegalArgumentException",e);
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			logger.error("InvocationTargetException",e);
+		}
+
+		return null;
+	}
+
+	public ArrayList<Advertisment> findAdvertismentByDistrictLocalArea(String districtLocalArea) {
+		Class<?> clazz;
+		try {
+
+			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
+			Method findAdvertismentByDistrictLocalArea = clazz.getDeclaredMethod("findAdvertismentByDistrictLocalArea", String.class);
+			Object obj = clazz.newInstance();
+			return (ArrayList<Advertisment>) findAdvertismentByDistrictLocalArea.invoke(obj, districtLocalArea);
+
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch blocka
+			logger.error("ClassNotFoundException",e);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			logger.error("NoSuchMethodException",e);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			logger.error("SecurityException",e);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			logger.error("InstantiationException",e);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			logger.error("IllegalAccessException",e);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			logger.error("IllegalArgumentException",e);
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			logger.error("InvocationTargetException",e);
+		}
+
+		return null;
+	}
+
 	public ArrayList<Advertisment> findAdvertismentByTitle(String title) {
  		Class<?> clazz;
 		try {

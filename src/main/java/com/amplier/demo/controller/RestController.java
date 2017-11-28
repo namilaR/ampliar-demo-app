@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ampliar.core.dbmodule.QueryHandeller;
 import com.ampliar.core.models.Advertisment;
@@ -68,9 +69,25 @@ public class RestController {
 
     }
 
+	@RequestMapping(value = "/api-get-add-by-category/{category}", method = RequestMethod.GET, produces = "application/json")
+	public String getAddByCategory(@PathVariable String category) {
+		ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
+		tempAds = new QueryHandeller().findAdvertismentByCategory(category);
+		return gson.toJson(tempAds);
+
+	}
+
+	@RequestMapping(value = "/api-get-add-by-sub-category/{subCategory}", method = RequestMethod.GET, produces = "application/json")
+	public String getAddBySubCategory(@PathVariable String subCategory) {
+		ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
+		tempAds = new QueryHandeller().findAdvertismentBySubCategory(subCategory);
+		return gson.toJson(tempAds);
+
+	}
+
     @Listener("/api-insert-mobile")
     @RequestMapping(value = "/api-insert-mobile", method = RequestMethod.POST)
-    public String apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+    public ModelAndView apiInsertMobile(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
         ArrayList<AdvertismentImage> adimage = new ArrayList<AdvertismentImage>();
 
         for (MultipartFile multipartFile : files) {
@@ -83,14 +100,14 @@ public class RestController {
         District dis = new District(1, request.getParameter("District"), 1);
         DistrictLocalArea disLocal = new DistrictLocalArea(1, 1, request.getParameter("DistrictLocalArea"), 1);
 
-        Mobile mobile = new Mobile(1, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
+        Mobile mobile = new Mobile(2, request.getParameter("title"), adimage, cat, subcat, dis, disLocal,
                 Double.parseDouble(request.getParameter("price")), 1, request.getParameter("condition"), request.getParameter("brand"),
                 request.getParameter("model"), request.getParameter("authenticity"), request.getParameter("bluetooth"),
                 request.getParameter("camera"));
 
         new QueryHandeller().insertAdvertisment(mobile);
 
-        return null;
+        return new ModelAndView("classified_all");
 
     }
 
