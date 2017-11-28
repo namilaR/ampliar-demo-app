@@ -28,7 +28,7 @@
                         <table>
                             <thead>
                                 <tr><h4>Current State of the Web Site</h4></tr>
-                            <tr><th style="padding: 10px"><h4><a href="/ampliar/views/PageviewsChart.jsp" >Page Views </a></h4></th>
+                            <tr><th style="padding: 10px"><h4><a href="pagevisualization" >Page Views </a></h4></th>
                                 <th style="padding: 10px"><h4><a href="" >Visitors </a></h4></th>
                                 <th style="padding: 10px"><h4><a href="" >Sessions </a></h4></th>
                                 <th style="padding: 10px"><h4><a href="" >Active Sessions </a></h4></th>
@@ -62,9 +62,9 @@
                         </table>
                     </div>
                                 <div style="float: left">
-                                    <div class="row" style="padding: 10px"> <a href="/ampliar/views/Postadchart.jsp"><h3> ADVERTISEMENT POSTING ANALYSIS</h3></a></div>
-                                    <div class="row" style="padding: 10px"> <a href="/ampliar/views/Chart.jsp"><h3> ADVERTISEMENT CATEGORY ANALYSIS</h3></a></div>
-                                    <div class="row" style="padding: 10px"> <a href="/ampliar/views/login_info_chart.jsp"><h3> AUTHENTICATION ANALYSIS</h3></a></div>
+                                    <div class="row" style="padding: 10px"> <a href="postedadchart"><h3> ADVERTISEMENT POSTING ANALYSIS</h3></a></div>
+                                    <div class="row" style="padding: 10px"> <a href="Category_Chart"><h3> ADVERTISEMENT CATEGORY ANALYSIS</h3></a></div>
+                                    <div class="row" style="padding: 10px"> <a href="LoginInfoChart"><h3> AUTHENTICATION ANALYSIS</h3></a></div>
                     </div>
                 </div>
                                 <div class="row">

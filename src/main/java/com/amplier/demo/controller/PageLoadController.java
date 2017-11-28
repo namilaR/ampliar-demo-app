@@ -556,6 +556,41 @@ public class PageLoadController {
         return new ModelAndView("PageViewsChart");
 
     }
+    @RequestMapping(path = "/postedadchart", method = RequestMethod.GET)
+    public ModelAndView loadPostAdChart(HttpServletRequest request) {
+        ResultSet rs1 = new QueryHandeller().getPostedAdCategoryCount();
+        request.setAttribute("category_count", rs1);
+        ResultSet rs2 = new QueryHandeller().getCarsCategoryCount();
+        request.setAttribute("vehicle_count", rs2);
+        ResultSet rs3 = new QueryHandeller().getPropertyCategoryCount();
+        request.setAttribute("property_count", rs3);
+        ResultSet rs4 = new QueryHandeller().getElectronicsCategoryCount();
+        request.setAttribute("electronics_count", rs4);
+        return new ModelAndView("PostAdChart");
 
+    }
 
+    @RequestMapping(path = "/LoginInfoChart", method = RequestMethod.GET)
+    public ModelAndView loadLoginInfoChart(HttpServletRequest request) {
+        ResultSet rs1 = new QueryHandeller().getBrowserCount();
+        request.setAttribute("browser_count", rs1);
+        ResultSet rs2 = new QueryHandeller().getDeviceCount();
+        request.setAttribute("device_count", rs2);
+        ResultSet rs3 = new QueryHandeller().getAuthenticatorCount();
+        request.setAttribute("authenticator_count", rs3);
+        ResultSet rs4 = new QueryHandeller().getLoginCount();
+        request.setAttribute("login_count", rs4);
+        return new ModelAndView("Login_info_Chart");
+
+    }
+    
+    @RequestMapping(path = "/Category_Chart", method = RequestMethod.GET)
+    public ModelAndView loadCategoryChart(HttpServletRequest request) {
+        ResultSet rs1 = new QueryHandeller().getViewAdCategoryCount();
+        request.setAttribute("Category_count", rs1);
+        ResultSet rs2 = new QueryHandeller().getViewAdCarCategoryCount();
+        request.setAttribute("Vehicle_count", rs2);
+        return new ModelAndView("CategoryChart");
+
+    }
 }

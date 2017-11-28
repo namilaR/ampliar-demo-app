@@ -348,4 +348,54 @@ public class OracleDataAccess implements DataAccess {
     public ResultSet getSellPageViewsWithDate() {
         return null;
     }
+
+    @Override
+    public ResultSet getPostedAdCategoryCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getCarsCategoryCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getPropertyCategoryCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getElectronicsCategoryCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getBrowserCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getDeviceCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getAuthenticatorCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getLoginCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getViewAdCategoryCount() {
+        return null;
+    }
+
+    @Override
+    public ResultSet getViewAdCarCategoryCount() {
+        return null;
+    }
 }

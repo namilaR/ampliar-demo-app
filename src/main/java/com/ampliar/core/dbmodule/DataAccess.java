@@ -44,5 +44,14 @@ public interface DataAccess {
         public ResultSet getHomePageViewsWithDate();
         public ResultSet getListPageViewsWithDate();
         public ResultSet getSellPageViewsWithDate();
-
+        public ResultSet getPostedAdCategoryCount();
+        public ResultSet getCarsCategoryCount();
+        public ResultSet getPropertyCategoryCount();
+        public ResultSet getElectronicsCategoryCount();
+        public ResultSet getBrowserCount();
+        public ResultSet getDeviceCount();
+        public ResultSet getAuthenticatorCount();
+        public ResultSet getLoginCount();
+        public ResultSet getViewAdCategoryCount();
+        public ResultSet getViewAdCarCategoryCount();
 }

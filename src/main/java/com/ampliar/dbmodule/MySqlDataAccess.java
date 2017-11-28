@@ -776,5 +776,175 @@ public class MySqlDataAccess implements DataAccess {
         }
     }
 
+    @Override
+    public ResultSet getPostedAdCategoryCount() {
+        pst = null;
+        String querygetPostedAdCategoryCount = "SELECT category,COUNT(*) as views FROM `postitem_listener` group by category";
+
+        try {
+            pst = con.prepareStatement(querygetPostedAdCategoryCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getCarsCategoryCount() {
+        pst = null;
+        String querygetCarsCategoryCount = "SELECT date,COUNT(*) as views FROM `postitem_listener` where category='Vehicle' group by date";
+
+        try {
+            pst = con.prepareStatement(querygetCarsCategoryCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getPropertyCategoryCount() {
+        pst = null;
+        String querygetPropertyCategoryCount = "SELECT date,COUNT(*) as views FROM `postitem_listener` where category='Property' group by date";
+
+        try {
+            pst = con.prepareStatement(querygetPropertyCategoryCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getElectronicsCategoryCount() {
+        pst = null;
+        String querygetElectronicsCategoryCount = "SELECT date,COUNT(*) as views FROM `postitem_listener` where category='Electronics' group by date";
+
+        try {
+            pst = con.prepareStatement(querygetElectronicsCategoryCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getBrowserCount() {
+        pst = null;
+        String querygetBrowserCount = "SELECT browser,COUNT(*) as views FROM `login_info` group by browser";
+
+        try {
+            pst = con.prepareStatement(querygetBrowserCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getDeviceCount() {
+        pst = null;
+        String querygetDeviceCount = "SELECT device,COUNT(*) as views FROM `login_info` group by device";
+
+        try {
+            pst = con.prepareStatement(querygetDeviceCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getAuthenticatorCount() {
+        pst = null;
+        String querygetAuthenticatorCount = "SELECT authenticator,COUNT(*) as views FROM `users` group by authenticator";
+
+        try {
+            pst = con.prepareStatement(querygetAuthenticatorCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getLoginCount() {
+        pst = null;
+        String querygetLoginCount = "SELECT time,COUNT(*) as logins FROM `login_info` group by time";
+
+        try {
+            pst = con.prepareStatement(querygetLoginCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getViewAdCategoryCount() {
+        pst = null;
+        String querygetViewAdCategoryCount = "SELECT category,COUNT(*) as views FROM `getitem_listener` group by category";
+
+        try {
+            pst = con.prepareStatement(querygetViewAdCategoryCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet getViewAdCarCategoryCount() {
+        pst = null;
+        String querygetViewAdCarCategoryCount = "SELECT date,COUNT(*) as views FROM `getitem_listener` where category='Vehicle";
+
+        try {
+            pst = con.prepareStatement(querygetViewAdCarCategoryCount);
+
+
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
 
 }
