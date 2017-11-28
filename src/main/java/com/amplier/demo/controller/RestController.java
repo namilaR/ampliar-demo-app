@@ -40,7 +40,7 @@ public class RestController {
 
     @Listener("/api-get-add")
     @RequestMapping(value = "/api-get-add-by-id/{id}", method = RequestMethod.GET, produces = "application/json")
-    public String getAddById(@PathVariable String id) {
+    public String getAddById(HttpServletRequest request,@PathVariable String id) {
 
         tempAdd = new QueryHandeller().findAdvertismentById(Integer.parseInt(id));
         System.out.println(tempAdd.getAdvertismentSubCategoty().getSubCategoryName());

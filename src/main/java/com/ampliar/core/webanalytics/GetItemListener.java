@@ -16,6 +16,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import com.ampliar.core.models.Advertisment;
+import com.ampliar.core.models.Category;
 
 
 /**
@@ -27,12 +29,13 @@ public class GetItemListener implements ListenerService {
 
     @Override
     public void premethod(HttpServletRequest request) {
-        System.out.println("logBefore() is running!");
+        System.out.println("Before getting the advertisement!");
     }
 
     @Override
     public void postmethod(HttpServletRequest request) {
-            System.out.println("logAfter() is running!");
+            System.out.println("After getting the advertisement!");
+            String returnString=(String) request.getSession().getAttribute("returnString");;
             //Get Client IP Address.
             String ipaddress = request.getRemoteAddr();
 
@@ -44,11 +47,12 @@ public class GetItemListener implements ListenerService {
             String eventtime=timeFormat.format(date);
             
             //Returned string
-            String returnString=(String) request.getAttribute("returnString");
-            Mobile data = (Mobile)new Gson().fromJson(returnString, Mobile.class);
+            
+            Advertisment data = (Mobile)new Gson().fromJson(returnString, Mobile.class);
             int id=data.getAdvertismentId();
-            String category=request.getAttribute("category").toString();
-            String time=request.getAttribute("eventtime").toString();
+            Category cat=data.getAdvertismentCategoty();
+            String category=cat.getCategoryName();
+            
         // Insert into database
         new QueryHandeller().AddGetItemEventRecord(id,ipaddress, eventdate, eventtime, category);
        
@@ -57,10 +61,10 @@ public class GetItemListener implements ListenerService {
         //Insert into CSV File
         String COMMA_DELIMITER = ",";
         String NEW_LINE_SEPERATOR = "\n";
-        //String FILE_HEADER ="ad_id,ipaddress,date,time,category";
+        String FILE_HEADER ="ad_id,ipaddress,date,time,category";
         try{
-            FileWriter fw = new FileWriter("D:\\SLIIT\\Year 04\\CDAP\\Analytics\\GetItemListener.csv",true);
-            //fw.append(FILE_HEADER);
+            FileWriter fw = new FileWriter("G:\\Completed\\GetItemListener.csv",true);
+            fw.append(FILE_HEADER);
             fw.append(NEW_LINE_SEPERATOR);
             fw.append(Integer.toString(id));
             fw.append(COMMA_DELIMITER);

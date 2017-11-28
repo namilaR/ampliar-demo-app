@@ -30,10 +30,11 @@ public class ListenerAdvice {
 		
 	}
         
-    @AfterReturning(pointcut = "execution(* com.amplier.demo.controller.RestController.getAddById(..))&& args(request) && @annotation(listenerAnnotation)",returning="returnString")
+    @AfterReturning(pointcut = "execution(* com.amplier.demo.controller.RestController.getAddById(..))&& args(request,..) && @annotation(listenerAnnotation)",returning="returnString")
 	public void logAfterGetItem(Listener listenerAnnotation,String returnString,HttpServletRequest request) {
                 ListenerService listenerService=new GetItemListener();
-                request.setAttribute(returnString, "returnString");
+                request.getSession().setAttribute("returnString", returnString);
+                //request.setAttribute(returnString, "returnString");
                 listenerService.postmethod(request);
 		
 		

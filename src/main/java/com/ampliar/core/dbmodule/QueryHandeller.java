@@ -895,9 +895,9 @@ public class QueryHandeller implements DataAccess {
 		try {
 
 			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
-			Method AddGetItemRecord = clazz.getDeclaredMethod("AddGetItemRecord", Integer.TYPE,String.class,String.class,String.class,String.class);
+			Method AddGetItemEventRecord = clazz.getDeclaredMethod("AddGetItemEventRecord", Integer.TYPE,String.class,String.class,String.class,String.class);
 			Object obj = clazz.newInstance();
-			return (int) AddGetItemRecord.invoke(obj, ad_id,ipaddress,date,time,category);
+			return (int) AddGetItemEventRecord.invoke(obj, ad_id,ipaddress,date,time,category);
 
 
 
@@ -932,9 +932,9 @@ public class QueryHandeller implements DataAccess {
 		try {
 
 			clazz = Class.forName("com.ampliar.dbmodule." + props.getProperty("dbms") + "DataAccess");
-			Method AddGetItemRecord = clazz.getDeclaredMethod("AddGetItemRecord", String.class,String.class,String.class,String.class,String.class);
+			Method AddPostItemEventRecord = clazz.getDeclaredMethod("AddPostItemEventRecord", String.class,String.class,String.class,String.class,String.class);
 			Object obj = clazz.newInstance();
-			return (int) AddGetItemRecord.invoke(obj,ad_name,ip,date,time,category);
+			return (int) AddPostItemEventRecord.invoke(obj,ad_name,ip,date,time,category);
 
 
 

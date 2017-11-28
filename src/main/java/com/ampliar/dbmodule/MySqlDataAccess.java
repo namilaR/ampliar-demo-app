@@ -266,7 +266,20 @@ public class MySqlDataAccess implements DataAccess {
     }
 
     public boolean CheckFederatedUserExists(String email, String authenticator) {
-        return false;
+        pst = null;
+        String queryLogin = "select * from users where email=? and authenticator=?";
+
+        try {
+            pst = con.prepareStatement(queryLogin);
+            pst.setString(1, email);
+            pst.setString(2, authenticator);
+
+            rs = pst.executeQuery();
+            return rs.next();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     public int AddLoginInfo(LoginInfo info) {
@@ -359,13 +372,29 @@ public class MySqlDataAccess implements DataAccess {
 
 
     public boolean CheckSecurityAnswer(String email, String answer) {
-        return false;
+        pst = null;
+                String queryCheckSecurityAnswer="select * from users where email=? and SecurityAnswer=? and authenticator=?";
+                
+		try
+                {
+                    pst=con.prepareStatement(queryCheckSecurityAnswer);
+                    pst.setString(1,email);
+                    pst.setString(2,answer);
+                    pst.setString(3,"Local");
+
+                    rs=pst.executeQuery();
+                    return rs.next();
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                    return false;
+                }
     }
 
     public int AddGetItemEventRecord(int ad_id, String ipaddress, String date, String time, String category) {
         pst = null;
         String queryUser = "INSERT INTO `ampliar_demo`.`getitem_listener` (  `ad_id`, `ipaddress`, `date`, `time`, `category`)\n" +
-                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
+                "VALUES ( ?, ?, ?, ?, ?);";
 
         try {
             pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
