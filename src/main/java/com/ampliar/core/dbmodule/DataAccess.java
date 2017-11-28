@@ -2,6 +2,7 @@ package com.ampliar.core.dbmodule;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ampliar.authenticationmodule.data.LoginInfo;
 import com.ampliar.authenticationmodule.data.User;
@@ -33,4 +34,13 @@ public interface DataAccess {
 	public ResultSet GetLastTime(String email);
 	public ResultSet GetLocationRecords(String email);
 	public ResultSet GetLastLocation(String email);
+    public int AddGetItemEventRecord(int ad_id,String ipaddress,String date,String time,String category);
+    public int AddPostItemEventRecord(String ad_name,String ip,String date,String time,String category);
+    public ResultSet getVisitorCount();
+    public ResultSet getHomePageViewCount();
+    public ResultSet getVisitorCountWithDate();
+    public ResultSet getSessionsWithDate();
+
+
+
 }

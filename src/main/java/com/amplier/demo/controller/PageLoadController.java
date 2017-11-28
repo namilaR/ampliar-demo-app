@@ -59,6 +59,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
+import java.sql.ResultSet;
 
 @Controller
 public class PageLoadController {
@@ -67,7 +68,7 @@ public class PageLoadController {
 	public ModelAndView loadHomePage() {
 		return new ModelAndView("index");
 	}
-        
+
         @RequestMapping("/Facebookcallback")
 	public ModelAndView OAuthFacebookCallbackListener(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
             Facebook fb=new Facebook();
@@ -98,20 +99,20 @@ public class PageLoadController {
                 String requestUrl =
                         "https://graph.facebook.com/v2.9/me?fields=id,name,gender,link,email";
                 fb.getprofiledetails(request,requestUrl, accessToken);
-                
+
 
             } else {
                 // Handle failure
             }
-            
+
             return loadHomePage();
 	}
-        
+
         @RequestMapping("/Linkedincallback")
 	public ModelAndView OAuthLinkedinCallbackListener(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
             Linkedin lkd=new Linkedin();
-        
-        
+
+
             // Detect the presence of an authorization code
             String authorizationCode = lkd.getAuthorizationcode(request);
             if (authorizationCode != null && authorizationCode.length() > 0) {
@@ -132,11 +133,11 @@ public class PageLoadController {
                 String output = OAuthTLSUtil.sendRequest(url, null, requestProps, "POST");
 
                 String accessToken = lkd.getAccessToken(output,null);
-                
+
                 String linkedInUserInfoEndpoint = "https://api.linkedin.com/v1/people/~:(first-name,last-name,email-address,picture-url,public-profile-url,summary,industry)?format=json";
-                
+
                 lkd.getprofiledetails(request,linkedInUserInfoEndpoint, accessToken);
-                
+
 
 
             } else {
@@ -144,32 +145,32 @@ public class PageLoadController {
             }
             return loadHomePage();
         }
-        
+
         @RequestMapping("/Googlecallback")
 	public ModelAndView OAuthGoogleCallbackListener(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
             Google google=new Google();
             String authorizationCode = google.getAuthorizationcode(request);
             if (authorizationCode != null && authorizationCode.length() > 0) {
-            
-                String urlParameters = "code=" + 
-                  URLEncoder.encode(authorizationCode, StandardCharsets.UTF_8.name()) + 
+
+                String urlParameters = "code=" +
+                  URLEncoder.encode(authorizationCode, StandardCharsets.UTF_8.name()) +
                   "&client_id=" + URLEncoder.encode(Google.CLIENT_ID, StandardCharsets.UTF_8.name()) +
-                  "&client_secret=" + URLEncoder.encode(Google.CLIENT_SECRET, StandardCharsets.UTF_8.name()) + 
+                  "&client_secret=" + URLEncoder.encode(Google.CLIENT_SECRET, StandardCharsets.UTF_8.name()) +
                   "&redirect_uri=" + URLEncoder.encode(Google.REDIRECT_URI, StandardCharsets.UTF_8.name()) +
                   "&grant_type="+URLEncoder.encode(Google.GRANT_TYPE, StandardCharsets.UTF_8.name());
-                
+
                 // Make the access token request
                     String line=google.makeAccessTokenRequest(urlParameters, Google.TOKEN_ENDPOINT);
-                
+
                 // Isolate access token
                 String accessToken=google.getAccessToken(line,null);
-                
+
                 //get profile details
                 String requestUrl =
                     "https://www.googleapis.com/oauth2/v1/userinfo?access_token=";
                 google.getprofiledetails(request, requestUrl, accessToken);
-                
-                
+
+
             }
             else
             {
@@ -177,7 +178,7 @@ public class PageLoadController {
             }
             return loadHomePage();
         }
-        
+
         @RequestMapping(path = "/twittersignin", method = RequestMethod.GET)
 	public void twitterSignin(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
             ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -199,9 +200,9 @@ public class PageLoadController {
 
             RequestToken requestToken=cl.getRequestToken(request,twitter);
             response.sendRedirect(requestToken.getAuthenticationURL());
-		
+
 	}
-        
+
         @RequestMapping("/Twittercallback")
 	public ModelAndView OAuthTwittetCallbackListener(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
             TwitterClass tw=new TwitterClass();
@@ -210,12 +211,12 @@ public class PageLoadController {
             String output=tw.getAccessToken(verifier, request);
             return loadHomePage();
         }
-        
+
         @RequestMapping(path = "/register", method = RequestMethod.GET)
 	public ModelAndView loadRegisterPage() {
 		return new ModelAndView("register");
 	}
-        
+
         @RequestMapping(path = "/register", method = RequestMethod.POST)
 	public ModelAndView register(HttpServletRequest request) {
             User user=new User();
@@ -257,12 +258,12 @@ public class PageLoadController {
             }
 		return loadRegisterPage();
 	}
-        
+
         @RequestMapping(path = "/login", method = RequestMethod.GET)
 	public ModelAndView loadLoginPage() {
 		return new ModelAndView("login");
 	}
-        
+
         @RequestMapping(path = "/login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request,HttpServletResponse response) {
             try
@@ -343,17 +344,17 @@ public class PageLoadController {
             catch(Exception ex)
             {
                 ex.printStackTrace();
-                
+
             }
             return loadLoginPage();
 	}
-        
+
         @RequestMapping(path = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request) {
                 request.getSession().invalidate();
 		return loadLoginPage();
 	}
-        
+
         @RequestMapping(path = "/adaptiveSettings", method = RequestMethod.GET)
 	public ModelAndView adaptiveSettings(HttpServletRequest request) {
                 Properties prop = new Properties();
@@ -382,7 +383,7 @@ public class PageLoadController {
                 }
                 return null;
 	}
-        
+
         @RequestMapping(path = "/adaptiveSettings", method = RequestMethod.POST)
 	public ModelAndView SaveadaptiveSettings(HttpServletRequest request) {
             try
@@ -421,7 +422,7 @@ public class PageLoadController {
             }
             return null;
         }
-        
+
         @RequestMapping(path = "/verification", method = RequestMethod.GET)
 	public ModelAndView loadVerificationPage(HttpServletRequest request) throws SQLException {
             LoginInfo info=(LoginInfo)request.getSession().getAttribute("info");
@@ -434,12 +435,12 @@ public class PageLoadController {
             request.setAttribute("question", question);
             return new ModelAndView("verification");
 	}
-        
+
         @RequestMapping(path = "/verification", method = RequestMethod.POST)
 	public ModelAndView VerifyUser(HttpServletRequest request) throws SQLException {
             String answer=request.getParameter("answer");
             LoginInfo info=(LoginInfo)request.getSession().getAttribute("info");
-            
+
             if(new QueryHandeller().CheckSecurityAnswer(info.getEmail(), answer))
             {
                 info.setStatus("success");
@@ -461,7 +462,7 @@ public class PageLoadController {
             }
             return null;
 	}
-        
+
         @RequestMapping(path = "/OTPVerification", method = RequestMethod.GET)
 	public ModelAndView loadOTPVerificationPage(HttpServletRequest request) throws SQLException {
             LoginInfo info=(LoginInfo)request.getSession().getAttribute("info");
@@ -473,7 +474,7 @@ public class PageLoadController {
                 if(Character.isDigit(c)){
                     sb.append(c);
                     found = true;
-                } 
+                }
             }
             otp=sb.toString();
             String email=info.getEmail();
@@ -484,16 +485,16 @@ public class PageLoadController {
             request.getSession().setAttribute("otp",otp );
             SendEmail.Send(email, subject, body);
             return new ModelAndView("OTPVerification");
-            
+
 	}
-	
+
         @RequestMapping(path = "/OTPVerification", method = RequestMethod.POST)
 	public ModelAndView VerifyOTP(HttpServletRequest request) throws SQLException {
             LoginInfo info=(LoginInfo)request.getSession().getAttribute("info");
-            
+
             String code=request.getParameter("code");
             String otp=(String)request.getSession().getAttribute("otp");
-            
+
             if(otp.equals(code))
             {
                 info.setStatus("success");
@@ -515,12 +516,12 @@ public class PageLoadController {
                     request.getSession().invalidate();
                     return new ModelAndView("verificationfailure");
                 }
-                
+
             }
             return null;
-            
+
 	}
-        
+
         @RequestMapping(path = "/insert-car", method = RequestMethod.POST)
 	public ModelAndView insertCar(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
 
@@ -555,6 +556,20 @@ public class PageLoadController {
 		return new ModelAndView("index");
 		
 	}
-	
+
+        @RequestMapping(path = "/webanalytics",  method = RequestMethod.GET)
+	public ModelAndView loadWebAnalyticsHome(HttpServletRequest request) {
+		ResultSet rs1=new QueryHandeller().getVisitorCount();
+                request.setAttribute("visitor_count", rs1);
+                ResultSet rs2=new QueryHandeller().getHomePageViewCount();
+                request.setAttribute("homepage_count", rs2);
+                ResultSet rs3=new QueryHandeller().getVisitorCountWithDate();
+                request.setAttribute("visitorwithdate_count", rs3);
+                ResultSet rs4=new QueryHandeller().getSessionsWithDate();
+                request.setAttribute("sessionswithdate_count", rs4);
+		return new ModelAndView("webanalytics_home");
+
+	}
+
 	
 }
