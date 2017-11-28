@@ -34,7 +34,6 @@ public class ListenerAdvice {
 	public void logAfterGetItem(Listener listenerAnnotation,String returnString,HttpServletRequest request) {
                 ListenerService listenerService=new GetItemListener();
                 request.getSession().setAttribute("returnString", returnString);
-                //request.setAttribute(returnString, "returnString");
                 listenerService.postmethod(request);
 		
 		
@@ -50,7 +49,6 @@ public class ListenerAdvice {
     @AfterReturning(pointcut="execution(* com.amplier.demo.controller.RestController.apiInsertMobile(..)) && args(request,..)&& @annotation(listenerAnnotation)",returning="returnString")
 	public void logAfterPostItem(Listener listenerAnnotation,String returnString,HttpServletRequest request) {
                 ListenerService listenerService=new PostItemListener();
-                request.setAttribute(returnString, "returnString");
                 listenerService.postmethod(request);
 		
 		
@@ -58,16 +56,15 @@ public class ListenerAdvice {
         
     @Before("execution(* com.amplier.demo.controller.RestController.getAllCarsApi(..)) && @annotation(listenerAnnotation)")
 	public void logBeforeAllAds(Listener listenerAnnotation) {
-                ListenerService listenerService=new PostItemListener();
+                ListenerService listenerService=new AllAdsListener();
                 listenerService.premethod(null);
 		
 	}
         
-    @AfterReturning(pointcut="execution(* com.amplier.demo.controller.RestController.apiInsertMobile(..)) && args(request,..) && @annotation(listenerAnnotation)",returning="returnString")
+    @AfterReturning(pointcut="execution(* com.amplier.demo.controller.RestController.getAllCarsApi(..)) && args(request,..) && @annotation(listenerAnnotation)",returning="returnString")
 	public void logAfterAllAds(Listener listenerAnnotation,String returnString,HttpServletRequest request) {
-                ListenerService listenerService=new PostItemListener();
-                request.setAttribute(returnString, "returnString");
-                listenerService.postmethod(request);
+                ListenerService listenerService=new AllAdsListener();
+                listenerService.postmethod(null);
 		
 		
 	}

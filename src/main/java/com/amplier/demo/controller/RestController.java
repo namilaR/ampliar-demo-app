@@ -31,7 +31,7 @@ public class RestController {
 
     @Listener("/api-get-all-ads")
     @RequestMapping(value = "/api-get-all-ads", method = RequestMethod.GET, produces = "application/json")
-    public String getAllCarsApi() {
+    public String getAllCarsApi(HttpServletRequest request) {
         ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
         tempAds = new QueryHandeller().findAllAdvertisments();
         return gson.toJson(tempAds);

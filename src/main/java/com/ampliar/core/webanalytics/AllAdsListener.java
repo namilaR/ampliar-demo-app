@@ -15,12 +15,12 @@ public class AllAdsListener implements ListenerService{
 
     @Override
     public void premethod(HttpServletRequest request) {
-        System.out.println("logBefore() is running!");
+        System.out.println("Before getting All Ads!");
     }
 
     @Override
     public void postmethod(HttpServletRequest request) {
-        System.out.println("logAfter() is running!");
+        System.out.println("After getting All Ads!");
     }
     
 }

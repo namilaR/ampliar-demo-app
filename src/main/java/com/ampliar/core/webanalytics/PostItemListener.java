@@ -28,7 +28,7 @@ public class PostItemListener implements ListenerService {
 
     @Override
     public void premethod(HttpServletRequest request) {
-        
+        System.out.println("Before posting the advertisement!");
         try
         {
            
@@ -68,6 +68,7 @@ public class PostItemListener implements ListenerService {
 
     @Override
     public void postmethod(HttpServletRequest request) {
+        System.out.println("After posting the advertisement!");
         //Get IP Address    
         String ipaddress = request.getRemoteAddr();
         //String ad_id = Integer.toString(id);
@@ -78,7 +79,7 @@ public class PostItemListener implements ListenerService {
         String eventdate = dateFormat.format(date);
         String eventtime=timeFormat.format(date);
         
-        String ad_name = request.getParameter("ad_name");
+        String ad_name = request.getParameter("title");
         Category cat = new Category(1, request.getParameter("Category"), 1);
         String category=cat.getCategoryName();
         
@@ -92,7 +93,7 @@ public class PostItemListener implements ListenerService {
         String NEW_LINE_SEPERATOR = "\n";
         //String FILE_HEADER ="ad_name,ipaddress,date,time,category";
         try{
-            FileWriter fw = new FileWriter("D:\\SLIIT\\Year 04\\CDAP\\Analytics\\PostItemListener.csv",true);
+            FileWriter fw = new FileWriter("G:\\Completed\\PostItemListener.csv",true);
             //fw.append(FILE_HEADER);
             fw.append(NEW_LINE_SEPERATOR);
             fw.append(ad_name);

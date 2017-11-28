@@ -427,8 +427,8 @@ public class MySqlDataAccess implements DataAccess {
 
     public int AddPostItemEventRecord(String ad_name, String ipaddress, String date, String time, String category) {
         pst = null;
-        String queryUser = "INSERT INTO `ampliar_demo`.`postitem_listener` (  `ad_name` ,`ipaddress`, `date`, `time`, `category`)\n" +
-                "VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?);";
+        String queryUser = "INSERT INTO `ampliar_demo`.`postitem_listener` (  `ad_name` ,`ip`, `date`, `time`, `category`)\n" +
+                "VALUES ( ?,?, ?, ?, ?);";
 
         try {
             pst = con.prepareStatement(queryUser, Statement.RETURN_GENERATED_KEYS);
