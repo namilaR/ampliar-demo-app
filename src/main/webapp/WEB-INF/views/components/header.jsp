@@ -114,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="header">
             <div class="container">
                 <div class="logo">
-                        <a href="index.html"><span>Re</span>sale</a>
+                        <a href="/ampliar-demo-app"><span>Re</span>sale</a>
                 </div>
                 <div class="header-right">
                     <%
@@ -122,8 +122,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     if(email==null)
                     {
                     %>
-                    <button class="btn btn-primary" style="margin-top: 0px"><a class="account" href="login">Login</a> </button>
-                    <button class="btn btn-primary" style="margin-top: 0px"><a class="account" href="register">Register</a></button>
+                    <button class="btn btn-primary" style="margin-top: 0px"><a class="account" href="/ampliar-demo-app/login">Login</a> </button>
+                    <button class="btn btn-primary" style="margin-top: 0px"><a class="account" href="/ampliar-demo-app/register">Register</a></button>
                     <%  
                     }
                     else

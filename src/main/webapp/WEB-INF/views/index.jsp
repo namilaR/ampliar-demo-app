@@ -5,9 +5,7 @@
 			Sell or Advertise <span class="segment-heading"> anything
 				online </span> with Resale
 		</h1>
-		<p>Lorem Ipsum is simply dummy text of the printing and
-			typesetting industry</p>
-		<a href="post-ad.html">Post Free Ad</a>
+		<a href="/ampliar-demo-app/post-ad">Post Free Ad</a>
 	</div>
 </div>
 <!-- content-starts-here -->
@@ -15,7 +13,7 @@
 	<div class="categories">
 		<div class="container">
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html">
+				<a href="/ampliar-demo-app/classified-all?type=mobile">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -27,7 +25,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab2">
+				<a href="/ampliar-demo-app/classified-all?type=electronics">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -39,7 +37,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab3">
+				<a href="/ampliar-demo-app/classified-all?type=cars">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -51,7 +49,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab4">
+				<a href="/ampliar-demo-app/classified-all?type=bikes">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -63,7 +61,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab5">
+				<a href="/ampliar-demo-app/classified-all?type=furnitures">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -75,7 +73,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab6">
+				<a href="/ampliar-demo-app/classified-all?type=pets">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -87,7 +85,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab7">
+				<a href="/ampliar-demo-app/classified-all?type=books">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -99,7 +97,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab8">
+				<a href="/ampliar-demo-app/classified-all?type=fashion">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -111,7 +109,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab9">
+				<a href="/ampliar-demo-app/classified-all?type=kids">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -123,7 +121,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab10">
+				<a href="/ampliar-demo-app/classified-all?type=services">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -135,7 +133,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab11">
+				<a href="/ampliar-demo-app/classified-all?type=jobs">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
@@ -147,7 +145,7 @@
 				</a>
 			</div>
 			<div class="col-md-2 focus-grid">
-				<a href="categories.html#parentVerticalTab12">
+				<a href="/ampliar-demo-app/classified-all?type=real_estate">
 					<div class="focus-border">
 						<div class="focus-layout">
 							<div class="focus-image">
