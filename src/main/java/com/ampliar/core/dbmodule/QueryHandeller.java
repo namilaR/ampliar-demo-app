@@ -40,7 +40,7 @@ public class QueryHandeller implements DataAccess {
 
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch blocka
+			// TODO Auto-generated catch block
 			logger.error("ClassNotFoundException",e);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
