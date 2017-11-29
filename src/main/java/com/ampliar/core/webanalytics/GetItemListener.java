@@ -60,7 +60,7 @@ public class GetItemListener implements ListenerService {
         String NEW_LINE_SEPERATOR = "\n";
         //String FILE_HEADER ="ad_id,ipaddress,date,time,category";
         try{
-            FileWriter fw = new FileWriter("G:\\Completed\\ampliar-demo-app\\src\\main\\resources\\GetItemListener.csv",true);
+            FileWriter fw = new FileWriter("C:\\Users\\DMS\\workspace\\ampliar-demo-app\\src\\main\\resources\\GetItemListener.csv",true);
             //fw.append(FILE_HEADER);
             fw.append(NEW_LINE_SEPERATOR);
             fw.append(Integer.toString(id));

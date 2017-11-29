@@ -51,6 +51,17 @@ public class RestController {
 
     }
 
+    @RequestMapping(value = "/api-get-addv-by-id/{id}", method = RequestMethod.GET, produces = "application/json")
+    public String getAddvById(HttpServletRequest request,@PathVariable String id) {
+
+        tempAdd = new QueryHandeller().findAdvertismentById(Integer.parseInt(id));
+        System.out.println(tempAdd.getAdvertismentSubCategoty().getSubCategoryName());
+
+        return gson.toJson(tempAdd);
+
+
+    }
+
     @RequestMapping(value = "/api-get-add-by-title/{title}", method = RequestMethod.GET, produces = "application/json")
     public String getAddByTitle(@PathVariable String title) {
         ArrayList<Advertisment> tempAds = new ArrayList<Advertisment>();
