@@ -1,4 +1,24 @@
+<%@page import="com.ampliar.webanalytics.views"%>
 <%@ include file="./components/header.jsp" %>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
+<% 
+//Get Client IP Address.
+    String ipaddress = request.getRemoteAddr();
+    
+   // Get session date and time.
+   DateFormat dateFormat = new SimpleDateFormat ("yyyy/MM/dd");
+   DateFormat timeFormat=new SimpleDateFormat("HH:mm:ss");
+   Date date = new Date();
+   String pageloaddate = dateFormat.format(date);
+   String pageloadtime=timeFormat.format(date);
+   views vm = new views();
+   
+ 
+   
+   vm.pageviews(ipaddress, pageloaddate,pageloadtime, "List");
+%>
 	</div>
 	<div class="banner text-center">
 	  <div class="container">    

@@ -1,4 +1,8 @@
+<%@page import="com.ampliar.webanalytics.views"%>
 <%@ include file="./components/header.jsp" %>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
 <div class="main-banner banner text-center">
 	<div class="container">
 		<h1>
@@ -9,6 +13,26 @@
 		<a href="/ampliar-demo-app/post-ad">Post Free Ad</a>
 	</div>
 </div>
+<%
+    //Get Client IP Address.
+    String ipaddress = request.getRemoteAddr();
+    
+   // Get session date and time.
+   DateFormat dateFormat = new SimpleDateFormat ("yyyy/MM/dd");
+   DateFormat timeFormat=new SimpleDateFormat("HH:mm:ss");
+   Date date = new Date();
+   String pageloaddate = dateFormat.format(date);
+   String pageloadtime=timeFormat.format(date);
+   views vm = new views();
+   
+   //int count_index=SessionCounterListener.getTotalActiveSession();
+   
+   
+   
+   vm.pageviews(ipaddress, pageloaddate,pageloadtime, "Home");
+   
+      
+%>
 <!-- content-starts-here -->
 <div class="content">
 	<div class="categories">
