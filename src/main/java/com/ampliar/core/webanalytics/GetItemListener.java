@@ -58,10 +58,10 @@ public class GetItemListener implements ListenerService {
         //Insert into CSV File
         String COMMA_DELIMITER = ",";
         String NEW_LINE_SEPERATOR = "\n";
-        String FILE_HEADER ="ad_id,ipaddress,date,time,category";
+        //String FILE_HEADER ="ad_id,ipaddress,date,time,category";
         try{
-            FileWriter fw = new FileWriter("G:\\Completed\\GetItemListener.csv",true);
-            fw.append(FILE_HEADER);
+            FileWriter fw = new FileWriter("G:\\Completed\\ampliar-demo-app\\src\\main\\resources\\GetItemListener.csv",true);
+            //fw.append(FILE_HEADER);
             fw.append(NEW_LINE_SEPERATOR);
             fw.append(Integer.toString(id));
             fw.append(COMMA_DELIMITER);

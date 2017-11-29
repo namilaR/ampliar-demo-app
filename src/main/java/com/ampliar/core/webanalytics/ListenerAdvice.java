@@ -46,8 +46,8 @@ public class ListenerAdvice {
 		
 	}
         
-    @AfterReturning(pointcut="execution(* com.amplier.demo.controller.RestController.apiInsertMobile(..)) && args(request,..)&& @annotation(listenerAnnotation)",returning="returnString")
-	public void logAfterPostItem(Listener listenerAnnotation,String returnString,HttpServletRequest request) {
+    @AfterReturning(pointcut="execution(* com.amplier.demo.controller.RestController.apiInsertMobile(..)) && args(request,..)&& @annotation(listenerAnnotation)")
+	public void logAfterPostItem(Listener listenerAnnotation,HttpServletRequest request) {
                 ListenerService listenerService=new PostItemListener();
                 listenerService.postmethod(request);
 		

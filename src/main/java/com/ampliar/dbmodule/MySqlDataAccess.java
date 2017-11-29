@@ -910,7 +910,7 @@ public class MySqlDataAccess implements DataAccess {
     @Override
     public ResultSet getElectronicsCategoryCount() {
         pst = null;
-        String querygetElectronicsCategoryCount = "SELECT date,COUNT(*) as views FROM `postitem_listener` where category='Electronics' group by date";
+        String querygetElectronicsCategoryCount = "SELECT date,COUNT(*) as views FROM `postitem_listener` where category='Electronics and Appliances' group by date";
 
         try {
             pst = con.prepareStatement(querygetElectronicsCategoryCount);
